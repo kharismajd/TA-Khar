@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Keycap Artistik 01",
+    "price": 100000,
+    "storeName": "Toko1",
+    "type": "Group Buy",
+    "status": "ongoing",
+    "mainImage": "/images/keycap.png"
+  },
+  {
+    "id": 2,
+    "title": "Keychron K6 Mechanical Keyboard",
+    "price": 2100000,
+    "storeName": "Toko1",
+    "type": "Group Buy",
+    "status": "ongoing",
+    "mainImage": "/images/keychronk6.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Red Dragon K552 Mechanical Keyboard",
+    "price": 1200000,
+    "storeName": "Toko2",
+    "type": "Group Buy",
+    "status": "ongoing",
+    "mainImage": "/images/reddragonk552.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Magegee Light 87 Mechanical Keyboard",
+    "price": 900000,
+    "storeName": "Toko2",
+    "type": "Group Buy",
+    "status": "ongoing",
+    "mainImage": "/images/magegeelight87.webp"
+  },
+  {
+    "id": 5,
+    "title": "Mode Loop",
+    "price": 3500000,
+    "storeName": "Mode",
+    "type": "Interest Check",
+    "status": "ongoing",
+    "mainImage": "/images/modeloop.webp"
+  },
+  {
+    "id": 6,
+    "title": "Mode Sonnet",
+    "price": 4000000,
+    "storeName": "Mode",
+    "type": "Interest Check",
+    "status": "ongoing",
+    "mainImage": "/images/modesonnet.webp"
+  },
+  {
+    "id": 7,
+    "title": "Mode SixtyFive",
+    "price": 3200000,
+    "storeName": "Mode",
+    "type": "Interest Check",
+    "status": "ongoing",
+    "mainImage": "/images/modesixtyfive.webp"
+  },
+  {
+    "id": 8,
+    "title": "Mode Tempo",
+    "price": 3000000,
+    "storeName": "Mode",
+    "type": "Interest Check",
+    "status": "ongoing",
+    "mainImage": "/images/modetempo.webp"
+  }
+]
