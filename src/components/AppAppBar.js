@@ -26,7 +26,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 
-
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -126,7 +125,7 @@ export default function PrimarySearchAppBar({ page: pageValue }) {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar>
-          <Toolbar sx={{ paddingRight: { xs: "4%" }, paddingLeft: { xs: "4%" }, paddingTop: { xs: "2px" }, paddingBottom: { xs: "2px" } }}>
+          <Toolbar sx={{ paddingRight: { xs: "4%" }, paddingLeft: { xs: "4%" }, paddingTop: { xs: "2px" }, paddingBottom: { xs: "2px" }, backgroundColor: '#18181B' }}>
             <Box sx={{ width: { xs:'10%', sm:"25%"} }}>
               <Box sx={{ display: { xs: 'flex', sm: 'none' }, justifyContent: 'flex-start' }}>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit" edge="start" onClick={toggleDrawer(true)}>

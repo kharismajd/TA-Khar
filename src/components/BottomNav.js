@@ -1,6 +1,6 @@
 import * as React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import MuiBottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
@@ -8,6 +8,14 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ListIcon from '@mui/icons-material/List';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
+import { styled } from "@mui/material/styles";
+
+const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
+  color: #B2B2B2;
+  &.Mui-selected {
+    color: #FFFFFF;
+  }
+`);
 
 export default function BottomNav({ value: valueProp }) {
   const [value, setValue] = React.useState(0);
@@ -36,9 +44,9 @@ export default function BottomNav({ value: valueProp }) {
   };
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: 65 }} elevation={3}>
-      <Box sx={{ height: 5 }}></Box>
-      <BottomNavigation value={currentValue} onChange={handleChange} showLabels={true}>
+    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: 60 }} elevation={3}>
+      <Box sx={{ height: 3 }}></Box>
+      <BottomNavigation value={currentValue} onChange={handleChange} showLabels={false}>
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction label="Keranjang" icon={<ShoppingCartIcon />} />
         <BottomNavigationAction label="Transaksi" icon={<ListIcon />} />
