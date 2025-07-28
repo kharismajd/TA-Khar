@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, CardMedia, CardContent, Typography, Grid, Box } from '@mui/material';
+import { Button, Card, CardMedia, CardContent, Typography, Grid, Box, Divider } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import PrimarySearchAppBar from '../components/AppAppBar';
 import BottomNav from '../components/BottomNav';
@@ -32,20 +32,20 @@ function Home() {
   return (
     <>
       <PrimarySearchAppBar page="home"/>
-      <Box sx={{ pr: { xs: 0, sm: 4, md: '6%' }, pl: { xs: 0, sm: 4, md: '6%' }}}>
+      <Box sx={{ pr: { xs: 1, sm: 4, md: '6%' }, pl: { xs: 1, sm: 4, md: '6%' }}}>
         <Typography sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold" }} variant="h5" mt={1.5}>Ongoing Group Buys</Typography>
-        <Box sx={{ flexGrow: 1, mt: 2 }}>
+        <Box sx={{ flexGrow: 1, mt: 2, mb: 3 }}>
           <Grid container spacing={{ xs: 1, md: 4 }}>
             {ongoingGroupBuyProducts.map(ongoingGroupBuyProduct => (
               <Grid size={{ xs: 6, sm: 3 }}>
                 <Link to={'product/' + ongoingGroupBuyProduct.id} style={{ textDecoration: 'none' }}>
-                  <Card elevation={0} sx={{ maxWidth: 345 }}>
+                  <Card variant='outlined' elevation={0} sx={{ maxWidth: 345, backgroundColor: '#09090B', borderRadius: 2 }}>
                     <CardMedia
                       sx={{ height: { xs: 180, sm: 180, md: 320} }}
                       image={ongoingGroupBuyProduct.mainImage}
                       title={ongoingGroupBuyProduct.title}
                     />
-                    <CardContent sx={{ pl: 0, pr: 0, pt: 1, '&:last-child': { pb: 1 } }}>
+                    <CardContent sx={{ pt: 2, '&:last-child': { pb: 2 } }}>
                       <Typography gutterBottom variant="body2" noWrap={true}>
                         {ongoingGroupBuyProduct.title}
                       </Typography>
@@ -62,19 +62,20 @@ function Home() {
             ))}
           </Grid>
         </Box>
-        <Typography sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold" }} variant="h5" mt={1.5}>Ongoing Interest Checks</Typography>
+        <Divider></Divider>
+        <Typography sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold" }} variant="h5" mt={2}>Ongoing Interest Checks</Typography>
         <Box sx={{ flexGrow: 1, mt: 2 }}>
           <Grid container spacing={{ xs: 1, md: 4 }}>
             {ongoingInterestCheckProducts.map(ongoingInterestCheckProduct => (
               <Grid size={{ xs: 6, sm: 3 }}>
                 <Link to={'product/' + ongoingInterestCheckProduct.id} style={{ textDecoration: 'none' }}>
-                  <Card elevation={0} sx={{ maxWidth: 345 }}>
+                  <Card variant='outlined' elevation={0} sx={{ maxWidth: 345, backgroundColor: '#09090B', borderRadius: 2 }}>
                     <CardMedia
                       sx={{ height: { xs: 180, sm: 180, md: 320} }}
                       image={ongoingInterestCheckProduct.mainImage}
                       title="green iguana"
                     />
-                    <CardContent sx={{ pl: 0, pr: 0, pt: 1, '&:last-child': { pb: 1 } }}>
+                    <CardContent sx={{ pt: 2, '&:last-child': { pb: 2 } }}>
                       <Typography gutterBottom variant="body2" noWrap={true}>
                         {ongoingInterestCheckProduct.title}
                       </Typography>
