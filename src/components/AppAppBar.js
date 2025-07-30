@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import MailIcon from '@mui/icons-material/Mail';
 import TuneIcon from '@mui/icons-material/Tune';
@@ -69,6 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar({ nav: nav, jenis: jenis, kondisi: kondisi, urutkan: urutkan }) {
   const [drawerState, setDrawerState] = React.useState(false);
   const [searchInputValue, setSearchInputValue] = React.useState('');
+  let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   if (jenis === undefined || jenis === null) {
@@ -174,6 +175,7 @@ export default function PrimarySearchAppBar({ nav: nav, jenis: jenis, kondisi: k
                   fullWidth={true}
                   onKeyDown={handleKeyDown}
                   onChange={handleInputChange}
+                  defaultValue={searchParams.get("term")}
                 />
               </Search>
             </Box>
