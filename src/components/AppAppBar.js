@@ -66,9 +66,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({ page: pageValue }) {
+export default function PrimarySearchAppBar({ nav: nav, jenis: jenis, kondisi: kondisi, urutkan: urutkan }) {
   const [drawerState, setDrawerState] = React.useState(false);
+  const [searchInputValue, setSearchInputValue] = React.useState('');
   const navigate = useNavigate();
+
+  if (jenis === undefined || jenis === null) {
+    jenis = { gb: true, ic: true }
+  }
+
+  if (kondisi === undefined || kondisi === null) {
+    kondisi = { berlangsung: true, selesai: false }
+  }
+
+  if (urutkan === undefined || urutkan === null) {
+    urutkan = "sesuai"
+  }
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -84,6 +97,23 @@ export default function PrimarySearchAppBar({ page: pageValue }) {
       return
     }
     navigate("/" + newValue)
+  };
+
+  const handleInputChange = (event) => {
+    setSearchInputValue(event.target.value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      navigate("/search-product?term=" + searchInputValue
+        + "&gb=" + jenis.gb
+        + "&ic=" + jenis.ic
+        + "&berlangsung=" + kondisi.berlangsung
+        + "&selesai=" + kondisi.selesai
+        + "&urutkan=" + urutkan
+        + "&page=" + 1
+      )
+    }
   };
 
   const list = () => (
@@ -142,22 +172,24 @@ export default function PrimarySearchAppBar({ page: pageValue }) {
                   placeholder="Cari Produk"
                   inputProps={{ 'aria-label': 'search' }}
                   fullWidth={true}
+                  onKeyDown={handleKeyDown}
+                  onChange={handleInputChange}
                 />
               </Search>
             </Box>
             <Box sx={{ width: { xs:'0%', sm:"25%"} }}>
               <Box sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end' }}>
                 <IconButton size="large" aria-label="home" color="inherit" onClick={() => handleIconClick("home")}>
-                  {pageValue === "home" ? <HomeIcon /> : <HomeOutlinedIcon />}
+                  {nav === "home" ? <HomeIcon /> : <HomeOutlinedIcon />}
                 </IconButton>
                 <IconButton size="large" aria-label="cart" color="inherit" onClick={() => handleIconClick("cart")}>
-                  {pageValue === "cart" ? <ShoppingCartIcon /> : <ShoppingCartOutlinedIcon />}
+                  {nav === "cart" ? <ShoppingCartIcon /> : <ShoppingCartOutlinedIcon />}
                 </IconButton>
                 <IconButton size="large" aria-label="list" color="inherit" onClick={() => handleIconClick("transactions")}>
-                  {pageValue === "transactions" ? <ListAltOutlinedIcon /> : <ListIcon />}
+                  {nav === "transactions" ? <ListAltOutlinedIcon /> : <ListIcon />}
                 </IconButton>
                 <IconButton size="large" edge="end" aria-label="profile" color="inherit" onClick={() => handleIconClick("profile")}>
-                  {pageValue === "profile" ? <PersonIcon /> : <PersonOutlinedIcon />}
+                  {nav === "profile" ? <PersonIcon /> : <PersonOutlinedIcon />}
                 </IconButton>
               </Box>
             </Box>

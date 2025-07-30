@@ -17,7 +17,7 @@ const theme = createTheme({
       paper: '#18181B'
     },
     text: {
-      primary: '#ffffff',
+      primary: '#d1d1d1',
     },
     divider: 'rgba(255,255,255,0.2)',
   },

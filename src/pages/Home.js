@@ -31,9 +31,9 @@ function Home() {
   const navigate = useNavigate();
   return (
     <>
-      <PrimarySearchAppBar page="home"/>
-      <Box sx={{ pr: { xs: 1, sm: 4, md: '6%' }, pl: { xs: 1, sm: 4, md: '6%' }}}>
-        <Typography sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold" }} variant="h5" mt={1.5}>Ongoing Group Buys</Typography>
+      <PrimarySearchAppBar nav="home"/>
+      <Box sx={{ pr: { xs: 1, sm: 4, md: '6%' }, pl: { xs: 1, sm: 4, md: '6%' }, mb: { xs: 10, sm: 4 }, mt: 1.5 }}>
+        <Typography sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold" }} variant="h5">Ongoing Group Buys</Typography>
         <Box sx={{ flexGrow: 1, mt: 2, mb: 3 }}>
           <Grid container spacing={{ xs: 1, md: 4 }}>
             {ongoingGroupBuyProducts.map(ongoingGroupBuyProduct => (

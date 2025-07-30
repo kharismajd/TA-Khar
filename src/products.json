@@ -6,7 +6,8 @@
     "storeName": "Toko1",
     "type": "Group Buy",
     "status": "ongoing",
-    "mainImage": "/images/keycap.png"
+    "mainImage": "/images/keycap.png",
+    "createdAt": "2025-06-01T23:15:00Z"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "storeName": "Toko1",
     "type": "Group Buy",
     "status": "ongoing",
-    "mainImage": "/images/keychronk6.jpg"
+    "mainImage": "/images/keychronk6.jpg",
+    "createdAt": "2025-06-02T23:15:00Z"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "storeName": "Toko2",
     "type": "Group Buy",
     "status": "ongoing",
-    "mainImage": "/images/reddragonk552.jpg"
+    "mainImage": "/images/reddragonk552.jpg",
+    "createdAt": "2025-06-03T23:15:00Z"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "storeName": "Toko2",
     "type": "Group Buy",
     "status": "ongoing",
-    "mainImage": "/images/magegeelight87.webp"
+    "mainImage": "/images/magegeelight87.webp",
+    "createdAt": "2025-06-04T23:15:00Z"
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "storeName": "Mode",
     "type": "Interest Check",
     "status": "ongoing",
-    "mainImage": "/images/modeloop.webp"
+    "mainImage": "/images/modeloop.webp",
+    "createdAt": "2025-06-05T05:15:00Z"
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "storeName": "Mode",
     "type": "Interest Check",
     "status": "ongoing",
-    "mainImage": "/images/modesonnet.webp"
+    "mainImage": "/images/modesonnet.webp",
+    "createdAt": "2025-06-06T23:15:00Z"
   },
   {
     "id": 7,
@@ -60,7 +66,8 @@
     "storeName": "Mode",
     "type": "Interest Check",
     "status": "ongoing",
-    "mainImage": "/images/modesixtyfive.webp"
+    "mainImage": "/images/modesixtyfive.webp",
+    "createdAt": "2025-06-07T23:15:00Z"
   },
   {
     "id": 8,
@@ -69,6 +76,27 @@
     "storeName": "Mode",
     "type": "Interest Check",
     "status": "ongoing",
-    "mainImage": "/images/modetempo.webp"
+    "mainImage": "/images/modetempo.webp",
+    "createdAt": "2025-06-08T23:15:00Z"
+  },
+  {
+    "id": 9,
+    "title": "Ended Test 1",
+    "price": 3000000,
+    "storeName": "Mode",
+    "type": "Group Buy",
+    "status": "ended",
+    "mainImage": "/images/modetempo.webp",
+    "createdAt": "2024-06-01T23:15:00Z"
+  },
+  {
+    "id": 10,
+    "title": "Ended Test 2",
+    "price": 3000000,
+    "storeName": "Mode",
+    "type": "Interest Check",
+    "status": "ended",
+    "mainImage": "/images/modetempo.webp",
+    "createdAt": "2024-06-02T23:15:00Z"
   }
 ]

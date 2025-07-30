@@ -12,10 +12,12 @@ function Product() {
 
   return (
     <>
-      <PrimarySearchAppBar page="home"/>
-      <Typography variant="h4" mt={5} align="center" sx={{ color: red[400] }}>{product.title}</Typography>
-      <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
-        <BottomNav value={2} />
+      <PrimarySearchAppBar nav="home"/>
+      <Box sx={{ pr: { xs: 1, sm: 4, md: '6%' }, pl: { xs: 1, sm: 4, md: '6%' }, mb: { xs: 10, sm: 4 } }}>
+        <Typography variant="h4" mt={5} align="center" sx={{ color: red[400] }}>{product.title}</Typography>
+        <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+          <BottomNav value={2} />
+        </Box>
       </Box>
     </>
   );

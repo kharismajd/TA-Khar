@@ -4,9 +4,9 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Transactions from './pages/Transactions';
 import Profile from './pages/Profile';
-import SearchProduct from './pages/SearchProduct';
 import Product from './pages/Product';
 import { Container } from '@mui/material';
+import ProductSearch from './pages/ProductSearch';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/search-product" element={<SearchProduct />} />
+          <Route path="/search-product" element={<ProductSearch />} />
           <Route path="/product/:productId" element={<Product />} />
         </Routes>
     </Router>
