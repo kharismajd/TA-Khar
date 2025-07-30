@@ -47,7 +47,42 @@
     "type": "Interest Check",
     "status": "ongoing",
     "mainImage": "/images/modeloop.webp",
-    "createdAt": "2025-06-05T05:15:00Z"
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/modeloopdesc1",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board."
+      },
+      {
+        "image": "/images/modeloopdesc2",
+        "description": "Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+      }
+    ],
+    "images": [
+      { "refId": [], "link": "/images/modeloop2" },
+      { "refId": [], "link": "/images/modeloop3" },
+      { "refId": [], "link": "/images/modeloop4" },
+      { "refId": [11, 21], "link": "/images/modeloopv1" },
+      { "refId": [12, 22], "link": "/images/modeloopv2" },
+      { "refId": [13, 23], "link": "/images/modeloopv3" }
+    ],
+    "variantList": [
+      {
+        "name": "Variant",
+        "variant": [
+          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
+          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Finish",
+        "variant": [
+          { "refId": 1, "name": "Green", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
+          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
+        ]
+      }
+    ]
   },
   {
     "id": 6,
@@ -98,5 +133,50 @@
     "status": "ended",
     "mainImage": "/images/modetempo.webp",
     "createdAt": "2024-06-02T23:15:00Z"
+  },
+  {
+    "id": 11,
+    "title": "Mode Loop (Group Buy Test)",
+    "price": 3500000,
+    "storeName": "Mode",
+    "type": "Group Buy",
+    "status": "ongoing",
+    "mainImage": "/images/modeloop.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/modeloopdesc1",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board."
+      },
+      {
+        "image": "/images/modeloopdesc2",
+        "description": "Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+      }
+    ],
+    "images": [
+      { "refId": [], "link": "/images/modeloop2" },
+      { "refId": [], "link": "/images/modeloop3" },
+      { "refId": [], "link": "/images/modeloop4" },
+      { "refId": [11, 21], "link": "/images/modeloopv1" },
+      { "refId": [12, 22], "link": "/images/modeloopv2" },
+      { "refId": [13, 23], "link": "/images/modeloopv3" }
+    ],
+    "variantList": [
+      {
+        "name": "Variant",
+        "variant": [
+          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
+          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Finish",
+        "variant": [
+          { "refId": 1, "name": "Green", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
+          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
+        ]
+      }
+    ]
   }
 ]
