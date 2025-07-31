@@ -49,14 +49,14 @@
   },
   {
     "id": 5,
-    "title": "Mode Loop",
+    "title": "Mode Loop (Interest Check Test)",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
     "storeRatingCount": 100,
     "type": "Interest Check",
     "status": "ongoing",
-    "mainImage": "/images/modeloop.webp",
+    "mainImage": "/images/modeloop2.webp",
     "createdAt": "2025-06-05T05:15:00Z",
     "description": [
       {
@@ -65,7 +65,7 @@
       },
       {
         "image": "/images/modeloopdesc2.webp",
-        "description": "Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
       }
     ],
     "images": [
@@ -91,6 +91,38 @@
           { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
         ]
       }
+    ],
+    "interestCheckQuestions":[
+    	{
+    		"id": 1,
+    		"type": "radio",
+    		"question": "Apakah anda tertarik untuk membeli produk ini?",
+    		"options": [
+    			"Ya",
+    			"Tidak"
+    		]
+    	},
+    	{
+    		"id": 2,
+    		"type": "checkbox",
+    		"question": "Apa yang membuat anda tertarik pada produk ini?",
+    		"options": [
+    			"Spesifikasi",
+    			"Harga",
+    			"Variasi",
+    			"Desain"
+    		]
+    	},
+    	{
+    		"id": 3,
+    		"type": "text",
+    		"question": "Apakah terdapat masukkan terkait spesifikasi dan harga dari produk?"
+    	},
+    	{
+    		"id": 4,
+    		"type": "text",
+    		"question": "Nomor yang bisa dikontok jika mau dihubungi"
+    	}
     ]
   },
   {

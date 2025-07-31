@@ -11,6 +11,13 @@ import {
   TextField,
   Avatar,
   Backdrop,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormGroup,
+  Checkbox,
 } from "@mui/material";
 import BottomNav from "../components/BottomNav";
 import PrimarySearchAppBar from "../components/AppAppBar";
@@ -44,9 +51,22 @@ function Product() {
   const [variants, setVariants] = React.useState(variantDictionary);
   const [totalPrice, setTotalPrice] = React.useState(product.price);
   const [openSuccessBackdrop, setOpenSuccessBackdrop] = React.useState(false);
+  const [successBackdropMessage, setSuccessBackdropMessage] =
+    React.useState("");
+  const [disableQuestions, setDisableQuestions] = React.useState(false);
 
-  const handleOpenSuccessBackdrop = () => {
+  const handleSubmitInterestCheck = () => {
+    setDisableQuestions(true);
+    handleOpenSuccessBackdrop("Jawaban telah terkirim");
+  };
+
+  const handleAddToCart = () => {
+    handleOpenSuccessBackdrop("Ditambahkan ke keranjang");
+  };
+
+  const handleOpenSuccessBackdrop = (text) => {
     setOpenSuccessBackdrop(true);
+    setSuccessBackdropMessage(text);
 
     setTimeout(() => {
       handleCloseSuccessBackdrop();
@@ -126,7 +146,11 @@ function Product() {
     <>
       <PrimarySearchAppBar nav="home" />
       <Backdrop
-        sx={(theme) => ({ backgroundColor: "rgba(0, 0, 0, 0.85)", color: "#ffffff", zIndex: theme.zIndex.drawer + 1 })}
+        sx={(theme) => ({
+          backgroundColor: "rgba(0, 0, 0, 0.85)",
+          color: "#ffffff",
+          zIndex: theme.zIndex.drawer + 1,
+        })}
         open={openSuccessBackdrop}
         onClick={handleCloseSuccessBackdrop}
       >
@@ -137,11 +161,7 @@ function Product() {
             />
           </Box>
           <Box display="flex" justifyContent="center" alignItems="center">
-            <Typography
-              variant="h5"
-            >
-              Ditambahkan ke keranjang
-            </Typography>
+            <Typography variant="h5">{successBackdropMessage}</Typography>
           </Box>
         </Stack>
       </Backdrop>
@@ -153,8 +173,8 @@ function Product() {
           mt: 1.5,
         }}
       >
-        <Grid container columnSpacing={2}>
-          <Grid size={{ xs: 12, md: 9 }}>
+        <Grid container columnSpacing={3}>
+          <Grid size={{ xs: 12, md: product.type === "Group Buy" ? 9 : 7.5 }}>
             <ImageGallery
               items={product.images}
               showPlayButton={false}
@@ -232,153 +252,277 @@ function Product() {
               </>
             ))}
           </Grid>
-          <Grid size={{ xs: 0, md: 3 }}>
-            <Box
-              border={1}
-              borderColor="rgba(255,255,255,0.2)"
-              borderRadius={2}
-              sx={{
-                display: { xs: "none", md: "block" },
-                position: "sticky",
-                top: 76,
-              }}
-              p={2}
-            >
-              <Box mb={1} />
-              <Typography
-                gutterBottom
-                sx={{ fontWeight: "bold" }}
-                variant="body1"
-                noWrap={true}
+          <Grid size={{ xs: 0, md: product.type === "Group Buy" ? 3 : 4.5 }}>
+            {product.type === "Group Buy" && (
+              <Box
+                border={1}
+                borderColor="rgba(255,255,255,0.2)"
+                borderRadius={2}
+                sx={{
+                  display: { xs: "none", md: "block" },
+                  position: "sticky",
+                  top: 76,
+                }}
+                p={2}
               >
-                Atur Jumlah dan Variasi
-              </Typography>
-              <Box mt={2} />
-              <Divider />
-              <Box mb={2} />
-              {product.variantList.map((variant) => (
-                <>
-                  <Typography
-                    gutterBottom
-                    sx={{ fontWeight: "bold" }}
-                    variant="body2"
-                    noWrap={true}
-                  >
-                    {variant.name + ":"}
-                  </Typography>
-                  <Container display="flex" disableGutters>
-                    {variant.variant.map((variantSelection) => (
-                      <>
-                        <Button
-                          onClick={() =>
-                            handleVariantButtonClick(
-                              variant.name,
-                              variantSelection.refId
-                            )
-                          }
-                          variant="contained"
-                          sx={{
-                            backgroundColor:
-                              variants.get(variant.name) ===
-                              variantSelection.refId
-                                ? "secondary.main"
-                                : "#2f2f2f",
-                            mb: 1,
-                            mr: 1,
-                            textTransform: "none",
-                          }}
-                        >
-                          {variantSelection.name}
-                        </Button>
-                      </>
-                    ))}
-                  </Container>
-                  <Box mb={1} />
-                </>
-              ))}
-              <Box mb={2} />
-              <Divider />
-              <Box mb={2} />
-              <Stack direction="row">
-                <Button
-                  onClick={handleDecrement}
-                  sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
+                <Box mb={1} />
+                <Typography
+                  gutterBottom
+                  sx={{ fontWeight: "bold" }}
+                  variant="body1"
                 >
-                  <Remove style={{ color: "white" }} />
-                </Button>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: 36,
-                    width: 60,
-                  }}
-                >
-                  <TextField
-                    value={quantity}
-                    onChange={handleQuantityInputChange}
-                    onBlur={handleOnBlur}
-                    sx={{ input: { textAlign: "center" } }}
-                  ></TextField>
-                </Box>
-                <Button
-                  onClick={handleIncrement}
-                  sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
-                >
-                  <Add style={{ color: "white" }} />
-                </Button>
-              </Stack>
-              <Box mb={2} />
-              <Grid container>
-                <Grid size={6}>
-                  <Typography variant="body1" noWrap={true}>
-                    Subtotal
-                  </Typography>
-                </Grid>
-                <Grid size={6}>
-                  <Box display="flex" justifyContent="flex-end">
+                  Atur Jumlah dan Variasi
+                </Typography>
+                <Box mt={2} />
+                <Divider />
+                <Box mb={2} />
+                {product.variantList.map((variant) => (
+                  <>
                     <Typography
                       gutterBottom
                       sx={{ fontWeight: "bold" }}
-                      variant="body1"
-                      noWrap={true}
+                      variant="body2"
                     >
-                      {"Rp" + formatPrice(totalPrice)}
+                      {variant.name + ":"}
                     </Typography>
+                    <Container display="flex" disableGutters>
+                      {variant.variant.map((variantSelection) => (
+                        <>
+                          <Button
+                            onClick={() =>
+                              handleVariantButtonClick(
+                                variant.name,
+                                variantSelection.refId
+                              )
+                            }
+                            variant="contained"
+                            sx={{
+                              backgroundColor:
+                                variants.get(variant.name) ===
+                                variantSelection.refId
+                                  ? "secondary.main"
+                                  : "#2f2f2f",
+                              mb: 1,
+                              mr: 1,
+                              textTransform: "none",
+                            }}
+                          >
+                            {variantSelection.name}
+                          </Button>
+                        </>
+                      ))}
+                    </Container>
+                    <Box mb={1} />
+                  </>
+                ))}
+                <Box mb={2} />
+                <Divider />
+                <Box mb={2} />
+                <Stack direction="row">
+                  <Button
+                    onClick={handleDecrement}
+                    sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
+                  >
+                    <Remove style={{ color: "white" }} />
+                  </Button>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: 36,
+                      width: 60,
+                    }}
+                  >
+                    <TextField
+                      value={quantity}
+                      onChange={handleQuantityInputChange}
+                      onBlur={handleOnBlur}
+                      sx={{ input: { textAlign: "center" } }}
+                    ></TextField>
                   </Box>
-                </Grid>
-              </Grid>
-              <Box mb={1} />
-              <Grid container spacing={1}>
-                <Grid size={6}>
                   <Button
-                    fullWidth
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "secondary.main",
-                      textTransform: "none",
-                    }}
+                    onClick={handleIncrement}
+                    sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
                   >
-                    Beli
+                    <Add style={{ color: "white" }} />
                   </Button>
+                </Stack>
+                <Box mb={2} />
+                <Grid container>
+                  <Grid size={6}>
+                    <Typography variant="body1">Subtotal</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Box display="flex" justifyContent="flex-end">
+                      <Typography
+                        gutterBottom
+                        sx={{ fontWeight: "bold" }}
+                        variant="body1"
+                      >
+                        {"Rp" + formatPrice(totalPrice)}
+                      </Typography>
+                    </Box>
+                  </Grid>
                 </Grid>
-                <Grid size={6}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "secondary.main",
-                      textTransform: "none",
-                    }}
-                    onClick={handleOpenSuccessBackdrop}
-                  >
-                    + Keranjang
-                  </Button>
+                <Box mb={1} />
+                <Grid container spacing={1}>
+                  <Grid size={6}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "secondary.main",
+                        textTransform: "none",
+                      }}
+                    >
+                      Beli
+                    </Button>
+                  </Grid>
+                  <Grid size={6}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "secondary.main",
+                        textTransform: "none",
+                      }}
+                      onClick={handleAddToCart}
+                    >
+                      + Keranjang
+                    </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Box>
+              </Box>
+            )}
+            {product.type === "Interest Check" && (
+              <Box
+                border={1}
+                borderColor="rgba(255,255,255,0.2)"
+                borderRadius={2}
+                sx={{
+                  display: { xs: "none", md: "block" },
+                  position: "sticky",
+                  top: 76,
+                }}
+                p={2}
+              >
+                <Box mb={1} />
+                <Typography
+                  gutterBottom
+                  sx={{ fontWeight: "bold" }}
+                  variant="body1"
+                  noWrap={true}
+                >
+                  Interest Check
+                </Typography>
+                <Box mt={2} />
+                <Divider />
+                <Box mb={2} />
+                {product.interestCheckQuestions.map((icQuestion, index) => (
+                  <>
+                    <Typography variant="body1">
+                      {index + 1 + ". " + icQuestion.question}
+                    </Typography>
+                    {icQuestion.type === "radio" && (
+                      <>
+                        <FormControl>
+                          <RadioGroup row name={icQuestion.id.toString()}>
+                            {icQuestion.options.map((option, index) => (
+                              <>
+                                <FormControlLabel
+                                  value={option}
+                                  control={
+                                    <Radio
+                                      sx={{
+                                        color: "#b2b2b2",
+                                        "&.Mui-checked": {
+                                          color: "secondary.main",
+                                        },
+                                      }}
+                                    />
+                                  }
+                                  label={option}
+                                />
+                              </>
+                            ))}
+                          </RadioGroup>
+                        </FormControl>
+                      </>
+                    )}
+                    {icQuestion.type === "checkbox" && (
+                      <>
+                        <FormGroup row>
+                          {icQuestion.options.map((option, index) => (
+                            <>
+                              <FormControlLabel
+                                value={option}
+                                control={
+                                  <Checkbox
+                                    sx={{
+                                      color: "#b2b2b2",
+                                      "&.Mui-checked": {
+                                        color: "secondary.main",
+                                      },
+                                    }}
+                                  />
+                                }
+                                label={option}
+                              />
+                            </>
+                          ))}
+                        </FormGroup>
+                      </>
+                    )}
+                    {icQuestion.type === "text" && (
+                      <>
+                        <Box mb={2} />
+                        <TextField
+                          id={icQuestion.id}
+                          label="Jawaban anda"
+                          multiline
+                          fullWidth
+                          maxRows={4}
+                          sx={{
+                            fieldset: {
+                              borderColor: "rgba(255,255,255,0.4)",
+                              color: "rgba(255,255,255,0.4)",
+                            },
+                            ".MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                              {
+                                borderColor: "rgba(255,255,255,0.6)",
+                              },
+                            ".MuiInputLabel-root": {
+                              color: "#c1c1c1",
+                            },
+                          }}
+                        />
+                      </>
+                    )}
+                    <Box mt={2} />
+                    <Divider />
+                    <Box mb={2} />
+                  </>
+                ))}
+                <Button
+                  fullWidth
+                  disabled={disableQuestions}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "secondary.main",
+                    textTransform: "none",
+                    "&.Mui-disabled": {
+                      background: "#18181B",
+                      color: "#d1d1d1",
+                    },
+                  }}
+                  onClick={handleSubmitInterestCheck}
+                >
+                  Submit
+                </Button>
+              </Box>
+            )}
           </Grid>
         </Grid>
         <Box sx={{ display: { xs: "block", md: "none" } }}>
