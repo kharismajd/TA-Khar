@@ -59,12 +59,11 @@
       }
     ],
     "images": [
-      { "refId": [], "link": "/images/modeloop2" },
-      { "refId": [], "link": "/images/modeloop3" },
-      { "refId": [], "link": "/images/modeloop4" },
-      { "refId": [11, 21], "link": "/images/modeloopv1" },
-      { "refId": [12, 22], "link": "/images/modeloopv2" },
-      { "refId": [13, 23], "link": "/images/modeloopv3" }
+      { "refId": [], "original": "/images/modeloop2.webp", "thumbnail": "/images/modeloop2.webp" },
+      { "refId": [], "original": "/images/modeloop3.webp", "thumbnail": "/images/modeloop3.webp" },
+      { "refId": [11, 21], "original": "/images/modeloopv1.jpg", "thumbnail": "/images/modeloopv1.jpg" },
+      { "refId": [12, 22], "original": "/images/modeloopv2.jpg", "thumbnail": "/images/modeloopv2.jpg" },
+      { "refId": [13, 23], "original": "/images/modeloopv3.jpg", "thumbnail": "/images/modeloopv3.jpg" }
     ],
     "variantList": [
       {
@@ -141,7 +140,7 @@
     "storeName": "Mode",
     "type": "Group Buy",
     "status": "ongoing",
-    "mainImage": "/images/modeloop.webp",
+    "mainImage": "/images/modeloop2.webp",
     "createdAt": "2025-06-05T05:15:00Z",
     "description": [
       {
@@ -154,12 +153,11 @@
       }
     ],
     "images": [
-      { "refId": [], "link": "/images/modeloop2" },
-      { "refId": [], "link": "/images/modeloop3" },
-      { "refId": [], "link": "/images/modeloop4" },
-      { "refId": [11, 21], "link": "/images/modeloopv1" },
-      { "refId": [12, 22], "link": "/images/modeloopv2" },
-      { "refId": [13, 23], "link": "/images/modeloopv3" }
+      { "refId": [], "original": "/images/modeloop2.webp", "thumbnail": "/images/modeloop2.webp" },
+      { "refId": [], "original": "/images/modeloop3.webp", "thumbnail": "/images/modeloop3.webp" },
+      { "refId": [11, 21], "original": "/images/modeloopv1.jpg", "thumbnail": "/images/modeloopv1.jpg" },
+      { "refId": [12, 22], "original": "/images/modeloopv2.jpg", "thumbnail": "/images/modeloopv2.jpg" },
+      { "refId": [13, 23], "original": "/images/modeloopv3.jpg", "thumbnail": "/images/modeloopv3.jpg" }
     ],
     "variantList": [
       {
