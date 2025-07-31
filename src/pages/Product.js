@@ -9,6 +9,8 @@ import {
   Container,
   IconButton,
   TextField,
+  Avatar,
+  Backdrop,
 } from "@mui/material";
 import BottomNav from "../components/BottomNav";
 import PrimarySearchAppBar from "../components/AppAppBar";
@@ -17,9 +19,10 @@ import { useParams } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./react-gallery.css";
-import { Add, Remove } from "@mui/icons-material";
+import { Add, CheckCircle, Remove, Star } from "@mui/icons-material";
+import { deepOrange } from "@mui/material/colors";
 
-const isNumbers = (str) => /^(\s*|\d+)$/.test(str)
+const isNumbers = (str) => /^(\s*|\d+)$/.test(str);
 
 function formatPrice(n) {
   return n.toFixed(0).replace(/./g, function (c, i, a) {
@@ -32,50 +35,63 @@ function Product() {
   const product = products.filter((p) => p.id == productId)[0];
 
   const variantDictionary = new Map();
-  const variantNames = product.variantList.map((p) => p.name)
-  variantNames.forEach((name) => variantDictionary.set(name, 1))
+  const variantNames = product.variantList.map((p) => p.name);
+  variantNames.forEach((name) => variantDictionary.set(name, 1));
 
   const imageGalleryRef = React.useRef(null);
 
   const [quantity, setQuantity] = React.useState(1);
-  const [variants, setVariants] = React.useState(variantDictionary)
-  const [totalPrice, setTotalPrice] = React.useState(product.price)
+  const [variants, setVariants] = React.useState(variantDictionary);
+  const [totalPrice, setTotalPrice] = React.useState(product.price);
+  const [openSuccessBackdrop, setOpenSuccessBackdrop] = React.useState(false);
+
+  const handleOpenSuccessBackdrop = () => {
+    setOpenSuccessBackdrop(true);
+
+    setTimeout(() => {
+      handleCloseSuccessBackdrop();
+    }, 1000);
+  };
+
+  const handleCloseSuccessBackdrop = () => {
+    setOpenSuccessBackdrop(false);
+  };
 
   const handleImageRef = () => {
-    var refId = ""
+    var refId = "";
     for (const key of variants.keys()) {
-      refId = refId + variants.get(key).toString()
+      refId = refId + variants.get(key).toString();
     }
 
-    var found = false
-    var idx = 0
+    var found = false;
+    var idx = 0;
     for (const images of product.images) {
       if (images.refId.includes(parseInt(refId))) {
-        found = true
-        break
+        found = true;
+        break;
       }
-      idx = idx + 1
+      idx = idx + 1;
     }
 
-    imageGalleryRef.current.slideToIndex(found ? idx : 0)
-  }
+    imageGalleryRef.current.slideToIndex(found ? idx : 0);
+  };
 
   const handleVariantButtonClick = (name, value) => {
-    setVariants(new Map(variants.set(name, value)))
-    setTotalPrice(getVariantPrice() * quantity)
-    handleImageRef()
-  }
+    setVariants(new Map(variants.set(name, value)));
+    setTotalPrice(getVariantPrice() * quantity);
+    handleImageRef();
+  };
 
   const handleDecrement = () => {
     if (quantity >= 2) {
       setQuantity(quantity - 1);
-      setTotalPrice(getVariantPrice() * (quantity - 1))
+      setTotalPrice(getVariantPrice() * (quantity - 1));
     }
   };
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
-    setTotalPrice(getVariantPrice() * (quantity + 1))
+    setTotalPrice(getVariantPrice() * (quantity + 1));
   };
 
   const handleQuantityInputChange = (event) => {
@@ -83,30 +99,52 @@ function Product() {
     if (isNumbers(value)) {
       setQuantity(value);
     }
-    setTotalPrice(getVariantPrice() * value)
-  }
+    setTotalPrice(getVariantPrice() * value);
+  };
 
   const handleOnBlur = (event) => {
     const { value } = event.target;
     if (value === "" || value === null) {
-      setQuantity(1)
-      setTotalPrice(getVariantPrice() * 1)
+      setQuantity(1);
+      setTotalPrice(getVariantPrice() * 1);
     }
-  }
+  };
 
   const getVariantPrice = () => {
-    var price = product.price
+    var price = product.price;
     for (const key of variants.keys()) {
-      var pVariant = product.variantList.filter((v) => v.name === key)[0]
-      var priceIncrement = pVariant.variant.filter((v) => v.refId === variants.get(key))[0].priceIncrease
-      price = price + priceIncrement
+      var pVariant = product.variantList.filter((v) => v.name === key)[0];
+      var priceIncrement = pVariant.variant.filter(
+        (v) => v.refId === variants.get(key)
+      )[0].priceIncrease;
+      price = price + priceIncrement;
     }
-    return price
-  }
+    return price;
+  };
 
   return (
     <>
       <PrimarySearchAppBar nav="home" />
+      <Backdrop
+        sx={(theme) => ({ backgroundColor: "rgba(0, 0, 0, 0.85)", color: "#ffffff", zIndex: theme.zIndex.drawer + 1 })}
+        open={openSuccessBackdrop}
+        onClick={handleCloseSuccessBackdrop}
+      >
+        <Stack direction="column" spacing={1}>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <CheckCircle
+              sx={{ height: 200, width: 200, color: "secondary.main" }}
+            />
+          </Box>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Typography
+              variant="h5"
+            >
+              Ditambahkan ke keranjang
+            </Typography>
+          </Box>
+        </Stack>
+      </Backdrop>
       <Box
         sx={{
           pr: { xs: 1, sm: 4, md: "6%" },
@@ -117,7 +155,82 @@ function Product() {
       >
         <Grid container columnSpacing={2}>
           <Grid size={{ xs: 12, md: 9 }}>
-            <ImageGallery items={product.images} showPlayButton={false} ref={imageGalleryRef} />
+            <ImageGallery
+              items={product.images}
+              showPlayButton={false}
+              ref={imageGalleryRef}
+            />
+            <Typography
+              sx={{ fontWeight: product.type === "Group Buy" ? "bold" : "" }}
+              variant="h4"
+              mt={2}
+            >
+              {product.title}
+            </Typography>
+            {product.type === "Interest Check" && (
+              <Typography sx={{ fontWeight: "bold" }} variant="h5" mt={1}>
+                {"Rp." + formatPrice(product.price)}
+              </Typography>
+            )}
+            <Box mt={2} />
+            <Divider />
+            <Box mt={2} />
+            <Stack direction="row" spacing={2}>
+              <Stack direction="column" justifyContent={"center"}>
+                <Avatar
+                  sx={{ bgcolor: deepOrange[500], width: 50, height: 50 }}
+                >
+                  T
+                </Avatar>
+              </Stack>
+              <Stack direction="column" justifyContent={"center"}>
+                <Stack direction="column" gap={0}>
+                  <Typography variant="body2">{product.storeName}</Typography>
+                  <Stack alignItems="center" direction="row" gap={1}>
+                    <Star />
+                    <Typography variant="body2">
+                      {product.storeRating +
+                        " (" +
+                        product.storeRatingCount +
+                        ")"}
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+            <Box mt={2} />
+            <Divider />
+            <Box mt={2} />
+            <Typography sx={{ fontWeight: "bold" }} variant="h7" mt={2}>
+              Detail Produk
+            </Typography>
+            <Box mt={2} />
+            {product.description.map((desc) => (
+              <>
+                {(desc.image !== "" || desc.image !== null) && (
+                  <>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Box
+                        component="img"
+                        sx={{
+                          width: { xs: "100%", sm: "auto" },
+                          maxWidth: { xs: "100%", sm: "80%", md: "60%" },
+                          maxHeight: { xs: "auto", sm: 400, md: 400 },
+                        }}
+                        src={desc.image}
+                      />
+                    </Box>
+                    <Box mt={2} />
+                  </>
+                )}
+                <Typography variant="body1">{desc.description}</Typography>
+                <Box mt={2} />
+              </>
+            ))}
           </Grid>
           <Grid size={{ xs: 0, md: 3 }}>
             <Box
@@ -157,10 +270,19 @@ function Product() {
                     {variant.variant.map((variantSelection) => (
                       <>
                         <Button
-                          onClick={() => handleVariantButtonClick(variant.name, variantSelection.refId)}
+                          onClick={() =>
+                            handleVariantButtonClick(
+                              variant.name,
+                              variantSelection.refId
+                            )
+                          }
                           variant="contained"
                           sx={{
-                            backgroundColor: variants.get(variant.name) === variantSelection.refId ? "secondary.main" : "#2f2f2f",
+                            backgroundColor:
+                              variants.get(variant.name) ===
+                              variantSelection.refId
+                                ? "secondary.main"
+                                : "#2f2f2f",
                             mb: 1,
                             mr: 1,
                             textTransform: "none",
@@ -182,7 +304,7 @@ function Product() {
                   onClick={handleDecrement}
                   sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
                 >
-                  <Remove style={{ color: "white" }}/>
+                  <Remove style={{ color: "white" }} />
                 </Button>
                 <Box
                   sx={{
@@ -191,42 +313,44 @@ function Product() {
                     justifyContent: "center",
                     alignItems: "center",
                     height: 36,
-                    width: 60
+                    width: 60,
                   }}
                 >
-                  <TextField value={quantity} onChange={handleQuantityInputChange} onBlur={handleOnBlur} sx={{ input: { textAlign: "center" } }}></TextField>
+                  <TextField
+                    value={quantity}
+                    onChange={handleQuantityInputChange}
+                    onBlur={handleOnBlur}
+                    sx={{ input: { textAlign: "center" } }}
+                  ></TextField>
                 </Box>
                 <Button
                   onClick={handleIncrement}
                   sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
                 >
-                  <Add style={{ color: "white" }}/>
+                  <Add style={{ color: "white" }} />
                 </Button>
               </Stack>
               <Box mb={2} />
               <Grid container>
                 <Grid size={6}>
-                <Typography
-                    variant="body1"
-                    noWrap={true}
-                  >
+                  <Typography variant="body1" noWrap={true}>
                     Subtotal
                   </Typography>
                 </Grid>
                 <Grid size={6}>
                   <Box display="flex" justifyContent="flex-end">
                     <Typography
-                        gutterBottom
-                        sx={{ fontWeight: "bold" }}
-                        variant="body1"
-                        noWrap={true}
-                      >
-                        {"Rp" + formatPrice(totalPrice)}
-                      </Typography>
+                      gutterBottom
+                      sx={{ fontWeight: "bold" }}
+                      variant="body1"
+                      noWrap={true}
+                    >
+                      {"Rp" + formatPrice(totalPrice)}
+                    </Typography>
                   </Box>
                 </Grid>
               </Grid>
-              <Box mb={1} />    
+              <Box mb={1} />
               <Grid container spacing={1}>
                 <Grid size={6}>
                   <Button
@@ -237,26 +361,27 @@ function Product() {
                       textTransform: "none",
                     }}
                   >
-                      Beli
+                    Beli
                   </Button>
-                </Grid>   
+                </Grid>
                 <Grid size={6}>
-                <Button
+                  <Button
                     fullWidth
                     variant="contained"
                     sx={{
                       backgroundColor: "secondary.main",
                       textTransform: "none",
                     }}
+                    onClick={handleOpenSuccessBackdrop}
                   >
-                      + Keranjang
+                    + Keranjang
                   </Button>
                 </Grid>
               </Grid>
             </Box>
           </Grid>
         </Grid>
-        <Box sx={{ display: { xs: "block", sm: "none" } }}>
+        <Box sx={{ display: { xs: "block", md: "none" } }}>
           <BottomNav value={0} />
         </Box>
       </Box>

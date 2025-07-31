@@ -4,6 +4,8 @@
     "title": "Keycap Artistik 01",
     "price": 100000,
     "storeName": "Toko1",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Group Buy",
     "status": "ongoing",
     "mainImage": "/images/keycap.png",
@@ -14,6 +16,8 @@
     "title": "Keychron K6 Mechanical Keyboard",
     "price": 2100000,
     "storeName": "Toko1",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Group Buy",
     "status": "ongoing",
     "mainImage": "/images/keychronk6.jpg",
@@ -24,6 +28,8 @@
     "title": "Red Dragon K552 Mechanical Keyboard",
     "price": 1200000,
     "storeName": "Toko2",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Group Buy",
     "status": "ongoing",
     "mainImage": "/images/reddragonk552.jpg",
@@ -34,6 +40,8 @@
     "title": "Magegee Light 87 Mechanical Keyboard",
     "price": 900000,
     "storeName": "Toko2",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Group Buy",
     "status": "ongoing",
     "mainImage": "/images/magegeelight87.webp",
@@ -44,17 +52,19 @@
     "title": "Mode Loop",
     "price": 3500000,
     "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Interest Check",
     "status": "ongoing",
     "mainImage": "/images/modeloop.webp",
     "createdAt": "2025-06-05T05:15:00Z",
     "description": [
       {
-        "image": "/images/modeloopdesc1",
-        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board."
+        "image": "/images/modeloopdesc1.webp",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
       },
       {
-        "image": "/images/modeloopdesc2",
+        "image": "/images/modeloopdesc2.webp",
         "description": "Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
       }
     ],
@@ -88,6 +98,8 @@
     "title": "Mode Sonnet",
     "price": 4000000,
     "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Interest Check",
     "status": "ongoing",
     "mainImage": "/images/modesonnet.webp",
@@ -98,6 +110,8 @@
     "title": "Mode SixtyFive",
     "price": 3200000,
     "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Interest Check",
     "status": "ongoing",
     "mainImage": "/images/modesixtyfive.webp",
@@ -108,6 +122,8 @@
     "title": "Mode Tempo",
     "price": 3000000,
     "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Interest Check",
     "status": "ongoing",
     "mainImage": "/images/modetempo.webp",
@@ -118,6 +134,8 @@
     "title": "Ended Test 1",
     "price": 3000000,
     "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Group Buy",
     "status": "ended",
     "mainImage": "/images/modetempo.webp",
@@ -128,6 +146,8 @@
     "title": "Ended Test 2",
     "price": 3000000,
     "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Interest Check",
     "status": "ended",
     "mainImage": "/images/modetempo.webp",
@@ -138,18 +158,20 @@
     "title": "Mode Loop (Group Buy Test)",
     "price": 3500000,
     "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
     "type": "Group Buy",
     "status": "ongoing",
     "mainImage": "/images/modeloop2.webp",
     "createdAt": "2025-06-05T05:15:00Z",
     "description": [
       {
-        "image": "/images/modeloopdesc1",
-        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board."
+        "image": "/images/modeloopdesc1.webp",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
       },
       {
-        "image": "/images/modeloopdesc2",
-        "description": "Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+        "image": "/images/modeloopdesc2.webp",
+        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
       }
     ],
     "images": [
