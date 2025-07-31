@@ -462,7 +462,7 @@ function ProductSearch() {
                   onChange={handlePageChange}
                   sx={{
                     "& .Mui-selected": {
-                      backgroundColor: "#16A34A !important",
+                      backgroundColor: "#00A329 !important",
                     },
                   }}
                 />

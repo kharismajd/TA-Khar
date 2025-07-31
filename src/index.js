@@ -2,24 +2,27 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const theme = createTheme({
   palette: {
-    type: "dark",
+    mode: 'dark',
     primary: {
-      main: "#09090B",
+      main: '#d1d1d1',
+      contrastText: "#d1d1d1"
     },
     secondary: {
-      main: "#16A34A",
+      main: '#00A329',
     },
     background: {
-      default: "#09090B",
-      paper: "#18181B",
+      default: '#09090B',
+      paper: '#18181b',
     },
     text: {
-      primary: "#d1d1d1",
+      primary: '#d1d1d1',
     },
-    divider: "rgba(255,255,255,0.2)",
+    divider: 'rgba(255,255,255,0.2)',
   },
 });
 
@@ -27,8 +30,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <CssBaseline />
+        <App />
+      </LocalizationProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

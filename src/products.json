@@ -117,11 +117,6 @@
     		"id": 3,
     		"type": "text",
     		"question": "Apakah terdapat masukkan terkait spesifikasi dan harga dari produk?"
-    	},
-    	{
-    		"id": 4,
-    		"type": "text",
-    		"question": "Nomor yang bisa dikontok jika mau dihubungi"
     	}
     ]
   },
@@ -194,6 +189,246 @@
     "storeRatingCount": 100,
     "type": "Group Buy",
     "status": "ongoing",
+    "mainImage": "/images/modeloop2.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/modeloopdesc1.webp",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+      },
+      {
+        "image": "/images/modeloopdesc2.webp",
+        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
+      }
+    ],
+    "images": [
+      { "refId": [], "original": "/images/modeloop2.webp", "thumbnail": "/images/modeloop2.webp" },
+      { "refId": [], "original": "/images/modeloop3.webp", "thumbnail": "/images/modeloop3.webp" },
+      { "refId": [11, 21], "original": "/images/modeloopv1.jpg", "thumbnail": "/images/modeloopv1.jpg" },
+      { "refId": [12, 22], "original": "/images/modeloopv2.jpg", "thumbnail": "/images/modeloopv2.jpg" },
+      { "refId": [13, 23], "original": "/images/modeloopv3.jpg", "thumbnail": "/images/modeloopv3.jpg" }
+    ],
+    "variantList": [
+      {
+        "name": "Variant",
+        "variant": [
+          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
+          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Finish",
+        "variant": [
+          { "refId": 1, "name": "Green", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
+          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Mode Loop (Selesai Test)",
+    "price": 3500000,
+    "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
+    "type": "Group Buy",
+    "status": "ended",
+    "isInProduction": false,
+    "isFailed": false,
+    "mainImage": "/images/modeloop2.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/modeloopdesc1.webp",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+      },
+      {
+        "image": "/images/modeloopdesc2.webp",
+        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
+      }
+    ],
+    "images": [
+      { "refId": [], "original": "/images/modeloop2.webp", "thumbnail": "/images/modeloop2.webp" },
+      { "refId": [], "original": "/images/modeloop3.webp", "thumbnail": "/images/modeloop3.webp" },
+      { "refId": [11, 21], "original": "/images/modeloopv1.jpg", "thumbnail": "/images/modeloopv1.jpg" },
+      { "refId": [12, 22], "original": "/images/modeloopv2.jpg", "thumbnail": "/images/modeloopv2.jpg" },
+      { "refId": [13, 23], "original": "/images/modeloopv3.jpg", "thumbnail": "/images/modeloopv3.jpg" }
+    ],
+    "variantList": [
+      {
+        "name": "Variant",
+        "variant": [
+          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
+          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Finish",
+        "variant": [
+          { "refId": 1, "name": "Green", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
+          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Mode Loop (Dikirim Test)",
+    "price": 3500000,
+    "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
+    "type": "Group Buy",
+    "status": "ended",
+    "isInProduction": false,
+    "isFailed": false,
+    "mainImage": "/images/modeloop2.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/modeloopdesc1.webp",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+      },
+      {
+        "image": "/images/modeloopdesc2.webp",
+        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
+      }
+    ],
+    "images": [
+      { "refId": [], "original": "/images/modeloop2.webp", "thumbnail": "/images/modeloop2.webp" },
+      { "refId": [], "original": "/images/modeloop3.webp", "thumbnail": "/images/modeloop3.webp" },
+      { "refId": [11, 21], "original": "/images/modeloopv1.jpg", "thumbnail": "/images/modeloopv1.jpg" },
+      { "refId": [12, 22], "original": "/images/modeloopv2.jpg", "thumbnail": "/images/modeloopv2.jpg" },
+      { "refId": [13, 23], "original": "/images/modeloopv3.jpg", "thumbnail": "/images/modeloopv3.jpg" }
+    ],
+    "variantList": [
+      {
+        "name": "Variant",
+        "variant": [
+          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
+          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Finish",
+        "variant": [
+          { "refId": 1, "name": "Green", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
+          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Mode Loop (Diproduksi Test)",
+    "price": 3500000,
+    "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
+    "type": "Group Buy",
+    "status": "ended",
+    "isInProduction": true,
+    "isFailed": false,
+    "mainImage": "/images/modeloop2.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/modeloopdesc1.webp",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+      },
+      {
+        "image": "/images/modeloopdesc2.webp",
+        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
+      }
+    ],
+    "images": [
+      { "refId": [], "original": "/images/modeloop2.webp", "thumbnail": "/images/modeloop2.webp" },
+      { "refId": [], "original": "/images/modeloop3.webp", "thumbnail": "/images/modeloop3.webp" },
+      { "refId": [11, 21], "original": "/images/modeloopv1.jpg", "thumbnail": "/images/modeloopv1.jpg" },
+      { "refId": [12, 22], "original": "/images/modeloopv2.jpg", "thumbnail": "/images/modeloopv2.jpg" },
+      { "refId": [13, 23], "original": "/images/modeloopv3.jpg", "thumbnail": "/images/modeloopv3.jpg" }
+    ],
+    "variantList": [
+      {
+        "name": "Variant",
+        "variant": [
+          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
+          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Finish",
+        "variant": [
+          { "refId": 1, "name": "Green", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
+          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Mode Loop (Gagal Test)",
+    "price": 3500000,
+    "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
+    "type": "Group Buy",
+    "status": "ended",
+    "isInProduction": false,
+    "isFailed": true,
+    "mainImage": "/images/modeloop2.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/modeloopdesc1.webp",
+        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+      },
+      {
+        "image": "/images/modeloopdesc2.webp",
+        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
+      }
+    ],
+    "images": [
+      { "refId": [], "original": "/images/modeloop2.webp", "thumbnail": "/images/modeloop2.webp" },
+      { "refId": [], "original": "/images/modeloop3.webp", "thumbnail": "/images/modeloop3.webp" },
+      { "refId": [11, 21], "original": "/images/modeloopv1.jpg", "thumbnail": "/images/modeloopv1.jpg" },
+      { "refId": [12, 22], "original": "/images/modeloopv2.jpg", "thumbnail": "/images/modeloopv2.jpg" },
+      { "refId": [13, 23], "original": "/images/modeloopv3.jpg", "thumbnail": "/images/modeloopv3.jpg" }
+    ],
+    "variantList": [
+      {
+        "name": "Variant",
+        "variant": [
+          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
+          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Finish",
+        "variant": [
+          { "refId": 1, "name": "Green", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
+          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
+        ]
+      }
+    ]
+  },
+    {
+    "id": 16,
+    "title": "Mode Loop (GB Ongoing Test)",
+    "price": 3500000,
+    "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
+    "type": "Group Buy",
+    "status": "ongoing",
+    "isInProduction": false,
+    "isFailed": false,
     "mainImage": "/images/modeloop2.webp",
     "createdAt": "2025-06-05T05:15:00Z",
     "description": [

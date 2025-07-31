@@ -174,7 +174,7 @@ function Product() {
         }}
       >
         <Grid container columnSpacing={3}>
-          <Grid size={{ xs: 12, md: product.type === "Group Buy" ? 9 : 7.5 }}>
+          <Grid size={{ xs: 12, md: product.type === "Group Buy" ? 9 : 8 }}>
             <ImageGallery
               items={product.images}
               showPlayButton={false}
@@ -252,7 +252,7 @@ function Product() {
               </>
             ))}
           </Grid>
-          <Grid size={{ xs: 0, md: product.type === "Group Buy" ? 3 : 4.5 }}>
+          <Grid size={{ xs: 0, md: product.type === "Group Buy" ? 3 : 4 }}>
             {product.type === "Group Buy" && (
               <Box
                 border={1}
@@ -323,7 +323,7 @@ function Product() {
                     onClick={handleDecrement}
                     sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
                   >
-                    <Remove style={{ color: "white" }} />
+                    <Remove style={{ color: "d1d1d1" }} />
                   </Button>
                   <Box
                     sx={{
@@ -340,13 +340,19 @@ function Product() {
                       onChange={handleQuantityInputChange}
                       onBlur={handleOnBlur}
                       sx={{ input: { textAlign: "center" } }}
+                      variant="standard"
+                      slotProps={{
+                        input: {
+                          disableUnderline: true,
+                        },
+                      }}
                     ></TextField>
                   </Box>
                   <Button
                     onClick={handleIncrement}
                     sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
                   >
-                    <Add style={{ color: "white" }} />
+                    <Add style={{ color: "d1d1d1" }} />
                   </Button>
                 </Stack>
                 <Box mb={2} />
@@ -432,6 +438,7 @@ function Product() {
                             {icQuestion.options.map((option, index) => (
                               <>
                                 <FormControlLabel
+                                  disabled={disableQuestions}
                                   value={option}
                                   control={
                                     <Radio
@@ -457,6 +464,7 @@ function Product() {
                           {icQuestion.options.map((option, index) => (
                             <>
                               <FormControlLabel
+                                disabled={disableQuestions}
                                 value={option}
                                 control={
                                   <Checkbox
@@ -479,6 +487,7 @@ function Product() {
                       <>
                         <Box mb={2} />
                         <TextField
+                          disabled={disableQuestions}
                           id={icQuestion.id}
                           label="Jawaban anda"
                           multiline

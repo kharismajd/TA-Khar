@@ -53,7 +53,6 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -159,7 +158,7 @@ export default function PrimarySearchAppBar({ nav: nav, jenis: jenis, kondisi: k
           <Toolbar sx={{ paddingRight: { xs: "4%" }, paddingLeft: { xs: "4%" }, paddingTop: { xs: "2px" }, paddingBottom: { xs: "2px" }, backgroundColor: '#18181B' }}>
             <Box sx={{ width: { xs:'10%', sm:"25%"} }}>
               <Box sx={{ display: { xs: 'flex', sm: 'none' }, justifyContent: 'flex-start' }}>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit" edge="start" onClick={toggleDrawer(true)}>
+                <IconButton size="large" aria-label="show 4 new mails" color="primary" edge="start" onClick={toggleDrawer(true)}>
                   <TuneIcon/>
                 </IconButton>
               </Box>
@@ -167,7 +166,7 @@ export default function PrimarySearchAppBar({ nav: nav, jenis: jenis, kondisi: k
             <Box sx={{ width: { xs:'90%', sm:"50%"} }}>
               <Search>
                 <SearchIconWrapper>
-                  <SearchIcon />
+                  <SearchIcon color='primary'/>
                 </SearchIconWrapper>
                 <StyledInputBase
                   placeholder="Cari Produk"
@@ -181,16 +180,16 @@ export default function PrimarySearchAppBar({ nav: nav, jenis: jenis, kondisi: k
             </Box>
             <Box sx={{ width: { xs:'0%', sm:"25%"} }}>
               <Box sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end' }}>
-                <IconButton size="large" aria-label="home" color="inherit" onClick={() => handleIconClick("home")}>
+                <IconButton size="large" aria-label="home" color="primary" onClick={() => handleIconClick("home")}>
                   {nav === "home" ? <HomeIcon /> : <HomeOutlinedIcon />}
                 </IconButton>
-                <IconButton size="large" aria-label="cart" color="inherit" onClick={() => handleIconClick("cart")}>
+                <IconButton size="large" aria-label="cart" color="primary" onClick={() => handleIconClick("cart")}>
                   {nav === "cart" ? <ShoppingCartIcon /> : <ShoppingCartOutlinedIcon />}
                 </IconButton>
-                <IconButton size="large" aria-label="list" color="inherit" onClick={() => handleIconClick("transactions")}>
+                <IconButton size="large" aria-label="list" color="primary" onClick={() => handleIconClick("transactions")}>
                   {nav === "transactions" ? <ListAltOutlinedIcon /> : <ListIcon />}
                 </IconButton>
-                <IconButton size="large" edge="end" aria-label="profile" color="inherit" onClick={() => handleIconClick("profile")}>
+                <IconButton size="large" edge="end" aria-label="profile" color="primary" onClick={() => handleIconClick("profile")}>
                   {nav === "profile" ? <PersonIcon /> : <PersonOutlinedIcon />}
                 </IconButton>
               </Box>
