@@ -311,7 +311,7 @@ function Transactions() {
       transactionDetailDialog = 2;
     }
     if (transactionDetailDialog === 3 && isXs) {
-      productionInfoId = null;
+      productionInfoId = 0;
     }
     if (transactionDetailDialog === 2) {
       productionInfoId = null;
