@@ -44,7 +44,7 @@ export default function BottomNav({ value: valueProp }) {
   };
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: 60, borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }} elevation={3}>
+    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: 60, borderTopLeftRadius: '16px', borderTopRightRadius: '16px', zIndex: 1301 }} elevation={3}>
       <BottomNavigation value={currentValue} onChange={handleChange} showLabels={false} sx={{ borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction label="Keranjang" icon={<ShoppingCartIcon />} />

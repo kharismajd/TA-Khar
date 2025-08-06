@@ -289,6 +289,7 @@ function Product() {
                       {variant.variant.map((variantSelection) => (
                         <>
                           <Button
+                            disabled={product.status === "ended"}
                             onClick={() =>
                               handleVariantButtonClick(
                                 variant.name,
@@ -320,6 +321,7 @@ function Product() {
                 <Box mb={2} />
                 <Stack direction="row">
                   <Button
+                    disabled={product.status === "ended"}
                     onClick={handleDecrement}
                     sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
                   >
@@ -349,6 +351,7 @@ function Product() {
                     ></TextField>
                   </Box>
                   <Button
+                    disabled={product.status === "ended"}
                     onClick={handleIncrement}
                     sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
                   >
@@ -376,6 +379,7 @@ function Product() {
                 <Grid container spacing={1}>
                   <Grid size={6}>
                     <Button
+                      disabled={product.status === "ended"}
                       fullWidth
                       variant="contained"
                       sx={{
@@ -388,6 +392,7 @@ function Product() {
                   </Grid>
                   <Grid size={6}>
                     <Button
+                      disabled={product.status === "ended"}
                       fullWidth
                       variant="contained"
                       sx={{
@@ -438,7 +443,7 @@ function Product() {
                             {icQuestion.options.map((option, index) => (
                               <>
                                 <FormControlLabel
-                                  disabled={disableQuestions}
+                                  disabled={disableQuestions || product.status === "ended"}
                                   value={option}
                                   control={
                                     <Radio
@@ -464,7 +469,7 @@ function Product() {
                           {icQuestion.options.map((option, index) => (
                             <>
                               <FormControlLabel
-                                disabled={disableQuestions}
+                                disabled={disableQuestions || product.status === "ended"}
                                 value={option}
                                 control={
                                   <Checkbox
@@ -487,7 +492,7 @@ function Product() {
                       <>
                         <Box mb={2} />
                         <TextField
-                          disabled={disableQuestions}
+                          disabled={disableQuestions || product.status === "ended"}
                           id={icQuestion.id}
                           label="Jawaban anda"
                           multiline
@@ -516,7 +521,7 @@ function Product() {
                 ))}
                 <Button
                   fullWidth
-                  disabled={disableQuestions}
+                  disabled={disableQuestions || product.status === "ended"}
                   variant="contained"
                   sx={{
                     backgroundColor: "secondary.main",

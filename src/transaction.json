@@ -16,6 +16,7 @@
 				}
 			]
 		},
+		"paymentMethod": "Direct Transfer",
 		"shippingStatus": "shipped",
 		"createdAt": "2025-07-01T00:00:00"
 	},
@@ -36,6 +37,7 @@
 				}
 			]
 		},
+		"paymentMethod": "Direct Transfer",
 		"shippingStatus": "shipping",
 		"createdAt": "2025-07-02T00:00:00"
 	},
@@ -56,6 +58,7 @@
 				}
 			]
 		},
+		"paymentMethod": "Direct Transfer",
 		"createdAt": "2025-07-03T00:00:00"
 	},
 	{
@@ -75,6 +78,7 @@
 				}
 			]
 		},
+		"paymentMethod": "Direct Transfer",
 		"createdAt": "2025-07-04T00:00:00"
 	},
 	{
@@ -94,6 +98,7 @@
 				}
 			]
 		},
+		"paymentMethod": "Direct Transfer",
 		"createdAt": "2025-07-05T00:00:00"
 	}
 ]

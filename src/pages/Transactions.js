@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import {
   Typography,
   Box,
@@ -11,6 +11,19 @@ import {
   Divider,
   Grid,
   Pagination,
+  DialogTitle,
+  IconButton,
+  DialogContent,
+  DialogActions,
+  Dialog,
+  LinearProgress,
+  linearProgressClasses,
+  Stepper,
+  Step,
+  StepLabel,
+  StepContent,
+  Modal,
+  Fade,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import dayjs from "dayjs";
@@ -21,6 +34,27 @@ import { DatePicker } from "@mui/x-date-pickers";
 import transactions from "../transaction.json";
 import products from "../products.json";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
+import styled from "@emotion/styled";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 25,
+  borderRadius: 25,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: "#d1d1d1",
+    ...theme.applyStyles("dark", {
+      backgroundColor: "#d1d1d1",
+    }),
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: "#00A329",
+    ...theme.applyStyles("dark", {
+      backgroundColor: "#00A329",
+    }),
+  },
+}));
 
 function formatPrice(n) {
   return n.toFixed(0).replace(/./g, function (c, i, a) {
@@ -137,7 +171,9 @@ function checkNull(any, defaultReturn) {
 }
 
 function setDate(date) {
-  return date === null || date === "" || isNaN(date) ? null : dayjs(date);
+  return date === null || date === "" || isNaN(parseInt(date))
+    ? null
+    : dayjs(parseInt(date));
 }
 
 Date.prototype.toShortFormat = function () {
@@ -146,14 +182,14 @@ Date.prototype.toShortFormat = function () {
     "Feb",
     "Mar",
     "Apr",
-    "May",
+    "Mei",
     "Jun",
     "Jul",
-    "Aug",
+    "Agu",
     "Sep",
-    "Oct",
+    "Okt",
     "Nov",
-    "Dec",
+    "Des",
   ];
 
   const day = this.getDate();
@@ -166,25 +202,88 @@ Date.prototype.toShortFormat = function () {
   return `${day} ${monthName} ${year}`;
 };
 
+Date.prototype.toShortFormatWithHours = function () {
+  const hours = String(this.getHours()).padStart(2, "0");
+  const minutes = String(this.getMinutes()).padStart(2, "0");
+
+  return this.toShortFormat() + `, ${hours}:${minutes}`;
+};
+
+Date.prototype.toShortFormatWithDay = function () {
+  const dayNames = [
+    "Minggu",
+    "Senin",
+    "Selasa",
+    "Rabu",
+    "Kamis",
+    "Jumat",
+    "Sabtu",
+  ];
+  const dayIndex = this.getDay();
+  const dayName = dayNames[dayIndex];
+
+  return `${dayName}, ${this.toShortFormat()}`;
+};
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
+
 function Transactions() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [transactionSearchInputValue, setTransactionSearchInputValue] =
-    React.useState(checkNullString(searchParams.get("transactionTerm"), ""));
-  const [startDate, setStartDate] = React.useState(
-    setDate(searchParams.get("startDate"))
+  let [searchParams, setSearchParams] = useSearchParams();
+  const [openImage, setOpenImage] = React.useState(false);
+  const [image, setImage] = React.useState("false");
+
+  let startDate = setDate(searchParams.get("startDate"));
+  let endDate = setDate(searchParams.get("endDate"));
+
+  let transactionSearchInputValue = checkNullString(
+    searchParams.get("transactionTerm"),
+    ""
   );
-  const [endDate, setEndDate] = React.useState(
-    setDate(searchParams.get("endDate"))
+  let status = checkNullString(searchParams.get("status"), "semua");
+  let page = checkNull(parseInt(searchParams.get("transactionPage")), 1);
+  let transactionDetailDialog = checkNull(
+    parseInt(searchParams.get("transactionDetailStep")),
+    0
   );
-  const [status, setStatus] = React.useState(
-    checkNullString(searchParams.get("status"), "semua")
+  let transactionId = checkNull(
+    parseInt(searchParams.get("transactionId")),
+    null
   );
-  const [page, setPage] = React.useState(
-    checkNull(parseInt(searchParams.get("transactionPage")), 1)
+  let productionInfoId = checkNull(
+    parseInt(searchParams.get("productionInfoId")),
+    null
   );
 
+  let selectedTransaction = null;
+  let product = null;
+  if (transactionId !== null) {
+    selectedTransaction = transactions.find((t) => {
+      return t.id === transactionId;
+    });
+    product = products.find((p) => {
+      return p.id === selectedTransaction.item.itemId;
+    });
+  }
+
+  const isXs = useMediaQuery((theme) => theme.breakpoints.only("xs"));
   const navigate = useNavigate();
   let itemsPerPage = 10;
+
+  const handleCloseImage = () => {
+    setOpenImage(false);
+  };
+
+  const handleImage = (value) => {
+    setImage(value);
+    setOpenImage(true);
+  };
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -193,26 +292,161 @@ function Transactions() {
     });
   };
 
-  console.log(startDate);
+  const handleTransactionDetailDialogOpen = (transaction) => {
+    transactionId = transaction.id;
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      1,
+      transactionId,
+      productionInfoId
+    );
+  };
+
+  const handleTransactionDetailDialogClose = () => {
+    if (transactionDetailDialog === 3 && !isXs) {
+      transactionDetailDialog = 2;
+    }
+    if (transactionDetailDialog === 3 && isXs) {
+      productionInfoId = null;
+    }
+    if (transactionDetailDialog === 2) {
+      productionInfoId = null;
+    }
+    if (transactionDetailDialog === 1) {
+      transactionId = null;
+    }
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      transactionDetailDialog - 1,
+      transactionId,
+      productionInfoId
+    );
+  };
+
+  const handleProductionInfoDialogOpen = () => {
+    productionInfoId = isXs ? null : 0;
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      2,
+      transactionId,
+      productionInfoId
+    );
+  };
+
+  const handleProductionInfoIdChange = (id) => {
+    productionInfoId = id;
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      isXs ? 3 : 2,
+      transactionId,
+      productionInfoId
+    );
+  };
+
+  const handleProductionInfoDialogClose = () => {
+    productionInfoId = null;
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      1,
+      transactionId,
+      productionInfoId
+    );
+  };
 
   const handleInputChange = (event) => {
-    setTransactionSearchInputValue(event.target.value);
+    transactionSearchInputValue = event.target.value;
   };
 
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
-
-  const handleStatusChange = (event) => {
-    setStatus(event.target.value);
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      applyFilter(
+        transactionSearchInputValue,
+        status,
+        startDate === null ? null : startDate.valueOf(),
+        endDate === null ? null : endDate.valueOf(),
+        page,
+        0,
+        null,
+        null
+      );
+      scrollToTop();
+    }
   };
 
   const handleStartDateChange = (value) => {
-    setStartDate(value);
+    startDate = value;
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      0,
+      null,
+      null
+    );
   };
 
   const handleEndDateChange = (value) => {
-    setEndDate(value);
+    endDate = value;
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      0,
+      null,
+      null
+    );
+  };
+
+  const handlePageChange = (event, value) => {
+    page = value;
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      0,
+      null,
+      null
+    );
+  };
+
+  const handleStatusChange = (event) => {
+    status = event.target.value;
+    applyFilter(
+      transactionSearchInputValue,
+      status,
+      startDate,
+      endDate,
+      page,
+      0,
+      null,
+      null
+    );
   };
 
   const applyFilter = (
@@ -220,7 +454,10 @@ function Transactions() {
     status,
     startDate,
     endDate,
-    page
+    page,
+    transactionDetailStep,
+    transactionId,
+    productionInfoId
   ) => {
     navigate(
       "/transactions?transactionTerm=" +
@@ -232,29 +469,36 @@ function Transactions() {
         "&endDate=" +
         endDate +
         "&transactionPage=" +
-        page
+        page +
+        "&transactionDetailStep=" +
+        transactionDetailStep +
+        "&transactionId=" +
+        transactionId +
+        "&productionInfoId=" +
+        productionInfoId
     );
-    scrollToTop();
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      applyFilter(
-        transactionSearchInputValue,
-        status,
-        startDate,
-        endDate,
-        page
-      );
-    }
   };
 
   const handleResetButton = () => {
-    setTransactionSearchInputValue("");
-    setStatus("semua");
-    setPage(1);
-    setStartDate(null);
-    setEndDate(null);
+    transactionSearchInputValue = "";
+    startDate = null;
+    endDate = null;
+    status = "semua";
+    page = 1;
+    transactionDetailDialog = 0;
+    transactionId = null;
+    productionInfoId = null;
+    applyFilter(
+      "",
+      status,
+      null,
+      null,
+      page,
+      transactionDetailDialog,
+      transactionId,
+      productionInfoId
+    );
+    scrollToTop();
   };
 
   const filterTransactions = (
@@ -328,10 +572,6 @@ function Transactions() {
     };
   };
 
-  React.useEffect(() => {
-    applyFilter(transactionSearchInputValue, status, startDate, endDate, page);
-  }, [startDate, endDate, status, page]);
-
   const filteredTransactions = filterTransactions(
     transactionSearchInputValue,
     status,
@@ -344,6 +584,642 @@ function Transactions() {
 
   return (
     <>
+      <Modal
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        open={openImage}
+        onClose={handleCloseImage}
+        closeAfterTransition
+      >
+        <img
+          outline="none"
+          src={image}
+          alt="asd"
+          style={{ maxHeight: "90%", maxWidth: "90%" }}
+        />
+      </Modal>
+      {transactionId !== null && product !== null && (
+        // Transaction Detail Dialog
+        <BootstrapDialog
+          onClose={handleTransactionDetailDialogClose}
+          aria-labelledby="customized-dialog-title"
+          open={transactionDetailDialog !== 0}
+          sx={{
+            background: isXs? "#09090B": "",
+            "& .MuiPaper-root": {
+              background: isXs? "#09090B": "",
+            },
+          }}
+          slotProps={{ paper: { sx: { maxHeight: isXs ? "100%" : "80vh", backgroundColor: !isXs ? "#09090B": "" } } }}
+          maxWidth={
+            transactionDetailDialog == 1 || transactionDetailDialog == 0
+              ? "sm"
+              : "md"
+          }
+          fullWidth
+          fullScreen={isXs}
+          key={transactionDetailDialog}
+          transitionDuration={0}
+        >
+          <DialogTitle
+            sx={{ fontWeight: "bold", m: 0, p: 2 }}
+            id="customized-dialog-title"
+          >
+            {transactionDetailDialog >= 2
+              ? "Info Produksi"
+              : "Detail Transaksi"}
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleTransactionDetailDialogClose}
+            sx={(theme) => ({
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: theme.palette.grey[500],
+            })}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogContent dividers>
+            {transactionDetailDialog === 1 && (
+              //Transaction Detail
+              <>
+                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  Pesanan {checkStatus(selectedTransaction)}
+                </Typography>
+                <Grid container spacing={2}>
+                  <Grid size={6}>
+                    <Typography variant="body1">Tanggal Pembelian</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1" justifySelf="flex-end">
+                      {new Date(
+                        selectedTransaction.createdAt
+                      ).toShortFormatWithHours()}
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Divider sx={{ mb: 2, mt: 2 }} />
+                <Grid container spacing={2}>
+                  <Grid size={6}>
+                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                      Detail Produk
+                    </Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography
+                      variant="body1"
+                      justifySelf="flex-end"
+                      gutterBottom
+                    >
+                      {product.storeName + " >"}
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  onClick={() => {
+                    navigate("/product/" + product.id);
+                    scrollToTop();
+                  }}
+                  sx={{ cursor: "pointer" }}
+                >
+                  <Box
+                    borderRadius={2}
+                    component="img"
+                    sx={{
+                      width: 64,
+                      height: 64,
+                      objectFit: "cover",
+                    }}
+                    src={product.mainImage}
+                  />
+                  <Stack gap={0.75}>
+                    <Typography variant="body1" fontWeight="bold">
+                      {product.title}
+                    </Typography>
+                    <Typography variant="body1">
+                      {selectedTransaction.item.quantity +
+                        " x Rp" +
+                        formatPrice(getVariantPrice(selectedTransaction))}
+                    </Typography>
+                  </Stack>
+                </Stack>
+                <Divider sx={{ mb: 2, mt: 2 }} />
+                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  Info Pengiriman
+                </Typography>
+                <Grid container rowSpacing={1}>
+                  <Grid size={6}>
+                    <Typography variant="body1">Kurir</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1">Kurir A</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1">Resi</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1">RESI12345RESI</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1">Alamat</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1">Mr Pikachu</Typography>
+                    <Typography variant="body1">+62 1234567890</Typography>
+                    <Typography variant="body1">
+                      Jl. Pikachu No. 123, Kec. Pikachu, Kota Pikachu, Prov.
+                      Pikachu
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Divider sx={{ mb: 2, mt: 2 }} />
+                {product.productionInfo &&
+                  product.productionInfo.length > 0 && (
+                    <>
+                      <Grid container spacing={2}>
+                        <Grid size={6}>
+                          <Typography
+                            variant="h6"
+                            fontWeight="bold"
+                            gutterBottom
+                          >
+                            Info Produksi
+                          </Typography>
+                        </Grid>
+                        <Grid size={6}>
+                          <Typography
+                            variant="body1"
+                            fontWeight="bold"
+                            color="secondary.main"
+                            justifySelf="flex-end"
+                            sx={{ cursor: "pointer" }}
+                            onClick={handleProductionInfoDialogOpen}
+                          >
+                            Lihat Detail
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Typography variant="body1" gutterBottom>
+                        {new Date(
+                          product.productionInfo[0].createdAt
+                        ).toShortFormatWithDay()}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        gutterBottom
+                        sx={{
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          display: "-webkit-box",
+                          WebkitLineClamp: "2",
+                          WebkitBoxOrient: "vertical",
+                        }}
+                      >
+                        {product.productionInfo[0].description}
+                      </Typography>
+                      <Box mt={1.5} />
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
+                          <BorderLinearProgress
+                            variant="determinate"
+                            value={product.productionInfo[0].progress}
+                          />
+                        </Box>
+                        <Box sx={{ minWidth: 35 }}>
+                          <Typography
+                            variant="body1"
+                            fontWeight="bold"
+                          >{`${Math.round(
+                            product.productionInfo[0].progress
+                          )}%`}</Typography>
+                        </Box>
+                      </Box>
+                      <Divider sx={{ mb: 2, mt: 2 }} />
+                    </>
+                  )}
+                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  Rincian Pembayaran
+                </Typography>
+                <Grid container spacing={1}>
+                  <Grid size={6}>
+                    <Typography variant="body1">Metode Pembayaran</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1" justifySelf="flex-end">
+                      {selectedTransaction.paymentMethod}
+                    </Typography>
+                  </Grid>
+                  <Grid size={12}>
+                    <Divider />
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1">
+                      Subtotal Harga Barang
+                    </Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1" justifySelf="flex-end">
+                      Rp
+                      {formatPrice(
+                        getVariantPrice(selectedTransaction) *
+                          selectedTransaction.item.quantity
+                      )}
+                    </Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1">Total Ongkos Kirim</Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1" justifySelf="flex-end">
+                      Rp{formatPrice(0)}
+                    </Typography>
+                  </Grid>
+                  <Grid size={12}>
+                    <Divider />
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography variant="body1" fontWeight="bold">
+                      Total Belanja
+                    </Typography>
+                  </Grid>
+                  <Grid size={6}>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      justifySelf="flex-end"
+                    >
+                      Rp
+                      {formatPrice(
+                        getVariantPrice(selectedTransaction) *
+                          selectedTransaction.item.quantity
+                      )}
+                    </Typography>
+                  </Grid>
+                </Grid>
+                {isXs && <Box sx={{ height: "60px" }} />}
+              </>
+            )}
+                {!isXs && (transactionDetailDialog >= 2) && (
+                  // Production Info Desktop
+                  <>
+                    <Grid container spacing={2}>
+                      <Grid item size={{ xs: 0, sm: 7.5 }}>
+                        <Box
+                          sx={{
+                            height: "calc(70vh - 32px)",
+                            overflowY: "auto",
+                            borderRight: "1px solid rgba(255,255,255,0.2)",
+                            borderWidth: "1px",
+                            pr: 2,
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              width: "100%",
+                            }}
+                          >
+                            <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
+                              <BorderLinearProgress
+                                variant="determinate"
+                                value={
+                                  product.productionInfo[productionInfoId]
+                                    .progress
+                                }
+                              />
+                            </Box>
+                            <Box sx={{ minWidth: 35 }}>
+                              <Typography
+                                variant="body1"
+                                fontWeight="bold"
+                              >{`${Math.round(
+                                product.productionInfo[productionInfoId]
+                                  .progress
+                              )}%`}</Typography>
+                            </Box>
+                          </Box>
+                          <Divider sx={{ mb: 2, mt: 2 }} />
+                          <Typography
+                            variant="body1"
+                            fontWeight="bold"
+                            gutterBottom
+                          >
+                            {new Date(
+                              product.productionInfo[productionInfoId].createdAt
+                            ).toShortFormatWithDay()}
+                          </Typography>
+                          <Box mb={2} />
+                          <Typography
+                            variant="body1"
+                            sx={{ whiteSpace: "pre-line" }}
+                          >
+                            {
+                              product.productionInfo[productionInfoId]
+                                .description
+                            }
+                          </Typography>
+                          {product.productionInfo[productionInfoId].images &&
+                            product.productionInfo[productionInfoId].images
+                              .length > 0 && (
+                              <Box mt={2}>
+                                <Grid container spacing={1}>
+                                  {product.productionInfo[
+                                    productionInfoId
+                                  ].images.map((image, imgIndex) => (
+                                    <Grid item size={4} key={imgIndex}>
+                                      <Box
+                                        onClick={() =>
+                                          handleImage(image.original)
+                                        }
+                                        borderRadius={2}
+                                        component="img"
+                                        sx={{
+                                          width: "100%",
+                                          objectFit: "cover",
+                                          ":hover": {
+                                            cursor: "pointer",
+                                          },
+                                        }}
+                                        src={image.original}
+                                      />
+                                    </Grid>
+                                  ))}
+                                </Grid>
+                              </Box>
+                            )}
+                        </Box>
+                      </Grid>
+                      <Grid item size={{ xs: 12, sm: 4.5 }}>
+                        <Box
+                          sx={{
+                            maxHeight: "calc(70vh - 32px)",
+                            overflowY: "auto",
+                          }}
+                        >
+                          <Stepper
+                            activeStep={productionInfoId}
+                            orientation="vertical"
+                            nonLinear
+                          >
+                            {product.productionInfo.map((step, index) => (
+                              <Step
+                                key={new Date(
+                                  step.createdAt
+                                ).toShortFormatWithDay()}
+                                expanded
+                                sx={{
+                                  "& .MuiStepLabel-root .MuiStepIcon-text": {
+                                    fill: "rgba(255,255,255,0)", // circle color (COMPLETED)
+                                  },
+                                  "& .MuiStepLabel-root .Mui-active": {
+                                    color: "#00A329", // circle color (ACTIVE)
+                                  },
+                                  "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text":
+                                    {
+                                      fill: "rgba(255,255,255,0)", // circle's number (ACTIVE)
+                                    },
+                                }}
+                              >
+                                <StepLabel
+                                  icon={null}
+                                  sx={{ fontWeight: "bold" }}
+                                >
+                                  <Typography variant="body1" fontWeight="bold">
+                                    {new Date(
+                                      step.createdAt
+                                    ).toShortFormatWithDay()}
+                                  </Typography>
+                                </StepLabel>
+                                <StepContent>
+                                  <Typography
+                                    variant="body2"
+                                    gutterBottom
+                                    sx={{
+                                      overflow: "hidden",
+                                      textOverflow: "ellipsis",
+                                      display: "-webkit-box",
+                                      WebkitLineClamp: "3",
+                                      WebkitBoxOrient: "vertical",
+                                    }}
+                                  >
+                                    {step.description}
+                                  </Typography>
+                                  {step.images && step.images.length > 0 && (
+                                    <Box mt={1} mb={1}>
+                                      <Stack
+                                        direction="row"
+                                        spacing={1}
+                                        sx={{ overflowX: "auto" }}
+                                      >
+                                        {step.images.map((image, imgIndex) => (
+                                          <Box
+                                            onClick={() =>
+                                              handleImage(image.original)
+                                            }
+                                            key={imgIndex}
+                                            borderRadius={2}
+                                            component="img"
+                                            sx={{
+                                              width: 64,
+                                              height: 64,
+                                              objectFit: "cover",
+                                              ":hover": {
+                                                cursor: "pointer",
+                                              },
+                                            }}
+                                            src={image.original}
+                                          />
+                                        ))}
+                                      </Stack>
+                                    </Box>
+                                  )}
+                                  {productionInfoId !== index && (
+                                    <>
+                                      <Typography
+                                        variant="body2"
+                                        gutterBottom
+                                        color="secondary.main"
+                                        sx={{ cursor: "pointer" }}
+                                        onClick={() =>
+                                          handleProductionInfoIdChange(index)
+                                        }
+                                        fontWeight="bold"
+                                      >
+                                        Lihat Detail
+                                      </Typography>
+                                    </>
+                                  )}
+                                </StepContent>
+                              </Step>
+                            ))}
+                          </Stepper>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </>
+                )}
+                {isXs && transactionDetailDialog === 2 && (
+                  // Production Info Mobile
+                  <>
+                    <Stepper activeStep={0} orientation="vertical" nonLinear>
+                      {product.productionInfo.map((step, index) => (
+                        <Step
+                          key={new Date(step.createdAt).toShortFormatWithDay()}
+                          expanded
+                          sx={{
+                            "& .MuiStepLabel-root .MuiStepIcon-text": {
+                              fill: "rgba(255,255,255,0)", // circle color (COMPLETED)
+                            },
+                            "& .MuiStepLabel-root .Mui-active": {
+                              color: "#00A329", // circle color (ACTIVE)
+                            },
+                            "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text":
+                              {
+                                fill: "rgba(255,255,255,0)", // circle's number (ACTIVE)
+                              },
+                          }}
+                        >
+                          <StepLabel icon={null} sx={{ fontWeight: "bold" }}>
+                            <Typography variant="body1" fontWeight="bold">
+                              {new Date(step.createdAt).toShortFormatWithDay()}
+                            </Typography>
+                          </StepLabel>
+                          <StepContent>
+                            <Typography
+                              variant="body2"
+                              gutterBottom
+                              sx={{
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                display: "-webkit-box",
+                                WebkitLineClamp: "3",
+                                WebkitBoxOrient: "vertical",
+                              }}
+                            >
+                              {step.description}
+                            </Typography>
+                            {step.images && step.images.length > 0 && (
+                              <Box mt={1} mb={1}>
+                                <Stack
+                                  direction="row"
+                                  spacing={1}
+                                  sx={{ overflowX: "auto" }}
+                                >
+                                  {step.images.map((image, imgIndex) => (
+                                    <Box
+                                      onClick={() =>
+                                        handleImage(image.original)
+                                      }
+                                      key={imgIndex}
+                                      borderRadius={2}
+                                      component="img"
+                                      sx={{
+                                        width: 64,
+                                        height: 64,
+                                        objectFit: "cover",
+                                        ":hover": {
+                                          cursor: "pointer",
+                                        },
+                                      }}
+                                      src={image.original}
+                                    />
+                                  ))}
+                                </Stack>
+                              </Box>
+                            )}
+                            <Typography
+                              variant="body2"
+                              gutterBottom
+                              color="secondary.main"
+                              sx={{ cursor: "pointer" }}
+                              onClick={() =>
+                                handleProductionInfoIdChange(index)
+                              }
+                              fontWeight="bold"
+                            >
+                              Lihat Detail
+                            </Typography>
+                          </StepContent>
+                        </Step>
+                      ))}
+                    </Stepper>
+                    <Box sx={{ height: "60px" }} />
+                  </>
+                )}
+            {transactionDetailDialog === 3 && isXs && (
+              // Production Info Detail (Mobile Only)
+              <>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
+                    <BorderLinearProgress
+                      variant="determinate"
+                      value={product.productionInfo[productionInfoId].progress}
+                    />
+                  </Box>
+                  <Box sx={{ minWidth: 35 }}>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                    >{`${Math.round(
+                      product.productionInfo[productionInfoId].progress
+                    )}%`}</Typography>
+                  </Box>
+                </Box>
+                <Divider sx={{ mb: 2, mt: 2 }} />
+                <Typography variant="body1" fontWeight="bold" gutterBottom>
+                  {new Date(
+                    product.productionInfo[productionInfoId].createdAt
+                  ).toShortFormatWithDay()}
+                </Typography>
+                <Box mb={2} />
+                <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
+                  {product.productionInfo[productionInfoId].description}
+                </Typography>
+                {product.productionInfo[productionInfoId].images &&
+                  product.productionInfo[productionInfoId].images.length >
+                    0 && (
+                    <Box mt={2}>
+                      <Grid container spacing={1}>
+                        {product.productionInfo[productionInfoId].images.map(
+                          (image, imgIndex) => (
+                            <Grid item size={4} key={imgIndex}>
+                              <Box
+                                onClick={() => handleImage(image.original)}
+                                borderRadius={2}
+                                component="img"
+                                sx={{
+                                  width: "100%",
+                                  objectFit: "cover",
+                                  ":hover": {
+                                    cursor: "pointer",
+                                  },
+                                }}
+                                src={image.original}
+                              />
+                            </Grid>
+                          )
+                        )}
+                      </Grid>
+                    </Box>
+                  )}
+                <Box sx={{ height: "60px" }} />
+              </>
+            )}
+          </DialogContent>
+        </BootstrapDialog>
+        //Transaction Detail Dialog End
+      )}
+
       <PrimarySearchAppBar nav="transactions" />
       <Box
         sx={{
@@ -399,6 +1275,7 @@ function Transactions() {
                     ? endDate
                     : dayjs()
                 }
+                closeOnSelect
               />
             </Box>
             <Box>
@@ -414,6 +1291,7 @@ function Transactions() {
                 onChange={(newValue) => handleEndDateChange(newValue)}
                 label="Sampai Tanggal"
                 minDate={startDate}
+                closeOnSelect
               />
             </Box>
           </Stack>
@@ -542,6 +1420,11 @@ function Transactions() {
                     p: { xs: 2, sm: 2, md: 3 },
                     pb: { xs: 2, sm: 2, md: 2 },
                   }}
+                  onClick={() => {
+                    isXs
+                      ? handleTransactionDetailDialogOpen(transaction, product)
+                      : null;
+                  }}
                 >
                   <Stack direction="row" spacing={1.5} alignItems="center">
                     <ShoppingBag />
@@ -616,6 +1499,9 @@ function Transactions() {
                       disableRipple
                       variant="text"
                       sx={{ textTransform: "none" }}
+                      onClick={() =>
+                        handleTransactionDetailDialogOpen(transaction, product)
+                      }
                     >
                       <Typography
                         variant="body1"
@@ -627,7 +1513,7 @@ function Transactions() {
                     </Button>
                   </Box>
                 </Box>
-                <Box mt={2} />
+                <Box mt={{ xs: 1, sm: 2 }} />
               </>
             );
           })}

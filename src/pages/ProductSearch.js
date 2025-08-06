@@ -64,7 +64,7 @@ function ProductSearch() {
   let urutkan = checkNullString(searchParams.get("urutkan"), "sesuai");
   let page = checkNull(parseInt(searchParams.get("page")), 1);
   let term = checkNullString(searchParams.get("term"), "");
-  let itemsPerPage = 8;
+  let itemsPerPage = 12;
 
   const scrollToTop = () => {
     window.scrollTo({
