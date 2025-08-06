@@ -603,12 +603,19 @@ function Transactions() {
           aria-labelledby="customized-dialog-title"
           open={transactionDetailDialog !== 0}
           sx={{
-            background: isXs? "#09090B": "",
+            background: isXs ? "#09090B" : "",
             "& .MuiPaper-root": {
-              background: isXs? "#09090B": "",
+              background: isXs ? "#09090B" : "",
             },
           }}
-          slotProps={{ paper: { sx: { maxHeight: isXs ? "100%" : "80vh", backgroundColor: !isXs ? "#09090B": "" } } }}
+          slotProps={{
+            paper: {
+              sx: {
+                maxHeight: isXs ? "100%" : "80vh",
+                backgroundColor: !isXs ? "#09090B" : "",
+              },
+            },
+          }}
           maxWidth={
             transactionDetailDialog == 1 || transactionDetailDialog == 0
               ? "sm"
@@ -861,83 +868,160 @@ function Transactions() {
                 {isXs && <Box sx={{ height: "60px" }} />}
               </>
             )}
-                {!isXs && (transactionDetailDialog >= 2) && (
-                  // Production Info Desktop
-                  <>
-                    <Grid container spacing={2}>
-                      <Grid item size={{ xs: 0, sm: 7.5 }}>
-                        <Box
-                          sx={{
-                            height: "calc(70vh - 32px)",
-                            overflowY: "auto",
-                            borderRight: "1px solid rgba(255,255,255,0.2)",
-                            borderWidth: "1px",
-                            pr: 2,
-                          }}
-                        >
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              width: "100%",
-                            }}
-                          >
-                            <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
-                              <BorderLinearProgress
-                                variant="determinate"
-                                value={
-                                  product.productionInfo[productionInfoId]
-                                    .progress
-                                }
-                              />
-                            </Box>
-                            <Box sx={{ minWidth: 35 }}>
-                              <Typography
-                                variant="body1"
-                                fontWeight="bold"
-                              >{`${Math.round(
-                                product.productionInfo[productionInfoId]
-                                  .progress
-                              )}%`}</Typography>
-                            </Box>
-                          </Box>
-                          <Divider sx={{ mb: 2, mt: 2 }} />
+            {!isXs && transactionDetailDialog >= 2 && (
+              // Production Info Desktop
+              <>
+                <Grid container spacing={2}>
+                  <Grid item size={{ xs: 0, sm: 7.5 }}>
+                    <Box
+                      sx={{
+                        height: "calc(70vh - 32px)",
+                        overflowY: "auto",
+                        borderRight: "1px solid rgba(255,255,255,0.2)",
+                        borderWidth: "1px",
+                        pr: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          width: "100%",
+                        }}
+                      >
+                        <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
+                          <BorderLinearProgress
+                            variant="determinate"
+                            value={
+                              product.productionInfo[productionInfoId].progress
+                            }
+                          />
+                        </Box>
+                        <Box sx={{ minWidth: 35 }}>
                           <Typography
                             variant="body1"
                             fontWeight="bold"
-                            gutterBottom
-                          >
-                            {new Date(
-                              product.productionInfo[productionInfoId].createdAt
+                          >{`${Math.round(
+                            product.productionInfo[productionInfoId].progress
+                          )}%`}</Typography>
+                        </Box>
+                      </Box>
+                      <Divider sx={{ mb: 2, mt: 2 }} />
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        gutterBottom
+                      >
+                        {new Date(
+                          product.productionInfo[productionInfoId].createdAt
+                        ).toShortFormatWithDay()}
+                      </Typography>
+                      <Box mb={2} />
+                      <Typography
+                        variant="body1"
+                        sx={{ whiteSpace: "pre-line" }}
+                      >
+                        {product.productionInfo[productionInfoId].description}
+                      </Typography>
+                      {product.productionInfo[productionInfoId].images &&
+                        product.productionInfo[productionInfoId].images.length >
+                          0 && (
+                          <Box mt={2}>
+                            <Grid container spacing={1}>
+                              {product.productionInfo[
+                                productionInfoId
+                              ].images.map((image, imgIndex) => (
+                                <Grid item size={4} key={imgIndex}>
+                                  <Box
+                                    onClick={() => handleImage(image.original)}
+                                    borderRadius={2}
+                                    component="img"
+                                    sx={{
+                                      width: "100%",
+                                      objectFit: "cover",
+                                      ":hover": {
+                                        cursor: "pointer",
+                                      },
+                                    }}
+                                    src={image.original}
+                                  />
+                                </Grid>
+                              ))}
+                            </Grid>
+                          </Box>
+                        )}
+                    </Box>
+                  </Grid>
+                  <Grid item size={{ xs: 12, sm: 4.5 }}>
+                    <Box
+                      sx={{
+                        maxHeight: "calc(70vh - 32px)",
+                        overflowY: "auto",
+                      }}
+                    >
+                      <Stepper
+                        activeStep={productionInfoId}
+                        orientation="vertical"
+                        nonLinear
+                      >
+                        {product.productionInfo.map((step, index) => (
+                          <Step
+                            key={new Date(
+                              step.createdAt
                             ).toShortFormatWithDay()}
-                          </Typography>
-                          <Box mb={2} />
-                          <Typography
-                            variant="body1"
-                            sx={{ whiteSpace: "pre-line" }}
+                            expanded
+                            sx={{
+                              "& .MuiStepLabel-root .MuiStepIcon-text": {
+                                fill: "rgba(255,255,255,0)", // circle color (COMPLETED)
+                              },
+                              "& .MuiStepLabel-root .Mui-active": {
+                                color: "#00A329", // circle color (ACTIVE)
+                              },
+                              "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text":
+                                {
+                                  fill: "rgba(255,255,255,0)", // circle's number (ACTIVE)
+                                },
+                            }}
                           >
-                            {
-                              product.productionInfo[productionInfoId]
-                                .description
-                            }
-                          </Typography>
-                          {product.productionInfo[productionInfoId].images &&
-                            product.productionInfo[productionInfoId].images
-                              .length > 0 && (
-                              <Box mt={2}>
-                                <Grid container spacing={1}>
-                                  {product.productionInfo[
-                                    productionInfoId
-                                  ].images.map((image, imgIndex) => (
-                                    <Grid item size={4} key={imgIndex}>
+                            <StepLabel icon={null} sx={{ fontWeight: "bold" }}>
+                              <Typography variant="body1" fontWeight="bold">
+                                {new Date(
+                                  step.createdAt
+                                ).toShortFormatWithDay()}
+                              </Typography>
+                            </StepLabel>
+                            <StepContent>
+                              <Typography
+                                variant="body1"
+                                gutterBottom
+                                sx={{
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  display: "-webkit-box",
+                                  WebkitLineClamp: "3",
+                                  WebkitBoxOrient: "vertical",
+                                }}
+                              >
+                                {step.description}
+                              </Typography>
+                              {step.images && step.images.length > 0 && (
+                                <Box mt={1} mb={1}>
+                                  <Stack
+                                    direction="row"
+                                    spacing={1}
+                                    sx={{ overflowX: "auto" }}
+                                  >
+                                    {step.images.map((image, imgIndex) => (
                                       <Box
                                         onClick={() =>
                                           handleImage(image.original)
                                         }
+                                        key={imgIndex}
                                         borderRadius={2}
                                         component="img"
                                         sx={{
-                                          width: "100%",
+                                          width: 64,
+                                          height: 64,
                                           objectFit: "cover",
                                           ":hover": {
                                             cursor: "pointer",
@@ -945,210 +1029,118 @@ function Transactions() {
                                         }}
                                         src={image.original}
                                       />
-                                    </Grid>
-                                  ))}
-                                </Grid>
-                              </Box>
-                            )}
-                        </Box>
-                      </Grid>
-                      <Grid item size={{ xs: 12, sm: 4.5 }}>
-                        <Box
-                          sx={{
-                            maxHeight: "calc(70vh - 32px)",
-                            overflowY: "auto",
-                          }}
-                        >
-                          <Stepper
-                            activeStep={productionInfoId}
-                            orientation="vertical"
-                            nonLinear
-                          >
-                            {product.productionInfo.map((step, index) => (
-                              <Step
-                                key={new Date(
-                                  step.createdAt
-                                ).toShortFormatWithDay()}
-                                expanded
-                                sx={{
-                                  "& .MuiStepLabel-root .MuiStepIcon-text": {
-                                    fill: "rgba(255,255,255,0)", // circle color (COMPLETED)
-                                  },
-                                  "& .MuiStepLabel-root .Mui-active": {
-                                    color: "#00A329", // circle color (ACTIVE)
-                                  },
-                                  "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text":
-                                    {
-                                      fill: "rgba(255,255,255,0)", // circle's number (ACTIVE)
-                                    },
-                                }}
-                              >
-                                <StepLabel
-                                  icon={null}
-                                  sx={{ fontWeight: "bold" }}
-                                >
-                                  <Typography variant="body1" fontWeight="bold">
-                                    {new Date(
-                                      step.createdAt
-                                    ).toShortFormatWithDay()}
-                                  </Typography>
-                                </StepLabel>
-                                <StepContent>
+                                    ))}
+                                  </Stack>
+                                </Box>
+                              )}
+                              {productionInfoId !== index && (
+                                <>
                                   <Typography
                                     variant="body1"
                                     gutterBottom
-                                    sx={{
-                                      overflow: "hidden",
-                                      textOverflow: "ellipsis",
-                                      display: "-webkit-box",
-                                      WebkitLineClamp: "3",
-                                      WebkitBoxOrient: "vertical",
-                                    }}
+                                    color="secondary.main"
+                                    sx={{ cursor: "pointer" }}
+                                    onClick={() =>
+                                      handleProductionInfoIdChange(index)
+                                    }
+                                    fontWeight="bold"
                                   >
-                                    {step.description}
+                                    Lihat Detail
                                   </Typography>
-                                  {step.images && step.images.length > 0 && (
-                                    <Box mt={1} mb={1}>
-                                      <Stack
-                                        direction="row"
-                                        spacing={1}
-                                        sx={{ overflowX: "auto" }}
-                                      >
-                                        {step.images.map((image, imgIndex) => (
-                                          <Box
-                                            onClick={() =>
-                                              handleImage(image.original)
-                                            }
-                                            key={imgIndex}
-                                            borderRadius={2}
-                                            component="img"
-                                            sx={{
-                                              width: 64,
-                                              height: 64,
-                                              objectFit: "cover",
-                                              ":hover": {
-                                                cursor: "pointer",
-                                              },
-                                            }}
-                                            src={image.original}
-                                          />
-                                        ))}
-                                      </Stack>
-                                    </Box>
-                                  )}
-                                  {productionInfoId !== index && (
-                                    <>
-                                      <Typography
-                                        variant="body1"
-                                        gutterBottom
-                                        color="secondary.main"
-                                        sx={{ cursor: "pointer" }}
-                                        onClick={() =>
-                                          handleProductionInfoIdChange(index)
-                                        }
-                                        fontWeight="bold"
-                                      >
-                                        Lihat Detail
-                                      </Typography>
-                                    </>
-                                  )}
-                                </StepContent>
-                              </Step>
-                            ))}
-                          </Stepper>
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </>
-                )}
-                {isXs && transactionDetailDialog === 2 && (
-                  // Production Info Mobile
-                  <>
-                    <Stepper activeStep={0} orientation="vertical" nonLinear>
-                      {product.productionInfo.map((step, index) => (
-                        <Step
-                          key={new Date(step.createdAt).toShortFormatWithDay()}
-                          expanded
+                                </>
+                              )}
+                            </StepContent>
+                          </Step>
+                        ))}
+                      </Stepper>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </>
+            )}
+            {isXs && transactionDetailDialog === 2 && (
+              // Production Info Mobile
+              <>
+                <Stepper activeStep={0} orientation="vertical" nonLinear>
+                  {product.productionInfo.map((step, index) => (
+                    <Step
+                      key={new Date(step.createdAt).toShortFormatWithDay()}
+                      expanded
+                      sx={{
+                        "& .MuiStepLabel-root .MuiStepIcon-text": {
+                          fill: "rgba(255,255,255,0)", // circle color (COMPLETED)
+                        },
+                        "& .MuiStepLabel-root .Mui-active": {
+                          color: "#00A329", // circle color (ACTIVE)
+                        },
+                        "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
+                          fill: "rgba(255,255,255,0)", // circle's number (ACTIVE)
+                        },
+                      }}
+                    >
+                      <StepLabel icon={null} sx={{ fontWeight: "bold" }}>
+                        <Typography variant="body1" fontWeight="bold">
+                          {new Date(step.createdAt).toShortFormatWithDay()}
+                        </Typography>
+                      </StepLabel>
+                      <StepContent>
+                        <Typography
+                          variant="body1"
+                          gutterBottom
                           sx={{
-                            "& .MuiStepLabel-root .MuiStepIcon-text": {
-                              fill: "rgba(255,255,255,0)", // circle color (COMPLETED)
-                            },
-                            "& .MuiStepLabel-root .Mui-active": {
-                              color: "#00A329", // circle color (ACTIVE)
-                            },
-                            "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text":
-                              {
-                                fill: "rgba(255,255,255,0)", // circle's number (ACTIVE)
-                              },
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            display: "-webkit-box",
+                            WebkitLineClamp: "3",
+                            WebkitBoxOrient: "vertical",
                           }}
                         >
-                          <StepLabel icon={null} sx={{ fontWeight: "bold" }}>
-                            <Typography variant="body1" fontWeight="bold">
-                              {new Date(step.createdAt).toShortFormatWithDay()}
-                            </Typography>
-                          </StepLabel>
-                          <StepContent>
-                            <Typography
-                              variant="body1"
-                              gutterBottom
-                              sx={{
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                display: "-webkit-box",
-                                WebkitLineClamp: "3",
-                                WebkitBoxOrient: "vertical",
-                              }}
+                          {step.description}
+                        </Typography>
+                        {step.images && step.images.length > 0 && (
+                          <Box mt={1} mb={1}>
+                            <Stack
+                              direction="row"
+                              spacing={1}
+                              sx={{ overflowX: "auto" }}
                             >
-                              {step.description}
-                            </Typography>
-                            {step.images && step.images.length > 0 && (
-                              <Box mt={1} mb={1}>
-                                <Stack
-                                  direction="row"
-                                  spacing={1}
-                                  sx={{ overflowX: "auto" }}
-                                >
-                                  {step.images.map((image, imgIndex) => (
-                                    <Box
-                                      onClick={() =>
-                                        handleImage(image.original)
-                                      }
-                                      key={imgIndex}
-                                      borderRadius={2}
-                                      component="img"
-                                      sx={{
-                                        width: 64,
-                                        height: 64,
-                                        objectFit: "cover",
-                                        ":hover": {
-                                          cursor: "pointer",
-                                        },
-                                      }}
-                                      src={image.original}
-                                    />
-                                  ))}
-                                </Stack>
-                              </Box>
-                            )}
-                            <Typography
-                              variant="body1"
-                              gutterBottom
-                              color="secondary.main"
-                              sx={{ cursor: "pointer" }}
-                              onClick={() =>
-                                handleProductionInfoIdChange(index)
-                              }
-                              fontWeight="bold"
-                            >
-                              Lihat Detail
-                            </Typography>
-                          </StepContent>
-                        </Step>
-                      ))}
-                    </Stepper>
-                    <Box sx={{ height: "60px" }} />
-                  </>
-                )}
+                              {step.images.map((image, imgIndex) => (
+                                <Box
+                                  onClick={() => handleImage(image.original)}
+                                  key={imgIndex}
+                                  borderRadius={2}
+                                  component="img"
+                                  sx={{
+                                    width: 64,
+                                    height: 64,
+                                    objectFit: "cover",
+                                    ":hover": {
+                                      cursor: "pointer",
+                                    },
+                                  }}
+                                  src={image.original}
+                                />
+                              ))}
+                            </Stack>
+                          </Box>
+                        )}
+                        <Typography
+                          variant="body1"
+                          gutterBottom
+                          color="secondary.main"
+                          sx={{ cursor: "pointer" }}
+                          onClick={() => handleProductionInfoIdChange(index)}
+                          fontWeight="bold"
+                        >
+                          Lihat Detail
+                        </Typography>
+                      </StepContent>
+                    </Step>
+                  ))}
+                </Stepper>
+                <Box sx={{ height: "60px" }} />
+              </>
+            )}
             {transactionDetailDialog === 3 && isXs && (
               // Production Info Detail (Mobile Only)
               <>
@@ -1233,7 +1225,6 @@ function Transactions() {
             Daftar Transaksi
           </Typography>
           <Box mb={2} />
-
           <Stack direction="row" spacing={2}>
             <Box>
               <TextField
