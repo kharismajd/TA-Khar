@@ -650,15 +650,15 @@ function Transactions() {
             {transactionDetailDialog === 1 && (
               //Transaction Detail
               <>
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                <Typography variant="body1" fontWeight="bold" gutterBottom>
                   Pesanan {checkStatus(selectedTransaction)}
                 </Typography>
                 <Grid container spacing={2}>
                   <Grid size={6}>
-                    <Typography variant="body1">Tanggal Pembelian</Typography>
+                    <Typography variant="body2">Tanggal Pembelian</Typography>
                   </Grid>
                   <Grid size={6}>
-                    <Typography variant="body1" justifySelf="flex-end">
+                    <Typography variant="body2" justifySelf="flex-end">
                       {new Date(
                         selectedTransaction.createdAt
                       ).toShortFormatWithHours()}
@@ -668,13 +668,13 @@ function Transactions() {
                 <Divider sx={{ mb: 2, mt: 2 }} />
                 <Grid container spacing={2}>
                   <Grid size={6}>
-                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    <Typography variant="body1" fontWeight="bold" gutterBottom>
                       Detail Produk
                     </Typography>
                   </Grid>
                   <Grid size={6}>
                     <Typography
-                      variant="body1"
+                      variant="body2"
                       justifySelf="flex-end"
                       gutterBottom
                     >
@@ -702,10 +702,10 @@ function Transactions() {
                     src={product.mainImage}
                   />
                   <Stack gap={0.75}>
-                    <Typography variant="body1" fontWeight="bold">
+                    <Typography variant="body2" fontWeight="bold">
                       {product.title}
                     </Typography>
-                    <Typography variant="body1">
+                    <Typography variant="body2">
                       {selectedTransaction.item.quantity +
                         " x Rp" +
                         formatPrice(getVariantPrice(selectedTransaction))}
@@ -713,29 +713,29 @@ function Transactions() {
                   </Stack>
                 </Stack>
                 <Divider sx={{ mb: 2, mt: 3 }} />
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                <Typography variant="body1" fontWeight="bold" gutterBottom>
                   Info Pengiriman
                 </Typography>
                 <Grid container rowSpacing={1}>
                   <Grid size={5}>
-                    <Typography variant="body1">Kurir</Typography>
+                    <Typography variant="body2">Kurir</Typography>
                   </Grid>
                   <Grid size={7}>
-                    <Typography variant="body1">Kurir A</Typography>
+                    <Typography variant="body2">Kurir A</Typography>
                   </Grid>
                   <Grid size={5}>
-                    <Typography variant="body1">Resi</Typography>
+                    <Typography variant="body2">Resi</Typography>
                   </Grid>
                   <Grid size={7}>
-                    <Typography variant="body1">RESI12345RESI</Typography>
+                    <Typography variant="body2">RESI12345RESI</Typography>
                   </Grid>
                   <Grid size={5}>
-                    <Typography variant="body1">Alamat</Typography>
+                    <Typography variant="body2">Alamat</Typography>
                   </Grid>
                   <Grid size={7}>
-                    <Typography variant="body1">Mr Pikachu</Typography>
-                    <Typography variant="body1">+62 1234567890</Typography>
-                    <Typography variant="body1">
+                    <Typography variant="body2">Mr Pikachu</Typography>
+                    <Typography variant="body2">+62 1234567890</Typography>
+                    <Typography variant="body2">
                       Jl. Pikachu No. 123, Kec. Pikachu, Kota Pikachu, Prov.
                       Pikachu
                     </Typography>
@@ -748,7 +748,7 @@ function Transactions() {
                       <Grid container spacing={2}>
                         <Grid size={6}>
                           <Typography
-                            variant="h6"
+                            variant="body1"
                             fontWeight="bold"
                             gutterBottom
                           >
@@ -768,13 +768,13 @@ function Transactions() {
                           </Typography>
                         </Grid>
                       </Grid>
-                      <Typography variant="body1" gutterBottom>
+                      <Typography variant="body2" gutterBottom>
                         {new Date(
                           product.productionInfo[0].createdAt
                         ).toShortFormatWithDay()}
                       </Typography>
                       <Typography
-                        variant="body1"
+                        variant="body2"
                         gutterBottom
                         sx={{
                           overflow: "hidden",
@@ -806,15 +806,15 @@ function Transactions() {
                       <Divider sx={{ mb: 2, mt: 3 }} />
                     </>
                   )}
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                <Typography variant="body1" fontWeight="bold" gutterBottom>
                   Rincian Pembayaran
                 </Typography>
                 <Grid container spacing={1}>
                   <Grid size={6}>
-                    <Typography variant="body1">Metode Pembayaran</Typography>
+                    <Typography variant="body2">Metode Pembayaran</Typography>
                   </Grid>
                   <Grid size={6}>
-                    <Typography variant="body1" justifySelf="flex-end">
+                    <Typography variant="body2" justifySelf="flex-end">
                       {selectedTransaction.paymentMethod}
                     </Typography>
                   </Grid>
@@ -822,12 +822,12 @@ function Transactions() {
                     <Divider />
                   </Grid>
                   <Grid size={6}>
-                    <Typography variant="body1">
+                    <Typography variant="body2">
                       Subtotal Harga Barang
                     </Typography>
                   </Grid>
                   <Grid size={6}>
-                    <Typography variant="body1" justifySelf="flex-end">
+                    <Typography variant="body2" justifySelf="flex-end">
                       Rp
                       {formatPrice(
                         getVariantPrice(selectedTransaction) *
@@ -836,10 +836,10 @@ function Transactions() {
                     </Typography>
                   </Grid>
                   <Grid size={6}>
-                    <Typography variant="body1">Total Ongkos Kirim</Typography>
+                    <Typography variant="body2">Total Ongkos Kirim</Typography>
                   </Grid>
                   <Grid size={6}>
-                    <Typography variant="body1" justifySelf="flex-end">
+                    <Typography variant="body2" justifySelf="flex-end">
                       Rp{formatPrice(0)}
                     </Typography>
                   </Grid>
@@ -847,13 +847,13 @@ function Transactions() {
                     <Divider />
                   </Grid>
                   <Grid size={6}>
-                    <Typography variant="body1" fontWeight="bold">
+                    <Typography variant="body2" fontWeight="bold">
                       Total Belanja
                     </Typography>
                   </Grid>
                   <Grid size={6}>
                     <Typography
-                      variant="body1"
+                      variant="body2"
                       fontWeight="bold"
                       justifySelf="flex-end"
                     >
@@ -918,7 +918,7 @@ function Transactions() {
                       </Typography>
                       <Box mb={2} />
                       <Typography
-                        variant="body1"
+                        variant="body2"
                         sx={{ whiteSpace: "pre-line" }}
                       >
                         {product.productionInfo[productionInfoId].description}
@@ -992,7 +992,7 @@ function Transactions() {
                             </StepLabel>
                             <StepContent>
                               <Typography
-                                variant="body1"
+                                variant="body2"
                                 gutterBottom
                                 sx={{
                                   overflow: "hidden",
@@ -1085,7 +1085,7 @@ function Transactions() {
                       </StepLabel>
                       <StepContent>
                         <Typography
-                          variant="body1"
+                          variant="body2"
                           gutterBottom
                           sx={{
                             overflow: "hidden",
@@ -1173,7 +1173,7 @@ function Transactions() {
                   ).toShortFormatWithDay()}
                 </Typography>
                 <Box mb={2} />
-                <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
+                <Typography variant="body2" sx={{ whiteSpace: "pre-line" }}>
                   {product.productionInfo[productionInfoId].description}
                 </Typography>
                 {product.productionInfo[productionInfoId].images &&
