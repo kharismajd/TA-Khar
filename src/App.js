@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import { Container } from "@mui/material";
 import ProductSearch from "./pages/ProductSearch";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/search-product" element={<ProductSearch />} />
         <Route path="/product/:productId" element={<Product />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>
   );
