@@ -332,7 +332,6 @@ function Transactions() {
   };
 
   const handleProductionInfoDialogOpen = () => {
-    productionInfoId = isXs ? null : 0;
     applyFilter(
       transactionSearchInputValue,
       status,
@@ -341,7 +340,7 @@ function Transactions() {
       page,
       2,
       transactionId,
-      productionInfoId
+      0
     );
   };
 
@@ -996,7 +995,7 @@ function Transactions() {
                                 </StepLabel>
                                 <StepContent>
                                   <Typography
-                                    variant="body2"
+                                    variant="body1"
                                     gutterBottom
                                     sx={{
                                       overflow: "hidden",
@@ -1040,7 +1039,7 @@ function Transactions() {
                                   {productionInfoId !== index && (
                                     <>
                                       <Typography
-                                        variant="body2"
+                                        variant="body1"
                                         gutterBottom
                                         color="secondary.main"
                                         sx={{ cursor: "pointer" }}
@@ -1090,7 +1089,7 @@ function Transactions() {
                           </StepLabel>
                           <StepContent>
                             <Typography
-                              variant="body2"
+                              variant="body1"
                               gutterBottom
                               sx={{
                                 overflow: "hidden",
@@ -1132,7 +1131,7 @@ function Transactions() {
                               </Box>
                             )}
                             <Typography
-                              variant="body2"
+                              variant="body1"
                               gutterBottom
                               color="secondary.main"
                               sx={{ cursor: "pointer" }}
