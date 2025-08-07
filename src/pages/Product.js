@@ -22,7 +22,7 @@ import {
 import BottomNav from "../components/BottomNav";
 import PrimarySearchAppBar from "../components/AppAppBar";
 import products from "../products.json";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./react-gallery.css";
@@ -46,6 +46,7 @@ function Product() {
   variantNames.forEach((name) => variantDictionary.set(name, 1));
 
   const imageGalleryRef = React.useRef(null);
+  const navigate = useNavigate()
 
   const [quantity, setQuantity] = React.useState(1);
   const [variants, setVariants] = React.useState(variantDictionary);
@@ -75,6 +76,18 @@ function Product() {
 
   const handleCloseSuccessBackdrop = () => {
     setOpenSuccessBackdrop(false);
+  };
+
+  const handleBuyProduct = () => {
+    const variantIds = [];
+    for (const key of variants.keys()) {
+      variantIds.push(variants.get(key).toString());
+    }
+    navigate("../checkout?" +
+      "productIds=" + productId +
+      "&variants=" + variantIds.join(",") +
+      "&q=" + quantity
+    )
   };
 
   const handleImageRef = () => {
@@ -386,6 +399,7 @@ function Product() {
                         backgroundColor: "secondary.main",
                         textTransform: "none",
                       }}
+                      onClick={handleBuyProduct}
                     >
                       Beli
                     </Button>
@@ -443,7 +457,10 @@ function Product() {
                             {icQuestion.options.map((option, index) => (
                               <>
                                 <FormControlLabel
-                                  disabled={disableQuestions || product.status === "ended"}
+                                  disabled={
+                                    disableQuestions ||
+                                    product.status === "ended"
+                                  }
                                   value={option}
                                   control={
                                     <Radio
@@ -469,7 +486,9 @@ function Product() {
                           {icQuestion.options.map((option, index) => (
                             <>
                               <FormControlLabel
-                                disabled={disableQuestions || product.status === "ended"}
+                                disabled={
+                                  disableQuestions || product.status === "ended"
+                                }
                                 value={option}
                                 control={
                                   <Checkbox
@@ -492,7 +511,9 @@ function Product() {
                       <>
                         <Box mb={2} />
                         <TextField
-                          disabled={disableQuestions || product.status === "ended"}
+                          disabled={
+                            disableQuestions || product.status === "ended"
+                          }
                           id={icQuestion.id}
                           label="Jawaban anda"
                           multiline
