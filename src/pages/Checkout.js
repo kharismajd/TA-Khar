@@ -41,6 +41,14 @@ function formatPrice(n) {
   });
 }
 
+function calculatePrice(products, variantIds, quantities) {
+  var price = 0
+  products.forEach((p, idx) => {
+    price = price + (getVariant(p, variantIds[idx]).price * quantities[idx])
+  })
+  return price
+}
+
 function Checkout() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
@@ -99,6 +107,8 @@ function Checkout() {
   const selectedProducts = products.filter((product) =>
     productIds.includes(product.id)
   );
+
+  const totalPrice = calculatePrice(selectedProducts, variantIds, quantities)
 
   return (
     <>
@@ -210,7 +220,6 @@ function Checkout() {
                               sx={{ flexWrap: "wrap", display: "flex", gap: 1 }}
                             >
                               {selectedVariants.variants.map((v, idx) => {
-                                console.log(selectedVariants);
                                 return (
                                   <Chip
                                     label={v.name + ": " + v.selected}
@@ -410,11 +419,11 @@ function Checkout() {
               </Typography>
               <Box display="flex" justifyContent="space-between" mb={1}>
                 <Typography variant="body2">Total Harga</Typography>
-                <Typography variant="body2">Rp 100.000</Typography>
+                <Typography variant="body2">Rp{formatPrice(totalPrice)}</Typography>
               </Box>
               <Box display="flex" justifyContent="space-between">
                 <Typography variant="body2">Ongkos Kirim</Typography>
-                <Typography variant="body2">Rp 10.000</Typography>
+                <Typography variant="body2">Rp0</Typography>
               </Box>
               <Divider sx={{ my: 2 }} />
               <Box display="flex" justifyContent="space-between">
@@ -422,7 +431,7 @@ function Checkout() {
                   Total Tagihan
                 </Typography>
                 <Typography variant="body1" fontWeight="bold">
-                  Rp 110.000
+                  Rp{formatPrice(totalPrice)}
                 </Typography>
               </Box>
               <Button

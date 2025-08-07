@@ -1,0 +1,38 @@
+[
+  {
+    "storeId": 1,
+    "storeName": "Mode",
+    "products": [
+      {
+        "id": 1,
+        "productId": 11,
+        "quantity": 1,
+        "variants": [
+          {
+            "name": "Variant",
+            "refId": 1
+          },
+          {
+            "name": "Finish",
+            "refId": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "productId": 16,
+        "quantity": 1,
+        "variants": [
+          {
+            "name": "Variant",
+            "refId": 2
+          },
+          {
+            "name": "Finish",
+            "refId": 3
+          }
+        ]
+      }
+    ]
+  }
+]

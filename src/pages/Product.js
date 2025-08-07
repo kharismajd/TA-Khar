@@ -137,7 +137,7 @@ function Product() {
 
   const handleOnBlur = (event) => {
     const { value } = event.target;
-    if (value === "" || value === null) {
+    if (value === "" || value === null || parseInt(value) === 0) {
       setQuantity(1);
       setTotalPrice(getVariantPrice() * 1);
     }
