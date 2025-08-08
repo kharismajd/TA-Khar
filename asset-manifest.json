@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/TA-Khar/static/css/main.4c27e278.css",
+    "main.js": "/TA-Khar/static/js/main.fca1332f.js",
+    "index.html": "/TA-Khar/index.html",
+    "main.4c27e278.css.map": "/TA-Khar/static/css/main.4c27e278.css.map",
+    "main.fca1332f.js.map": "/TA-Khar/static/js/main.fca1332f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4c27e278.css",
+    "static/js/main.fca1332f.js"
+  ]
+}
