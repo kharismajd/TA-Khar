@@ -11,6 +11,7 @@ import {
   Stack,
   Chip,
   TextField,
+  useMediaQuery,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import BottomNav from "../components/BottomNav";
@@ -19,6 +20,7 @@ import products from "../products.json";
 import cart from "../cart.json";
 import { useNavigate } from "react-router-dom";
 import { Add, Delete, Remove } from "@mui/icons-material";
+import MobileSimpleAppBar from "../components/MobileSimpleAppBar";
 
 function formatPrice(n) {
   return n.toFixed(0).replace(/./g, function (c, i, a) {
@@ -30,6 +32,9 @@ const isNumbers = (str) => /^(\s*|\d+)$/.test(str);
 
 function Cart() {
   const navigate = useNavigate();
+  const isXs = useMediaQuery((theme) => theme.breakpoints.only("xs"));
+  const isSm = useMediaQuery((theme) => theme.breakpoints.only("sm"));
+
   const cartInitState = structuredClone(cart);
   var totalItemInitState = 0;
   for (const store of cartInitState) {
@@ -274,7 +279,7 @@ function Cart() {
 
   return (
     <>
-      <PrimarySearchAppBar nav="cart" />
+      {isXs ? <MobileSimpleAppBar title="Keranjang"/> : <PrimarySearchAppBar nav="cart" />}
       <Box
         sx={{
           pr: { xs: 2, sm: 4, md: "6%" },
@@ -295,9 +300,9 @@ function Cart() {
         <Grid container columnSpacing={3}>
           <Grid size={{ xs: 12, md: 8 }}>
             <Box
-              border={1}
+              border={isXs || isSm ? 0 : 1}
               borderColor="rgba(255,255,255,0.2)"
-              borderRadius={2}
+              borderRadius={isXs || isSm ? 0 : 2}
             >
               <FormGroup>
                 <Box
@@ -333,9 +338,12 @@ function Cart() {
                   <>
                     {s.products.length !== 0 && (
                       <Box
-                        borderBottom={i === cartData.length - 1 ? 0 : 1}
+                        border={isXs || isSm ? 1 : 0}
+                        borderBottom={isXs || isSm ? 1 : i === cartData.length - 1 ? 0 : 1}
                         borderColor="rgba(255,255,255,0.2)"
                         p={2}
+                        borderRadius={isXs || isSm ? 2 : 0}
+                        my={isXs || isSm ? 1 : 0}
                       >
                         <FormControlLabel
                           control={
@@ -486,6 +494,7 @@ function Cart() {
                                   </Box>
                                 </Box>
                               </Box>
+                              <Box mb={2} />
                               <Box display="flex" justifyContent="flex-end">
                                 <Stack direction="row">
                                   <Button
