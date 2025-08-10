@@ -114,8 +114,8 @@ export default function MobileTransactionAppBar({
   };
 
   const handleTanggalChange = (event) => {
-    setTanggal(event.target.value)
-  }
+    setTanggal(event.target.value);
+  };
 
   const applyFilter = (
     transactionTerm,
@@ -174,6 +174,7 @@ export default function MobileTransactionAppBar({
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
+      setDrawerState(false);
       event.preventDefault();
       const date = getDateFromSelection(tanggal);
       applyFilter(
@@ -220,7 +221,8 @@ export default function MobileTransactionAppBar({
           value="semua"
           variant="contained"
           sx={{
-            backgroundColor: statusMobile === "semua" ? "secondary.main" : "#2f2f2f",
+            backgroundColor:
+              statusMobile === "semua" ? "secondary.main" : "#2f2f2f",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -289,7 +291,8 @@ export default function MobileTransactionAppBar({
           value="gagal"
           variant="contained"
           sx={{
-            backgroundColor: statusMobile === "gagal" ? "secondary.main" : "#2f2f2f",
+            backgroundColor:
+              statusMobile === "gagal" ? "secondary.main" : "#2f2f2f",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -414,7 +417,7 @@ export default function MobileTransactionAppBar({
                   fullWidth={true}
                   onKeyDown={handleKeyDown}
                   onChange={handleInputChange}
-                  defaultValue={searchParams.get("term")}
+                  defaultValue={transactionTerm}
                 />
               </Search>
             </Box>

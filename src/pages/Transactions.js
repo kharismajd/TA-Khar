@@ -1234,7 +1234,7 @@ function Transactions() {
                 placeholder="Cari Transaksi"
                 onKeyDown={handleKeyDown}
                 onChange={handleInputChange}
-                defaultValue={searchParams.get("transactionTerm")}
+                defaultValue={transactionSearchInputValue}
                 slotProps={{
                   input: {
                     startAdornment: (
