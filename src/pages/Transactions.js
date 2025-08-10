@@ -37,6 +37,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import styled from "@emotion/styled";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import MobileTransactionAppBar from "../components/MobileTransactionAppBar";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 25,
@@ -1211,7 +1212,7 @@ function Transactions() {
         //Transaction Detail Dialog End
       )}
 
-      <PrimarySearchAppBar nav="transactions" />
+      { !isXs ? (<PrimarySearchAppBar nav="transactions" />) : <MobileTransactionAppBar term={transactionSearchInputValue} status={status} /> }
       <Box
         sx={{
           pr: { xs: 1, sm: 4, md: "6%" },
@@ -1281,6 +1282,7 @@ function Transactions() {
                 onChange={(newValue) => handleEndDateChange(newValue)}
                 label="Sampai Tanggal"
                 minDate={startDate}
+                maxDate={dayjs()}
                 closeOnSelect
               />
             </Box>

@@ -35,6 +35,7 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
+import dayjs from "dayjs";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -75,28 +76,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({
-  nav: nav,
-  jenis: jenis,
-  kondisi: kondisi,
-  urutkan: urutkan,
+export default function MobileTransactionAppBar({
+  term: term,
+  status: status,
 }) {
-  if (jenis === undefined || jenis === null) {
-    jenis = { gb: true, ic: true };
-  }
-
-  if (kondisi === undefined || kondisi === null) {
-    kondisi = { berlangsung: true, selesai: false };
-  }
-
-  if (urutkan === undefined || urutkan === null) {
-    urutkan = "sesuai";
-  }
   const [drawerState, setDrawerState] = React.useState(false);
-  const [searchInputValue, setSearchInputValue] = React.useState("");
-  const [jenisMobile, setJenisMobile] = React.useState(jenis);
-  const [kondisiMobile, setKondisiMobile] = React.useState(kondisi);
-  const [urutkanMobile, setUrutkanMobile] = React.useState(urutkan);
+  const [transactionTerm, setTransactionTerm] = React.useState(term);
+  const [statusMobile, setStatusMobile] = React.useState(status);
+  const [tanggal, setTanggal] = React.useState("semua");
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -118,73 +105,103 @@ export default function PrimarySearchAppBar({
     setDrawerState(open);
   };
 
-  const handleIconClick = (newValue) => {
-    if (newValue === "home") {
-      navigate("/");
-      return;
-    }
-    navigate("/" + newValue);
-  };
-
   const handleInputChange = (event) => {
-    setSearchInputValue(event.target.value);
+    setTransactionTerm(event.target.value);
   };
 
-  const handleJenisChange = (event) => {
-    const jenisCopy = { ...jenisMobile };
-    jenisCopy[event.target.value] = !jenisCopy[event.target.value];
-    setJenisMobile(jenisCopy);
+  const handleStatusMobileChange = (event) => {
+    setStatusMobile(event.target.value);
   };
 
-  const handleKondisiChange = (event) => {
-    const kondisiCopy = { ...kondisiMobile };
-    kondisiCopy[event.target.value] = !kondisiCopy[event.target.value];
-    setKondisiMobile(kondisiCopy);
+  const handleTanggalChange = (event) => {
+    setTanggal(event.target.value)
+  }
+
+  const applyFilter = (
+    transactionTerm,
+    status,
+    startDate,
+    endDate,
+    page,
+    transactionDetailStep,
+    transactionId,
+    productionInfoId
+  ) => {
+    navigate(
+      "/transactions?transactionTerm=" +
+        transactionTerm +
+        "&status=" +
+        status +
+        "&startDate=" +
+        startDate +
+        "&endDate=" +
+        endDate +
+        "&transactionPage=" +
+        page +
+        "&transactionDetailStep=" +
+        transactionDetailStep +
+        "&transactionId=" +
+        transactionId +
+        "&productionInfoId=" +
+        productionInfoId
+    );
   };
 
-  const handleUrutkanChange = (event) => {
-    setUrutkanMobile(event.target.value);
+  const getDateFromSelection = (selection) => {
+    const date = { startDate: null, endDate: null };
+    const today = dayjs()
+      .set("hour", 0)
+      .set("minute", 0)
+      .set("second", 0)
+      .set("millisecond", 0);
+    if (selection === "1bulan") {
+      date.startDate = today.subtract(1, "month");
+      return date;
+    }
+
+    if (selection === "6bulan") {
+      date.startDate = today.subtract(6, "month");
+      return date;
+    }
+
+    if (selection === "3tahun") {
+      date.startDate = today.subtract(3, "year");
+      return date;
+    }
+
+    return date;
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      setDrawerState(false);
-      navigate(
-        "/search-product?term=" +
-          searchInputValue +
-          "&gb=" +
-          jenisMobile.gb +
-          "&ic=" +
-          jenisMobile.ic +
-          "&berlangsung=" +
-          kondisiMobile.berlangsung +
-          "&selesai=" +
-          kondisiMobile.selesai +
-          "&urutkan=" +
-          urutkanMobile +
-          "&page=" +
-          1
+      event.preventDefault();
+      const date = getDateFromSelection(tanggal);
+      applyFilter(
+        transactionTerm,
+        statusMobile,
+        date.startDate,
+        date.endDate,
+        1,
+        0,
+        null,
+        null
       );
+      scrollToTop();
     }
   };
 
-  const handleSearchProduct = () => {
+  const handleSearchTransaction = () => {
     setDrawerState(false);
-    navigate(
-      "/search-product?term=" +
-        searchInputValue +
-        "&gb=" +
-        jenisMobile.gb +
-        "&ic=" +
-        jenisMobile.ic +
-        "&berlangsung=" +
-        kondisiMobile.berlangsung +
-        "&selesai=" +
-        kondisiMobile.selesai +
-        "&urutkan=" +
-        urutkanMobile +
-        "&page=" +
-        1
+    const date = getDateFromSelection(tanggal);
+    applyFilter(
+      transactionTerm,
+      statusMobile,
+      date.startDate,
+      date.endDate,
+      1,
+      0,
+      null,
+      null
     );
     scrollToTop();
   };
@@ -193,140 +210,164 @@ export default function PrimarySearchAppBar({
     <Box width="auto" role="presentation" p={2}>
       <Box display="flex" justifyContent="space-between">
         <Typography variant="body1" fontWeight="bold" gutterBottom>
-          Jenis
+          Status
         </Typography>
         <Close onClick={toggleDrawer(false)} />
       </Box>
       <Container display="flex" disableGutters>
         <Button
-          onClick={handleJenisChange}
-          value="gb"
+          onClick={handleStatusMobileChange}
+          value="semua"
           variant="contained"
           sx={{
-            backgroundColor: jenisMobile.gb ? "secondary.main" : "#2f2f2f",
+            backgroundColor: statusMobile === "semua" ? "secondary.main" : "#2f2f2f",
+            mb: 1,
             mr: 1,
             textTransform: "none",
           }}
         >
-          Group Buy
+          Semua
         </Button>
         <Button
-          onClick={handleJenisChange}
-          value="ic"
-          variant="contained"
-          sx={{
-            backgroundColor: jenisMobile.ic ? "secondary.main" : "#2f2f2f",
-            mr: 1,
-            textTransform: "none",
-          }}
-        >
-          Interest Check
-        </Button>
-      </Container>
-      <Box mb={2} />
-      <Typography variant="body1" fontWeight="bold" gutterBottom>
-        Kondisi
-      </Typography>
-      <Container display="flex" disableGutters>
-        <Button
-          onClick={handleKondisiChange}
-          value="berlangsung"
-          variant="contained"
-          sx={{
-            backgroundColor: kondisiMobile.berlangsung
-              ? "secondary.main"
-              : "#2f2f2f",
-            mr: 1,
-            textTransform: "none",
-          }}
-        >
-          Berlangsung
-        </Button>
-        <Button
-          onClick={handleKondisiChange}
+          onClick={handleStatusMobileChange}
           value="selesai"
           variant="contained"
           sx={{
-            backgroundColor: kondisiMobile.selesai
-              ? "secondary.main"
-              : "#2f2f2f",
+            backgroundColor:
+              statusMobile === "selesai" ? "secondary.main" : "#2f2f2f",
+            mb: 1,
             mr: 1,
             textTransform: "none",
           }}
         >
           Selesai
         </Button>
+        <Button
+          onClick={handleStatusMobileChange}
+          value="dikirim"
+          variant="contained"
+          sx={{
+            backgroundColor:
+              statusMobile === "dikirim" ? "secondary.main" : "#2f2f2f",
+            mb: 1,
+            mr: 1,
+            textTransform: "none",
+          }}
+        >
+          Dikirim
+        </Button>
+        <Button
+          onClick={handleStatusMobileChange}
+          value="diproduksi"
+          variant="contained"
+          sx={{
+            backgroundColor:
+              statusMobile === "diproduksi" ? "secondary.main" : "#2f2f2f",
+            mb: 1,
+            mr: 1,
+            textTransform: "none",
+          }}
+        >
+          Diproduksi
+        </Button>
+        <Button
+          onClick={handleStatusMobileChange}
+          value="gbOngoing"
+          variant="contained"
+          sx={{
+            backgroundColor:
+              statusMobile === "gbOngoing" ? "secondary.main" : "#2f2f2f",
+            mb: 1,
+            mr: 1,
+            textTransform: "none",
+          }}
+        >
+          GB Ongoing
+        </Button>
+        <Button
+          onClick={handleStatusMobileChange}
+          value="gagal"
+          variant="contained"
+          sx={{
+            backgroundColor: statusMobile === "gagal" ? "secondary.main" : "#2f2f2f",
+            mb: 1,
+            mr: 1,
+            textTransform: "none",
+          }}
+        >
+          Gagal
+        </Button>
       </Container>
       <Box mb={2} />
       <Typography variant="body1" fontWeight="bold" gutterBottom>
-        Urutkan
+        Tanggal
       </Typography>
       <Box mb={2}>
         <FormControl>
           <RadioGroup
-            defaultValue="sesuai"
+            defaultValue="semua"
             name="radio-buttons-group"
-            value={urutkanMobile}
-            onChange={handleUrutkanChange}
+            value={tanggal}
+            onChange={handleTanggalChange}
           >
             <FormControlLabel
               control={
                 <Radio
-                  value="sesuai"
+                  value="semua"
                   sx={{
                     color: "#b2b2b2",
                     "&.Mui-checked": { color: "secondary.main" },
                   }}
                 />
               }
-              label="Paling Sesuai"
+              label="Semua Tanggal Transaksi"
             />
             <FormControlLabel
               control={
                 <Radio
-                  value="terbaru"
+                  value="1bulan"
                   sx={{
                     color: "#b2b2b2",
                     "&.Mui-checked": { color: "secondary.main" },
                   }}
                 />
               }
-              label="Terbaru"
+              label="1 Bulan Terakhir"
             />
             <FormControlLabel
               control={
                 <Radio
-                  value="harga-tertinggi"
+                  value="6bulan"
                   sx={{
                     color: "#b2b2b2",
                     "&.Mui-checked": { color: "secondary.main" },
                   }}
                 />
               }
-              label="Harga Tertinggi"
+              label="6 Bulan Terakhir"
             />
             <FormControlLabel
               control={
                 <Radio
-                  value="harga-terendah"
+                  value="3tahun"
                   sx={{
                     color: "#b2b2b2",
                     "&.Mui-checked": { color: "secondary.main" },
                   }}
                 />
               }
-              label="Harga Terendah"
+              label="3 Tahun Terakhir"
             />
           </RadioGroup>
         </FormControl>
       </Box>
       <Button
-        onClick={handleSearchProduct}
+        onClick={handleSearchTransaction}
         variant="contained"
         fullWidth
         sx={{ textTransform: "none", backgroundColor: "secondary.main" }}
       >
-        Tampilkan Produk
+        Tampilkan Transaksi
       </Button>
     </Box>
   );
@@ -368,7 +409,7 @@ export default function PrimarySearchAppBar({
                   <SearchIcon color="primary" />
                 </SearchIconWrapper>
                 <StyledInputBase
-                  placeholder="Cari Produk"
+                  placeholder="Cari Transaksi"
                   inputProps={{ "aria-label": "search" }}
                   fullWidth={true}
                   onKeyDown={handleKeyDown}
@@ -376,56 +417,6 @@ export default function PrimarySearchAppBar({
                   defaultValue={searchParams.get("term")}
                 />
               </Search>
-            </Box>
-            <Box sx={{ width: { xs: "0%", sm: "25%" } }}>
-              <Box
-                sx={{
-                  display: { xs: "none", sm: "flex" },
-                  justifyContent: "flex-end",
-                }}
-              >
-                <IconButton
-                  size="large"
-                  aria-label="home"
-                  color="primary"
-                  onClick={() => handleIconClick("home")}
-                >
-                  {nav === "home" ? <HomeIcon /> : <HomeOutlinedIcon />}
-                </IconButton>
-                <IconButton
-                  size="large"
-                  aria-label="cart"
-                  color="primary"
-                  onClick={() => handleIconClick("cart")}
-                >
-                  {nav === "cart" ? (
-                    <ShoppingCartIcon />
-                  ) : (
-                    <ShoppingCartOutlinedIcon />
-                  )}
-                </IconButton>
-                <IconButton
-                  size="large"
-                  aria-label="list"
-                  color="primary"
-                  onClick={() => handleIconClick("transactions")}
-                >
-                  {nav === "transactions" ? (
-                    <ListAltOutlinedIcon />
-                  ) : (
-                    <ListIcon />
-                  )}
-                </IconButton>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="profile"
-                  color="primary"
-                  onClick={() => handleIconClick("profile")}
-                >
-                  {nav === "profile" ? <PersonIcon /> : <PersonOutlinedIcon />}
-                </IconButton>
-              </Box>
             </Box>
           </Toolbar>
         </AppBar>
