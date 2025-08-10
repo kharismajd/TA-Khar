@@ -46,7 +46,7 @@ function Cart() {
   }
 
   const [isAllChecked, setIsAllChecked] = React.useState(false);
-  const [isAllNotChecked, setIsAllNotChecked] = React.useState(true)
+  const [isAllNotChecked, setIsAllNotChecked] = React.useState(true);
   const [cartData, setCartData] = React.useState(cartInitState);
   const [totalItem, setTotalItem] = React.useState(totalItemInitState);
   const [totalPrice, setTotalPrice] = React.useState(0);
@@ -157,7 +157,7 @@ function Cart() {
     if (value === "" || value === null || parseInt(value) === 0) {
       cartProduct.quantity = 1;
     }
-    console.log(cartProduct.quantity);
+
     setCartData(cartDataCopy);
   };
 
@@ -193,24 +193,25 @@ function Cart() {
           p.variants.forEach((v, k) => {
             variant.push(v.refId);
           });
-          variants.push(variant)
+          variants.push(variant);
         }
       });
     });
 
-    const productIdsString = productIds.join(",")
-    const qString = q.join(",")
-    var variantsString = ""
+    const productIdsString = productIds.join(",");
+    const qString = q.join(",");
+    var variantsString = "";
     variants.forEach((v, i) => {
       if (i == 0) {
-        variantsString = variantsString + "variants=" + v.join(",")
+        variantsString = variantsString + "variants=" + v.join(",");
       } else {
-        variantsString = variantsString + "&variants=" + v.join(",")
+        variantsString = variantsString + "&variants=" + v.join(",");
       }
-    })
+    });
 
-    const queryString = "productIds=" + productIdsString + "&q=" + qString + "&" + variantsString
-    navigate("/checkout?" + queryString)
+    const queryString =
+      "productIds=" + productIdsString + "&q=" + qString + "&" + variantsString;
+    navigate("/checkout?" + queryString);
   };
 
   const getVariantPrice = (product, variants) => {
@@ -254,22 +255,34 @@ function Cart() {
   };
 
   const checkIsAllNotChecked = () => {
-    var isAllNotChecked = true
+    var isAllNotChecked = true;
     for (const store of cartData) {
       for (const cartProduct of store.products) {
-
         if (cartProduct.checked) {
-          isAllNotChecked = false
-          break
+          isAllNotChecked = false;
+          break;
         }
       }
 
       if (!isAllNotChecked) {
-        break
+        break;
       }
     }
 
-    setIsAllNotChecked(isAllNotChecked)
+    setIsAllNotChecked(isAllNotChecked);
+  };
+
+  const countChecked = () => {
+    var checked = 0
+    for (const store of cartData) {
+      for (const cartProduct of store.products) {
+        if (cartProduct.checked) {
+          checked = checked + 1
+        }
+      }
+    }
+
+    return checked
   }
 
   React.useEffect(() => {
@@ -279,12 +292,16 @@ function Cart() {
 
   return (
     <>
-      {isXs ? <MobileSimpleAppBar title="Keranjang"/> : <PrimarySearchAppBar nav="cart" />}
+      {isXs ? (
+        <MobileSimpleAppBar title="Keranjang" />
+      ) : (
+        <PrimarySearchAppBar nav="cart" />
+      )}
       <Box
         sx={{
           pr: { xs: 2, sm: 4, md: "6%" },
           pl: { xs: 2, sm: 4, md: "6%" },
-          mb: { xs: 10, sm: 4 },
+          mb: { xs: 10, sm: 10 },
           mt: 1.5,
         }}
       >
@@ -339,7 +356,9 @@ function Cart() {
                     {s.products.length !== 0 && (
                       <Box
                         border={isXs || isSm ? 1 : 0}
-                        borderBottom={isXs || isSm ? 1 : i === cartData.length - 1 ? 0 : 1}
+                        borderBottom={
+                          isXs || isSm ? 1 : i === cartData.length - 1 ? 0 : 1
+                        }
                         borderColor="rgba(255,255,255,0.2)"
                         p={2}
                         borderRadius={isXs || isSm ? 2 : 0}
@@ -603,11 +622,66 @@ function Cart() {
                 onClick={handleBuyClick}
                 sx={{ textTransform: "none" }}
               >
-                Beli
+                Beli{countChecked() > 0 ? " (" + countChecked() + ")" : ""}
               </Button>
             </Box>
           </Grid>
         </Grid>
+      </Box>
+      <Box
+        display="flex"
+        width="100%"
+        justifyContent="space-between"
+        alignItems="center"
+        p={2}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          display: { xs: "flex", md: "none" },
+          backgroundColor: "#18181B",
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8,
+        }}
+      >
+        <Box>
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="all"
+                checked={isAllChecked}
+                onClick={() => handleCheckAllButton(!isAllChecked)}
+                sx={{
+                  pt: 0,
+                  pb: 0,
+                  pl: 0,
+                  ml: 2,
+                  color: "#b2b2b2",
+                  "&.Mui-checked": { color: "secondary.main" },
+                }}
+              />
+            }
+            label={
+              <Typography variant="body1" noWrap>
+                {"Semua"}
+              </Typography>
+            }
+          />
+        </Box>
+        <Box display="flex" alignItems="center">
+          <Typography variant="body1" fontWeight="bold" mr={2}>
+            {totalPrice === 0 ? "-" : "Rp" + formatPrice(totalPrice)}
+          </Typography>
+          <Button
+            disabled={isAllNotChecked}
+            variant="contained"
+            color="secondary"
+            fullWidth
+            onClick={handleBuyClick}
+            sx={{ textTransform: "none", whiteSpace: "nowrap" }}
+          >
+            Beli{countChecked() > 0 ? " (" + countChecked() + ")" : ""}
+          </Button>
+        </Box>
       </Box>
     </>
   );
