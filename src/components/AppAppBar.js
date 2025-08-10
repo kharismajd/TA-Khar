@@ -99,6 +99,13 @@ export default function PrimarySearchAppBar({
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
