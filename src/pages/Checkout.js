@@ -42,11 +42,11 @@ function formatPrice(n) {
 }
 
 function calculatePrice(products, variantIds, quantities) {
-  var price = 0
+  var price = 0;
   products.forEach((p, idx) => {
-    price = price + (getVariant(p, variantIds[idx]).price * quantities[idx])
-  })
-  return price
+    price = price + getVariant(p, variantIds[idx]).price * quantities[idx];
+  });
+  return price;
 }
 
 function Checkout() {
@@ -108,7 +108,7 @@ function Checkout() {
     productIds.includes(product.id)
   );
 
-  const totalPrice = calculatePrice(selectedProducts, variantIds, quantities)
+  const totalPrice = calculatePrice(selectedProducts, variantIds, quantities);
 
   return (
     <>
@@ -137,7 +137,7 @@ function Checkout() {
         sx={{
           pr: { xs: 2, sm: 4, md: "6%" },
           pl: { xs: 2, sm: 4, md: "6%" },
-          mb: { xs: 10, sm: 4 },
+          mb: { xs: 14, sm: 14 },
           mt: 1.5,
         }}
       >
@@ -419,33 +419,68 @@ function Checkout() {
               </Typography>
               <Box display="flex" justifyContent="space-between" mb={1}>
                 <Typography variant="body2">Total Harga</Typography>
-                <Typography variant="body2">Rp{formatPrice(totalPrice)}</Typography>
+                <Typography variant="body2">
+                  Rp{formatPrice(totalPrice)}
+                </Typography>
               </Box>
               <Box display="flex" justifyContent="space-between">
                 <Typography variant="body2">Ongkos Kirim</Typography>
                 <Typography variant="body2">Rp0</Typography>
               </Box>
-              <Divider sx={{ my: 2 }} />
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="body1" fontWeight="bold">
-                  Total Tagihan
-                </Typography>
-                <Typography variant="body1" fontWeight="bold">
-                  Rp{formatPrice(totalPrice)}
-                </Typography>
+              <Box sx={{ display: { xs: "none", md: "block" } }}>
+                <Divider sx={{ my: 2 }} />
+                <Box display="flex" justifyContent="space-between">
+                  <Typography variant="body1" fontWeight="bold">
+                    Total Tagihan
+                  </Typography>
+                  <Typography variant="body1" fontWeight="bold">
+                    {totalPrice === 0 ? "-" : "Rp" + formatPrice(totalPrice)}
+                  </Typography>
+                </Box>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  fullWidth
+                  sx={{ mt: 2, textTransform: "none" }}
+                  onClick={handleBuy}
+                >
+                  Beli
+                </Button>
               </Box>
-              <Button
-                variant="contained"
-                color="secondary"
-                fullWidth
-                sx={{ mt: 2, textTransform: "none" }}
-                onClick={handleBuy}
-              >
-                Beli
-              </Button>
             </Box>
           </Grid>
         </Grid>
+      </Box>
+      <Box
+        width="100%"
+        justifyContent="center"
+        p={2}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          display: { xs: "block", md: "none" },
+          backgroundColor: "#18181B",
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8,
+        }}
+      >
+        <Box display="flex" justifyContent="space-between">
+          <Typography variant="body1">Total Tagihan</Typography>
+          <Typography variant="body1" fontWeight="bold">
+            {totalPrice === 0 ? "-" : "Rp" + formatPrice(totalPrice)}
+          </Typography>
+        </Box>
+        <Box display="flex">
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            sx={{ mt: 1, textTransform: "none" }}
+            onClick={handleBuy}
+          >
+            Beli
+          </Button>
+        </Box>
       </Box>
     </>
   );

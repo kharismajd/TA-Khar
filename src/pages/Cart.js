@@ -273,17 +273,17 @@ function Cart() {
   };
 
   const countChecked = () => {
-    var checked = 0
+    var checked = 0;
     for (const store of cartData) {
       for (const cartProduct of store.products) {
         if (cartProduct.checked) {
-          checked = checked + 1
+          checked = checked + 1;
         }
       }
     }
 
-    return checked
-  }
+    return checked;
+  };
 
   React.useEffect(() => {
     calculatePrice();
@@ -610,7 +610,7 @@ function Cart() {
               <Box display="flex" justifyContent="space-between" width="100%">
                 <Typography variant="body1">Total</Typography>
                 <Typography variant="body1" fontWeight="bold">
-                  Rp{formatPrice(totalPrice)}
+                  {totalPrice === 0 ? "-" : "Rp" + formatPrice(totalPrice)}
                 </Typography>
               </Box>
               <Divider sx={{ my: 2 }} />
@@ -629,58 +629,57 @@ function Cart() {
         </Grid>
       </Box>
       <Box
-        display="flex"
         width="100%"
-        justifyContent="space-between"
-        alignItems="center"
         p={2}
         sx={{
           position: "fixed",
           bottom: 0,
-          display: { xs: "flex", md: "none" },
+          display: { xs: "block", md: "none" },
           backgroundColor: "#18181B",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
         }}
       >
-        <Box>
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="all"
-                checked={isAllChecked}
-                onClick={() => handleCheckAllButton(!isAllChecked)}
-                sx={{
-                  pt: 0,
-                  pb: 0,
-                  pl: 0,
-                  ml: 2,
-                  color: "#b2b2b2",
-                  "&.Mui-checked": { color: "secondary.main" },
-                }}
-              />
-            }
-            label={
-              <Typography variant="body1" noWrap>
-                {"Semua"}
-              </Typography>
-            }
-          />
-        </Box>
-        <Box display="flex" alignItems="center">
-          <Typography variant="body1" fontWeight="bold" mr={2}>
-            {totalPrice === 0 ? "-" : "Rp" + formatPrice(totalPrice)}
-          </Typography>
-          <Button
-            disabled={isAllNotChecked}
-            variant="contained"
-            color="secondary"
-            fullWidth
-            onClick={handleBuyClick}
-            sx={{ textTransform: "none", whiteSpace: "nowrap" }}
-          >
-            Beli{countChecked() > 0 ? " (" + countChecked() + ")" : ""}
-          </Button>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  value="all"
+                  checked={isAllChecked}
+                  onClick={() => handleCheckAllButton(!isAllChecked)}
+                  sx={{
+                    pt: 0,
+                    pb: 0,
+                    pl: 0,
+                    ml: 2,
+                    color: "#b2b2b2",
+                    "&.Mui-checked": { color: "secondary.main" },
+                  }}
+                />
+              }
+              label={
+                <Typography variant="body1" noWrap>
+                  {"Semua"}
+                </Typography>
+              }
+            />
+          </Box>
+          <Box display="flex" alignItems="center">
+            <Typography variant="body1" fontWeight="bold" mr={2}>
+              {totalPrice === 0 ? "-" : "Rp" + formatPrice(totalPrice)}
+            </Typography>
+            <Button
+              disabled={isAllNotChecked}
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={handleBuyClick}
+              sx={{ textTransform: "none", whiteSpace: "nowrap" }}
+            >
+              Beli{countChecked() > 0 ? " (" + countChecked() + ")" : ""}
+            </Button>
+          </Box>
         </Box>
       </Box>
     </>
