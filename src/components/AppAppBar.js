@@ -25,12 +25,15 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import { Close } from "@mui/icons-material";
+import { Close, Home, ShoppingCart } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   Button,
   Container,
   FormControl,
   FormControlLabel,
+  Menu,
+  MenuItem,
   Radio,
   RadioGroup,
   Typography,
@@ -80,6 +83,7 @@ export default function PrimarySearchAppBar({
   jenis: jenis,
   kondisi: kondisi,
   urutkan: urutkan,
+  withMenu: withMenu,
 }) {
   if (jenis === undefined || jenis === null) {
     jenis = { gb: true, ic: true };
@@ -92,13 +96,29 @@ export default function PrimarySearchAppBar({
   if (urutkan === undefined || urutkan === null) {
     urutkan = "sesuai";
   }
+
+  if (withMenu === undefined || withMenu === null) {
+    withMenu = false;
+  }
+
   const [drawerState, setDrawerState] = React.useState(false);
   const [searchInputValue, setSearchInputValue] = React.useState("");
   const [jenisMobile, setJenisMobile] = React.useState(jenis);
   const [kondisiMobile, setKondisiMobile] = React.useState(kondisi);
   const [urutkanMobile, setUrutkanMobile] = React.useState(urutkan);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -331,104 +351,178 @@ export default function PrimarySearchAppBar({
     </Box>
   );
 
+  const mobileMenuId = "simple-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem onClick={() => navigate("/")}>
+        <IconButton size="large" color="inherit">
+          <Home />
+        </IconButton>
+        <p>Home</p>
+      </MenuItem>
+      <MenuItem onClick={() => navigate("/cart")}>
+        <IconButton size="large" color="inherit">
+          <ShoppingCart />
+        </IconButton>
+        <p>Keranjang</p>
+      </MenuItem>
+      <MenuItem onClick={() => navigate("/transactions")}>
+        <IconButton size="large" color="inherit">
+          <List />
+        </IconButton>
+        <p>Transaksi</p>
+      </MenuItem>
+    </Menu>
+  );
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar>
-          <Toolbar
-            sx={{
-              paddingRight: { xs: "4%" },
-              paddingLeft: { xs: "4%" },
-              paddingTop: { xs: "2px" },
-              paddingBottom: { xs: "2px" },
-              backgroundColor: "#18181B",
-            }}
-          >
-            <Box sx={{ width: { xs: "10%", sm: "25%" } }}>
-              <Box
-                sx={{
-                  display: { xs: "flex", sm: "none" },
-                  justifyContent: "flex-start",
-                }}
-              >
-                <IconButton
-                  size="large"
-                  aria-label="show 4 new mails"
-                  color="primary"
-                  edge="start"
-                  onClick={toggleDrawer(!drawerState)}
-                >
-                  <TuneIcon />
-                </IconButton>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Toolbar
+              sx={{
+                paddingRight: { xs: "4%" },
+                paddingLeft: { xs: "4%" },
+                paddingTop: { xs: "2px" },
+                paddingBottom: { xs: "2px" },
+                backgroundColor: "#18181B",
+              }}
+            >
+              <Box width="25%" />
+              <Box width="50%">
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon color="primary" />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Cari Produk"
+                    inputProps={{ "aria-label": "search" }}
+                    fullWidth={true}
+                    onKeyDown={handleKeyDown}
+                    onChange={handleInputChange}
+                    defaultValue={searchParams.get("term")}
+                  />
+                </Search>
               </Box>
-            </Box>
-            <Box sx={{ width: { xs: "90%", sm: "50%" } }}>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon color="primary" />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Cari Produk"
-                  inputProps={{ "aria-label": "search" }}
-                  fullWidth={true}
-                  onKeyDown={handleKeyDown}
-                  onChange={handleInputChange}
-                  defaultValue={searchParams.get("term")}
-                />
-              </Search>
-            </Box>
-            <Box sx={{ width: { xs: "0%", sm: "25%" } }}>
-              <Box
-                sx={{
-                  display: { xs: "none", sm: "flex" },
-                  justifyContent: "flex-end",
-                }}
-              >
-                <IconButton
-                  size="large"
-                  aria-label="home"
-                  color="primary"
-                  onClick={() => handleIconClick("home")}
-                >
-                  {nav === "home" ? <HomeIcon /> : <HomeOutlinedIcon />}
-                </IconButton>
-                <IconButton
-                  size="large"
-                  aria-label="cart"
-                  color="primary"
-                  onClick={() => handleIconClick("cart")}
-                >
-                  {nav === "cart" ? (
-                    <ShoppingCartIcon />
-                  ) : (
-                    <ShoppingCartOutlinedIcon />
-                  )}
-                </IconButton>
-                <IconButton
-                  size="large"
-                  aria-label="list"
-                  color="primary"
-                  onClick={() => handleIconClick("transactions")}
-                >
-                  {nav === "transactions" ? (
-                    <ListAltOutlinedIcon />
-                  ) : (
-                    <ListIcon />
-                  )}
-                </IconButton>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="profile"
-                  color="primary"
-                  onClick={() => handleIconClick("profile")}
-                >
-                  {nav === "profile" ? <PersonIcon /> : <PersonOutlinedIcon />}
-                </IconButton>
+              <Box width="25%">
+                <Box display="flex" justifyContent="flex-end">
+                  <IconButton
+                    size="large"
+                    aria-label="home"
+                    color="primary"
+                    onClick={() => handleIconClick("home")}
+                  >
+                    {nav === "home" ? <HomeIcon /> : <HomeOutlinedIcon />}
+                  </IconButton>
+                  <IconButton
+                    size="large"
+                    aria-label="cart"
+                    color="primary"
+                    onClick={() => handleIconClick("cart")}
+                  >
+                    {nav === "cart" ? (
+                      <ShoppingCartIcon />
+                    ) : (
+                      <ShoppingCartOutlinedIcon />
+                    )}
+                  </IconButton>
+                  <IconButton
+                    size="large"
+                    aria-label="list"
+                    color="primary"
+                    onClick={() => handleIconClick("transactions")}
+                  >
+                    {nav === "transactions" ? (
+                      <ListAltOutlinedIcon />
+                    ) : (
+                      <ListIcon />
+                    )}
+                  </IconButton>
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    aria-label="profile"
+                    color="primary"
+                    onClick={() => handleIconClick("profile")}
+                  >
+                    {nav === "profile" ? (
+                      <PersonIcon />
+                    ) : (
+                      <PersonOutlinedIcon />
+                    )}
+                  </IconButton>
+                </Box>
               </Box>
-            </Box>
-          </Toolbar>
+            </Toolbar>
+          </Box>
+          <Box sx={{ display: { xs: "block", sm: "none" } }}>
+            <Toolbar
+              sx={{
+                paddingRight: { xs: "4%" },
+                paddingLeft: { xs: "4%" },
+                paddingTop: { xs: "2px" },
+                paddingBottom: { xs: "2px" },
+                backgroundColor: "#18181B",
+              }}
+            >
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={toggleDrawer(!drawerState)}
+              >
+                <TuneIcon />
+              </IconButton>
+              <Box sx={{ flexGrow: 1 }}>
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Cari Produk"
+                    inputProps={{ "aria-label": "search" }}
+                    fullWidth={true}
+                    onKeyDown={handleKeyDown}
+                    onChange={handleInputChange}
+                    defaultValue={searchParams.get("term")}
+                  />
+                </Search>
+              </Box>
+              {withMenu && (
+                <Box display="flex">
+                  <IconButton
+                    size="large"
+                    aria-label="show more"
+                    aria-controls={mobileMenuId}
+                    aria-haspopup="true"
+                    onClick={handleMobileMenuOpen}
+                    color="inherit"
+                    edge="end"
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                </Box>
+              )}
+            </Toolbar>
+          </Box>
         </AppBar>
+        {renderMobileMenu}
       </Box>
       <Toolbar />
       <Drawer

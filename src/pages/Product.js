@@ -200,7 +200,7 @@ function Product() {
 
   return (
     <>
-      <PrimarySearchAppBar nav="home" />
+      <PrimarySearchAppBar nav="home" withMenu />
       <Backdrop
         sx={(theme) => ({
           backgroundColor: "rgba(0, 0, 0, 0.85)",
