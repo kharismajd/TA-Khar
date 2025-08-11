@@ -654,35 +654,35 @@ function Transactions() {
                 <Typography variant="h6" fontWeight="bold" gutterBottom>
                   Pesanan {checkStatus(selectedTransaction)}
                 </Typography>
-                <Grid container spacing={2}>
-                  <Grid size={6}>
-                    <Typography variant="body1">Tanggal Pembelian</Typography>
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography variant="body1" justifySelf="flex-end">
-                      {new Date(
-                        selectedTransaction.createdAt
-                      ).toShortFormatWithHours()}
-                    </Typography>
-                  </Grid>
-                </Grid>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography variant="body1">Tanggal Pembelian</Typography>
+                  <Typography variant="body1" justifySelf="flex-end">
+                    {new Date(
+                      selectedTransaction.createdAt
+                    ).toShortFormatWithHours()}
+                  </Typography>
+                </Box>
                 <Divider sx={{ mb: 2, mt: 2 }} />
-                <Grid container spacing={2}>
-                  <Grid size={6}>
-                    <Typography variant="h6" fontWeight="bold" gutterBottom>
-                      Detail Produk
-                    </Typography>
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography
-                      variant="body1"
-                      justifySelf="flex-end"
-                      gutterBottom
-                    >
-                      {product.storeName + " >"}
-                    </Typography>
-                  </Grid>
-                </Grid>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    Detail Produk
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    justifySelf="flex-end"
+                    gutterBottom
+                  >
+                    {product.storeName + " >"}
+                  </Typography>
+                </Box>
                 <Stack
                   direction="row"
                   spacing={2}
@@ -746,29 +746,25 @@ function Transactions() {
                 {product.productionInfo &&
                   product.productionInfo.length > 0 && (
                     <>
-                      <Grid container spacing={2}>
-                        <Grid size={6}>
-                          <Typography
-                            variant="h6"
-                            fontWeight="bold"
-                            gutterBottom
-                          >
-                            Info Produksi
-                          </Typography>
-                        </Grid>
-                        <Grid size={6}>
-                          <Typography
-                            variant="body1"
-                            fontWeight="bold"
-                            color="secondary.main"
-                            justifySelf="flex-end"
-                            sx={{ cursor: "pointer" }}
-                            onClick={handleProductionInfoDialogOpen}
-                          >
-                            Lihat Detail
-                          </Typography>
-                        </Grid>
-                      </Grid>
+                      <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
+                        <Typography variant="h6" fontWeight="bold" gutterBottom>
+                          Info Produksi
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          color="secondary.main"
+                          justifySelf="flex-end"
+                          sx={{ cursor: "pointer" }}
+                          onClick={handleProductionInfoDialogOpen}
+                        >
+                          Lihat Detail
+                        </Typography>
+                      </Box>
                       <Typography variant="body1" gutterBottom>
                         {new Date(
                           product.productionInfo[0].createdAt
@@ -810,62 +806,65 @@ function Transactions() {
                 <Typography variant="h6" fontWeight="bold" gutterBottom>
                   Rincian Pembayaran
                 </Typography>
-                <Grid container spacing={1}>
-                  <Grid size={6}>
-                    <Typography variant="body1">Metode Pembayaran</Typography>
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography variant="body1" justifySelf="flex-end">
-                      {selectedTransaction.paymentMethod}
-                    </Typography>
-                  </Grid>
-                  <Grid size={12}>
-                    <Divider />
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography variant="body1">
-                      Subtotal Harga Barang
-                    </Typography>
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography variant="body1" justifySelf="flex-end">
-                      Rp
-                      {formatPrice(
-                        getVariantPrice(selectedTransaction) *
-                          selectedTransaction.item.quantity
-                      )}
-                    </Typography>
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography variant="body1">Total Ongkos Kirim</Typography>
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography variant="body1" justifySelf="flex-end">
-                      Rp{formatPrice(0)}
-                    </Typography>
-                  </Grid>
-                  <Grid size={12}>
-                    <Divider />
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography variant="body1" fontWeight="bold">
-                      Total Belanja
-                    </Typography>
-                  </Grid>
-                  <Grid size={6}>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      justifySelf="flex-end"
-                    >
-                      Rp
-                      {formatPrice(
-                        getVariantPrice(selectedTransaction) *
-                          selectedTransaction.item.quantity
-                      )}
-                    </Typography>
-                  </Grid>
-                </Grid>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  mb={1}
+                >
+                  <Typography variant="body1">Metode Pembayaran</Typography>
+                  <Typography variant="body1" justifySelf="flex-end">
+                    {selectedTransaction.paymentMethod}
+                  </Typography>
+                </Box>
+                <Divider sx={{ mb: 1 }} />
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  mb={1}
+                >
+                  <Typography variant="body1">Subtotal Harga Barang</Typography>
+                  <Typography variant="body1" justifySelf="flex-end">
+                    Rp
+                    {formatPrice(
+                      getVariantPrice(selectedTransaction) *
+                        selectedTransaction.item.quantity
+                    )}
+                  </Typography>
+                </Box>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  mb={1}
+                >
+                  <Typography variant="body1">Total Ongkos Kirim</Typography>
+                  <Typography variant="body1" justifySelf="flex-end">
+                    Rp{formatPrice(0)}
+                  </Typography>
+                </Box>
+                <Divider sx={{ mb: 1 }} />
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography variant="body1" fontWeight="bold">
+                    Total Belanja
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    fontWeight="bold"
+                    justifySelf="flex-end"
+                  >
+                    Rp
+                    {formatPrice(
+                      getVariantPrice(selectedTransaction) *
+                        selectedTransaction.item.quantity
+                    )}
+                  </Typography>
+                </Box>
                 {isXs && <Box sx={{ height: "60px" }} />}
               </>
             )}
@@ -1212,7 +1211,14 @@ function Transactions() {
         //Transaction Detail Dialog End
       )}
 
-      { !isXs ? (<PrimarySearchAppBar nav="transactions" />) : <MobileTransactionAppBar term={transactionSearchInputValue} status={status} /> }
+      {!isXs ? (
+        <PrimarySearchAppBar nav="transactions" />
+      ) : (
+        <MobileTransactionAppBar
+          term={transactionSearchInputValue}
+          status={status}
+        />
+      )}
       <Box
         sx={{
           pr: { xs: 1, sm: 4, md: "6%" },
