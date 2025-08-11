@@ -419,7 +419,7 @@ function Product() {
             </Typography>
             {product.type === "Interest Check" && (
               <Typography fontWeight="bold" variant="h5" mt={1}>
-                {"Rp." + formatPrice(product.price)}
+                {"Rp." + formatPrice(totalPrice)}
               </Typography>
             )}
             {product.type === "Group Buy" && (
