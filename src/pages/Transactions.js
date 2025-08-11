@@ -275,7 +275,7 @@ function Transactions() {
 
   const isXs = useMediaQuery((theme) => theme.breakpoints.only("xs"));
   const navigate = useNavigate();
-  let itemsPerPage = 10;
+  let itemsPerPage = 20;
 
   const handleCloseImage = () => {
     setOpenImage(false);
