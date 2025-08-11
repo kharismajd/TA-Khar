@@ -44,6 +44,23 @@ function Product() {
   const { productId } = useParams();
   const product = products.filter((p) => p.id == productId)[0];
 
+  var answer = [];
+  if (product.type === "Interest Check") {
+    for (const question of product.interestCheckQuestions) {
+      if (question.type === "text") {
+        answer.push("");
+      } else if (question.type === "radio") {
+        answer.push(question.options[0]);
+      } else {
+        var checkboxAnswer = {};
+        for (const checkboxOpt of question.options) {
+          checkboxAnswer[checkboxOpt] = false;
+        }
+        answer.push(checkboxAnswer);
+      }
+    }
+  }
+
   const variantDictionary = new Map();
   const variantNames = product.variantList.map((p) => p.name);
   variantNames.forEach((name) => variantDictionary.set(name, 1));
@@ -59,9 +76,22 @@ function Product() {
     React.useState("");
   const [disableQuestions, setDisableQuestions] = React.useState(false);
   const [icQuestionDrawer, setIcQuestionDrawer] = React.useState(false);
+  const [icAnswerState, setIcAnswerState] = React.useState(answer);
 
   const toggleIcQuestionDrawer = (bool) => {
     setIcQuestionDrawer(bool);
+  };
+
+  const handleAnswerChange = (idx, answer) => {
+    const icAnswerStateCopy = [...icAnswerState];
+    icAnswerStateCopy[idx] = answer;
+    setIcAnswerState(icAnswerStateCopy);
+  };
+
+  const handleCheckboxAnswerChange = (idx, answerKey) => {
+    const icAnswerStateCopy = [...icAnswerState];
+    icAnswerStateCopy[idx][answerKey] = !icAnswerStateCopy[idx][answerKey];
+    setIcAnswerState(icAnswerStateCopy);
   };
 
   const handleSubmitInterestCheck = () => {
@@ -195,7 +225,7 @@ function Product() {
         sx={{
           pr: { xs: 1, sm: 4, md: "6%" },
           pl: { xs: 1, sm: 4, md: "6%" },
-          mb: { xs: 10, sm: 4 },
+          mb: { xs: 6, sm: 6 },
           mt: 1.5,
         }}
       >
@@ -412,7 +442,7 @@ function Product() {
                         borderColor: "secondary.main",
                         textTransform: "none",
                         color: "secondary.main",
-                        fontWeight: "bold"
+                        fontWeight: "bold",
                       }}
                       onClick={handleBuyProduct}
                     >
@@ -427,7 +457,7 @@ function Product() {
                       sx={{
                         backgroundColor: "secondary.main",
                         textTransform: "none",
-                        fontWeight: "bold"
+                        fontWeight: "bold",
                       }}
                       onClick={handleAddToCart}
                     >
@@ -469,8 +499,15 @@ function Product() {
                     {icQuestion.type === "radio" && (
                       <>
                         <FormControl>
-                          <RadioGroup row name={icQuestion.id.toString()}>
-                            {icQuestion.options.map((option, index) => (
+                          <RadioGroup
+                            row
+                            name={icQuestion.id.toString()}
+                            value={icAnswerState[index]}
+                            onChange={(e) =>
+                              handleAnswerChange(index, e.target.value)
+                            }
+                          >
+                            {icQuestion.options.map((option, idx) => (
                               <>
                                 <FormControlLabel
                                   disabled={
@@ -499,7 +536,7 @@ function Product() {
                     {icQuestion.type === "checkbox" && (
                       <>
                         <FormGroup row>
-                          {icQuestion.options.map((option, index) => (
+                          {icQuestion.options.map((option, idx) => (
                             <>
                               <FormControlLabel
                                 disabled={
@@ -508,6 +545,10 @@ function Product() {
                                 value={option}
                                 control={
                                   <Checkbox
+                                    checked={icAnswerState[index][option]}
+                                    onChange={() =>
+                                      handleCheckboxAnswerChange(index, option)
+                                    }
                                     sx={{
                                       color: "#b2b2b2",
                                       "&.Mui-checked": {
@@ -531,10 +572,15 @@ function Product() {
                             disableQuestions || product.status === "ended"
                           }
                           id={icQuestion.id}
-                          label="Jawaban anda"
+                          placeholder="Jawaban anda"
+                          label=""
                           multiline
                           fullWidth
                           maxRows={4}
+                          value={icAnswerState[index]}
+                          onChange={(event) => {
+                            handleAnswerChange(index, event.target.value);
+                          }}
                           sx={{
                             fieldset: {
                               borderColor: "rgba(255,255,255,0.4)",
@@ -628,8 +674,15 @@ function Product() {
               {icQuestion.type === "radio" && (
                 <>
                   <FormControl>
-                    <RadioGroup row name={icQuestion.id.toString()}>
-                      {icQuestion.options.map((option, index) => (
+                    <RadioGroup
+                      row
+                      name={icQuestion.id.toString()}
+                      value={icAnswerState[index]}
+                      onChange={(e) =>
+                        handleAnswerChange(index, e.target.value)
+                      }
+                    >
+                      {icQuestion.options.map((option, idx) => (
                         <>
                           <FormControlLabel
                             disabled={
@@ -657,7 +710,7 @@ function Product() {
               {icQuestion.type === "checkbox" && (
                 <>
                   <FormGroup row>
-                    {icQuestion.options.map((option, index) => (
+                    {icQuestion.options.map((option, idx) => (
                       <>
                         <FormControlLabel
                           disabled={
@@ -666,6 +719,10 @@ function Product() {
                           value={option}
                           control={
                             <Checkbox
+                              checked={icAnswerState[index][option]}
+                              onChange={() =>
+                                handleCheckboxAnswerChange(index, option)
+                              }
                               sx={{
                                 color: "#b2b2b2",
                                 "&.Mui-checked": {
@@ -692,6 +749,10 @@ function Product() {
                     multiline
                     fullWidth
                     maxRows={4}
+                    value={icAnswerState[index]}
+                    onChange={(event) => {
+                      handleAnswerChange(index, event.target.value);
+                    }}
                     sx={{
                       fieldset: {
                         borderColor: "rgba(255,255,255,0.4)",
@@ -733,7 +794,7 @@ function Product() {
             <Box display="flex">
               <Button
                 disabled={disableQuestions || product.status === "ended"}
-                fontWeight= "bold"
+                fontWeight="bold"
                 variant="contained"
                 color="secondary"
                 fullWidth
