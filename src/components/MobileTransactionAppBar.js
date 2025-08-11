@@ -388,28 +388,19 @@ export default function MobileTransactionAppBar({
               backgroundColor: "#18181B",
             }}
           >
-            <Box sx={{ width: { xs: "10%", sm: "25%" } }}>
-              <Box
-                sx={{
-                  display: { xs: "flex", sm: "none" },
-                  justifyContent: "flex-start",
-                }}
-              >
-                <IconButton
-                  size="large"
-                  aria-label="show 4 new mails"
-                  color="primary"
-                  edge="start"
-                  onClick={toggleDrawer(!drawerState)}
-                >
-                  <TuneIcon />
-                </IconButton>
-              </Box>
-            </Box>
-            <Box sx={{ width: { xs: "90%", sm: "50%" } }}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer(!drawerState)}
+            >
+              <TuneIcon />
+            </IconButton>
+            <Box sx={{ flexGrow: 1 }}>
               <Search>
                 <SearchIconWrapper>
-                  <SearchIcon color="primary" />
+                  <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
                   placeholder="Cari Transaksi"

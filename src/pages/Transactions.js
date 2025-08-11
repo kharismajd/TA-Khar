@@ -1517,7 +1517,7 @@ function Transactions() {
           })}
         </Box>
         <Box
-          display="flex"
+          sx={{ display: { xs: "none", sm: "flex" } }}
           direction="row"
           justifyContent="flex-end"
           width="100%"
