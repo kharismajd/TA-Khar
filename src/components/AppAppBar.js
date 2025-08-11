@@ -376,7 +376,7 @@ export default function PrimarySearchAppBar({
       </MenuItem>
       <MenuItem onClick={() => navigate("/transactions")}>
         <IconButton size="large" color="inherit">
-          <List />
+          <ListIcon />
         </IconButton>
         <p>Transaksi</p>
       </MenuItem>

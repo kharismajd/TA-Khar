@@ -21,6 +21,7 @@ import {
   Drawer,
   AppBar,
   Toolbar,
+  Chip,
 } from "@mui/material";
 import BottomNav from "../components/BottomNav";
 import PrimarySearchAppBar from "../components/AppAppBar";
@@ -76,10 +77,15 @@ function Product() {
     React.useState("");
   const [disableQuestions, setDisableQuestions] = React.useState(false);
   const [icQuestionDrawer, setIcQuestionDrawer] = React.useState(false);
+  const [buyProductDrawer, setBuyProductDrawer] = React.useState(false);
   const [icAnswerState, setIcAnswerState] = React.useState(answer);
 
   const toggleIcQuestionDrawer = (bool) => {
     setIcQuestionDrawer(bool);
+  };
+
+  const toggleBuyProductDrawer = (bool) => {
+    setBuyProductDrawer(bool);
   };
 
   const handleAnswerChange = (idx, answer) => {
@@ -102,6 +108,7 @@ function Product() {
 
   const handleAddToCart = () => {
     handleOpenSuccessBackdrop("Ditambahkan ke keranjang");
+    toggleBuyProductDrawer(false)
   };
 
   const handleOpenSuccessBackdrop = (text) => {
@@ -133,7 +140,7 @@ function Product() {
     );
   };
 
-  const handleImageRef = () => {
+  const getImageIndex = () => {
     var refId = "";
     for (const key of variants.keys()) {
       refId = refId + variants.get(key).toString();
@@ -149,7 +156,12 @@ function Product() {
       idx = idx + 1;
     }
 
-    imageGalleryRef.current.slideToIndex(found ? idx : 0);
+    return found ? idx : 0;
+  };
+
+  const handleImageRef = () => {
+    const imageIdx = getImageIndex();
+    imageGalleryRef.current.slideToIndex(imageIdx);
   };
 
   const handleVariantButtonClick = (name, value) => {
@@ -198,6 +210,172 @@ function Product() {
     return price;
   };
 
+  const renderIcQuestions = (icQuestion, index) => {
+    return (
+      <>
+        <Typography variant="body1">
+          {index + 1 + ". " + icQuestion.question}
+        </Typography>
+        {icQuestion.type === "radio" && (
+          <>
+            <FormControl>
+              <RadioGroup
+                row
+                name={icQuestion.id.toString()}
+                value={icAnswerState[index]}
+                onChange={(e) => handleAnswerChange(index, e.target.value)}
+              >
+                {icQuestion.options.map((option, idx) => (
+                  <>
+                    <FormControlLabel
+                      disabled={disableQuestions || product.status === "ended"}
+                      value={option}
+                      control={
+                        <Radio
+                          sx={{
+                            color: "#b2b2b2",
+                            "&.Mui-checked": {
+                              color: "secondary.main",
+                            },
+                          }}
+                        />
+                      }
+                      label={option}
+                    />
+                  </>
+                ))}
+              </RadioGroup>
+            </FormControl>
+          </>
+        )}
+        {icQuestion.type === "checkbox" && (
+          <>
+            <FormGroup row>
+              {icQuestion.options.map((option, idx) => (
+                <>
+                  <FormControlLabel
+                    disabled={disableQuestions || product.status === "ended"}
+                    value={option}
+                    control={
+                      <Checkbox
+                        checked={icAnswerState[index][option]}
+                        onChange={() =>
+                          handleCheckboxAnswerChange(index, option)
+                        }
+                        sx={{
+                          color: "#b2b2b2",
+                          "&.Mui-checked": {
+                            color: "secondary.main",
+                          },
+                        }}
+                      />
+                    }
+                    label={option}
+                  />
+                </>
+              ))}
+            </FormGroup>
+          </>
+        )}
+        {icQuestion.type === "text" && (
+          <>
+            <Box mb={2} />
+            <TextField
+              disabled={disableQuestions || product.status === "ended"}
+              id={icQuestion.id}
+              placeholder="Jawaban anda"
+              label=""
+              multiline
+              fullWidth
+              maxRows={4}
+              value={icAnswerState[index]}
+              onChange={(event) => {
+                handleAnswerChange(index, event.target.value);
+              }}
+              sx={{
+                fieldset: {
+                  borderColor: "rgba(255,255,255,0.4)",
+                  color: "rgba(255,255,255,0.4)",
+                },
+                ".MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: "rgba(255,255,255,0.6)",
+                  },
+                ".MuiInputLabel-root": {
+                  color: "#c1c1c1",
+                },
+              }}
+            />
+          </>
+        )}
+      </>
+    );
+  };
+
+  const renderVariant = (product) => {
+    return (
+      <>
+        {product.variantList.map((variant) => (
+          <>
+            <Typography
+              gutterBottom
+              sx={{ fontWeight: "bold" }}
+              variant="body2"
+            >
+              {variant.name + ":"}
+            </Typography>
+            <Container display="flex" disableGutters>
+              {variant.variant.map((variantSelection) => (
+                <>
+                  <Button
+                    disabled={product.status === "ended"}
+                    onClick={() =>
+                      handleVariantButtonClick(
+                        variant.name,
+                        variantSelection.refId
+                      )
+                    }
+                    variant="contained"
+                    sx={{
+                      backgroundColor:
+                        variants.get(variant.name) === variantSelection.refId
+                          ? "secondary.main"
+                          : "#2f2f2f",
+                      mb: 1,
+                      mr: 1,
+                      textTransform: "none",
+                    }}
+                  >
+                    {variantSelection.name}
+                  </Button>
+                </>
+              ))}
+            </Container>
+            <Box mb={1} />
+          </>
+        ))}
+      </>
+    );
+  };
+
+  const renderVariantChip = (product) => {
+    return (
+      <>
+        {product.variantList.map((variant) => (
+          <>
+            {variant.variant.map((variantSelection) => (
+              <>
+                {variants.get(variant.name) === variantSelection.refId && (
+                  <Chip sx={{ borderRadius: '4px' }} label={variantSelection.name} />
+                )}
+              </>
+            ))}
+          </>
+        ))}
+      </>
+    );
+  };
+
   return (
     <>
       <PrimarySearchAppBar nav="home" withMenu />
@@ -236,21 +414,24 @@ function Product() {
               showPlayButton={false}
               ref={imageGalleryRef}
             />
-            <Typography
-              sx={{ fontWeight: product.type === "Group Buy" ? "bold" : "" }}
-              variant="h4"
-              mt={2}
-            >
+            <Typography variant="h4" mt={2}>
               {product.title}
             </Typography>
             {product.type === "Interest Check" && (
-              <Typography sx={{ fontWeight: "bold" }} variant="h5" mt={1}>
+              <Typography fontWeight="bold" variant="h5" mt={1}>
                 {"Rp." + formatPrice(product.price)}
               </Typography>
             )}
-            <Box mt={2} />
-            <Divider />
-            <Box mt={2} />
+            {product.type === "Group Buy" && (
+              <Typography fontWeight="bold" variant="h5" mt={1}>
+                {"Rp" + formatPrice(totalPrice)}
+              </Typography>
+            )}
+            <Divider sx={{ my: 2 }} />
+            <Box sx={{ display: { sx: "block", sm: "block", md: "none" } }}>
+              {renderVariant(product)}
+              <Divider sx={{ my: 2 }} />
+            </Box>
             <Stack direction="row" spacing={2}>
               <Stack direction="column" justifyContent={"center"}>
                 <Avatar
@@ -274,9 +455,7 @@ function Product() {
                 </Stack>
               </Stack>
             </Stack>
-            <Box mt={2} />
-            <Divider />
-            <Box mt={2} />
+            <Divider sx={{ my: 2 }} />
             <Typography sx={{ fontWeight: "bold" }} variant="h7" mt={2}>
               Detail Produk
             </Typography>
@@ -329,52 +508,9 @@ function Product() {
                 >
                   Atur Jumlah dan Variasi
                 </Typography>
-                <Box mt={2} />
-                <Divider />
-                <Box mb={2} />
-                {product.variantList.map((variant) => (
-                  <>
-                    <Typography
-                      gutterBottom
-                      sx={{ fontWeight: "bold" }}
-                      variant="body2"
-                    >
-                      {variant.name + ":"}
-                    </Typography>
-                    <Container display="flex" disableGutters>
-                      {variant.variant.map((variantSelection) => (
-                        <>
-                          <Button
-                            disabled={product.status === "ended"}
-                            onClick={() =>
-                              handleVariantButtonClick(
-                                variant.name,
-                                variantSelection.refId
-                              )
-                            }
-                            variant="contained"
-                            sx={{
-                              backgroundColor:
-                                variants.get(variant.name) ===
-                                variantSelection.refId
-                                  ? "secondary.main"
-                                  : "#2f2f2f",
-                              mb: 1,
-                              mr: 1,
-                              textTransform: "none",
-                            }}
-                          >
-                            {variantSelection.name}
-                          </Button>
-                        </>
-                      ))}
-                    </Container>
-                    <Box mb={1} />
-                  </>
-                ))}
-                <Box mb={2} />
-                <Divider />
-                <Box mb={2} />
+                <Divider sx={{ my: 2 }} />
+                {renderVariant(product)}
+                <Divider sx={{ my: 2 }} />
                 <Stack direction="row">
                   <Button
                     disabled={product.status === "ended"}
@@ -488,118 +624,11 @@ function Product() {
                 >
                   Interest Check
                 </Typography>
-                <Box mt={2} />
-                <Divider />
-                <Box mb={2} />
+                <Divider sx={{ my: 2 }} />
                 {product.interestCheckQuestions.map((icQuestion, index) => (
                   <>
-                    <Typography variant="body1">
-                      {index + 1 + ". " + icQuestion.question}
-                    </Typography>
-                    {icQuestion.type === "radio" && (
-                      <>
-                        <FormControl>
-                          <RadioGroup
-                            row
-                            name={icQuestion.id.toString()}
-                            value={icAnswerState[index]}
-                            onChange={(e) =>
-                              handleAnswerChange(index, e.target.value)
-                            }
-                          >
-                            {icQuestion.options.map((option, idx) => (
-                              <>
-                                <FormControlLabel
-                                  disabled={
-                                    disableQuestions ||
-                                    product.status === "ended"
-                                  }
-                                  value={option}
-                                  control={
-                                    <Radio
-                                      sx={{
-                                        color: "#b2b2b2",
-                                        "&.Mui-checked": {
-                                          color: "secondary.main",
-                                        },
-                                      }}
-                                    />
-                                  }
-                                  label={option}
-                                />
-                              </>
-                            ))}
-                          </RadioGroup>
-                        </FormControl>
-                      </>
-                    )}
-                    {icQuestion.type === "checkbox" && (
-                      <>
-                        <FormGroup row>
-                          {icQuestion.options.map((option, idx) => (
-                            <>
-                              <FormControlLabel
-                                disabled={
-                                  disableQuestions || product.status === "ended"
-                                }
-                                value={option}
-                                control={
-                                  <Checkbox
-                                    checked={icAnswerState[index][option]}
-                                    onChange={() =>
-                                      handleCheckboxAnswerChange(index, option)
-                                    }
-                                    sx={{
-                                      color: "#b2b2b2",
-                                      "&.Mui-checked": {
-                                        color: "secondary.main",
-                                      },
-                                    }}
-                                  />
-                                }
-                                label={option}
-                              />
-                            </>
-                          ))}
-                        </FormGroup>
-                      </>
-                    )}
-                    {icQuestion.type === "text" && (
-                      <>
-                        <Box mb={2} />
-                        <TextField
-                          disabled={
-                            disableQuestions || product.status === "ended"
-                          }
-                          id={icQuestion.id}
-                          placeholder="Jawaban anda"
-                          label=""
-                          multiline
-                          fullWidth
-                          maxRows={4}
-                          value={icAnswerState[index]}
-                          onChange={(event) => {
-                            handleAnswerChange(index, event.target.value);
-                          }}
-                          sx={{
-                            fieldset: {
-                              borderColor: "rgba(255,255,255,0.4)",
-                              color: "rgba(255,255,255,0.4)",
-                            },
-                            ".MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                              {
-                                borderColor: "rgba(255,255,255,0.6)",
-                              },
-                            ".MuiInputLabel-root": {
-                              color: "#c1c1c1",
-                            },
-                          }}
-                        />
-                      </>
-                    )}
-                    <Box mt={2} />
-                    <Divider />
-                    <Box mb={2} />
+                    {renderIcQuestions(icQuestion, index)}
+                    <Divider sx={{ my: 2 }} />
                   </>
                 ))}
                 <Button
@@ -650,6 +679,41 @@ function Product() {
             </Button>
           </Box>
         )}
+        {product.type === "Group Buy" && (
+          <Grid container spacing={1}>
+            <Grid size={6}>
+              <Button
+                disabled={product.status === "ended"}
+                fullWidth
+                variant="outlined"
+                sx={{
+                  borderColor: "secondary.main",
+                  textTransform: "none",
+                  color: "secondary.main",
+                  fontWeight: "bold",
+                }}
+                onClick={() => toggleBuyProductDrawer(true)}
+              >
+                Beli
+              </Button>
+            </Grid>
+            <Grid size={6}>
+              <Button
+                disabled={product.status === "ended"}
+                fullWidth
+                variant="contained"
+                sx={{
+                  backgroundColor: "secondary.main",
+                  textTransform: "none",
+                  fontWeight: "bold",
+                }}
+                onClick={() => toggleBuyProductDrawer(true)}
+              >
+                + Keranjang
+              </Button>
+            </Grid>
+          </Grid>
+        )}
       </Box>
       {product.type === "Interest Check" && (
         <Drawer
@@ -668,112 +732,10 @@ function Product() {
         >
           {product.interestCheckQuestions.map((icQuestion, index) => (
             <>
-              <Typography variant="body1">
-                {index + 1 + ". " + icQuestion.question}
-              </Typography>
-              {icQuestion.type === "radio" && (
-                <>
-                  <FormControl>
-                    <RadioGroup
-                      row
-                      name={icQuestion.id.toString()}
-                      value={icAnswerState[index]}
-                      onChange={(e) =>
-                        handleAnswerChange(index, e.target.value)
-                      }
-                    >
-                      {icQuestion.options.map((option, idx) => (
-                        <>
-                          <FormControlLabel
-                            disabled={
-                              disableQuestions || product.status === "ended"
-                            }
-                            value={option}
-                            control={
-                              <Radio
-                                sx={{
-                                  color: "#b2b2b2",
-                                  "&.Mui-checked": {
-                                    color: "secondary.main",
-                                  },
-                                }}
-                              />
-                            }
-                            label={option}
-                          />
-                        </>
-                      ))}
-                    </RadioGroup>
-                  </FormControl>
-                </>
-              )}
-              {icQuestion.type === "checkbox" && (
-                <>
-                  <FormGroup row>
-                    {icQuestion.options.map((option, idx) => (
-                      <>
-                        <FormControlLabel
-                          disabled={
-                            disableQuestions || product.status === "ended"
-                          }
-                          value={option}
-                          control={
-                            <Checkbox
-                              checked={icAnswerState[index][option]}
-                              onChange={() =>
-                                handleCheckboxAnswerChange(index, option)
-                              }
-                              sx={{
-                                color: "#b2b2b2",
-                                "&.Mui-checked": {
-                                  color: "secondary.main",
-                                },
-                              }}
-                            />
-                          }
-                          label={option}
-                        />
-                      </>
-                    ))}
-                  </FormGroup>
-                </>
-              )}
-              {icQuestion.type === "text" && (
-                <>
-                  <Box mb={2} />
-                  <TextField
-                    disabled={disableQuestions || product.status === "ended"}
-                    id={icQuestion.id}
-                    placeholder="Jawaban anda"
-                    label=""
-                    multiline
-                    fullWidth
-                    maxRows={4}
-                    value={icAnswerState[index]}
-                    onChange={(event) => {
-                      handleAnswerChange(index, event.target.value);
-                    }}
-                    sx={{
-                      fieldset: {
-                        borderColor: "rgba(255,255,255,0.4)",
-                        color: "rgba(255,255,255,0.4)",
-                      },
-                      ".MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                        {
-                          borderColor: "rgba(255,255,255,0.6)",
-                        },
-                      ".MuiInputLabel-root": {
-                        color: "#c1c1c1",
-                      },
-                    }}
-                  />
-                </>
-              )}
+              {renderIcQuestions(icQuestion, index)}
               {index < product.interestCheckQuestions.length - 1 ? (
                 <>
-                  <Box mt={2} />
-                  <Divider />
-                  <Box mb={2} />
+                  <Divider sx={{ my: 2 }} />
                 </>
               ) : (
                 <Box my={3} />
@@ -804,6 +766,126 @@ function Product() {
                 Submit
               </Button>
             </Box>
+          </Box>
+        </Drawer>
+      )}
+      {product.type === "Group Buy" && (
+        <Drawer
+          anchor="bottom"
+          open={buyProductDrawer}
+          onClose={() => toggleBuyProductDrawer(false)}
+          sx={{
+            "& .MuiPaper-root": {
+              background: "#18181B",
+              borderRadius: 4,
+              maxHeight: "75vh",
+              p: 2,
+              pt: 3,
+            },
+          }}
+        >
+          <Box display="flex">
+            <Box
+              component="img"
+              width="40%"
+              src={product.images[getImageIndex()].original}
+              borderRadius={2}
+            />
+            <Stack width="60%" ml={2} gap={1}>
+              <Box sx={{ flexWrap: "wrap", display: "flex", gap: 1 }}>
+                {renderVariantChip(product)}
+              </Box>
+              <Typography fontWeight="bold" variant="h6">
+                {"Rp" + formatPrice(totalPrice)}
+              </Typography>
+              <Box display="flex" mt={2}>
+                <Button
+                  disabled={product.status === "ended"}
+                  onClick={handleDecrement}
+                  sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
+                >
+                  <Remove fontSize="small" style={{ color: "d1d1d1" }} />
+                </Button>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: 36,
+                    width: 48,
+                  }}
+                >
+                  <TextField
+                    value={quantity}
+                    onChange={handleQuantityInputChange}
+                    onBlur={handleOnBlur}
+                    sx={{ input: { textAlign: "center" } }}
+                    variant="standard"
+                    slotProps={{
+                      input: {
+                        disableUnderline: true,
+                      },
+                    }}
+                  ></TextField>
+                </Box>
+                <Button
+                  disabled={product.status === "ended"}
+                  onClick={handleIncrement}
+                  sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
+                >
+                  <Add fontSize="small" style={{ color: "d1d1d1" }} />
+                </Button>
+              </Box>
+            </Stack>
+          </Box>
+          <Divider sx={{ my: 2 }} />
+          {renderVariant(product)}
+          <Box my={2} />
+          <Box
+            width="100%"
+            p={1}
+            sx={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              display: { xs: "block", md: "none" },
+              backgroundColor: "#18181B",
+            }}
+          >
+            <Grid container spacing={1}>
+              <Grid size={6}>
+                <Button
+                  disabled={product.status === "ended"}
+                  fullWidth
+                  variant="outlined"
+                  sx={{
+                    borderColor: "secondary.main",
+                    textTransform: "none",
+                    color: "secondary.main",
+                    fontWeight: "bold",
+                  }}
+                  onClick={handleBuyProduct}
+                >
+                  Beli
+                </Button>
+              </Grid>
+              <Grid size={6}>
+                <Button
+                  disabled={product.status === "ended"}
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "secondary.main",
+                    textTransform: "none",
+                    fontWeight: "bold",
+                  }}
+                  onClick={handleAddToCart}
+                >
+                  + Keranjang
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
         </Drawer>
       )}
