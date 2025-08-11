@@ -450,7 +450,6 @@ function ProductSearch() {
                 </Grid>
               ))}
               <Box
-                sx={{ display: { xs: "none", sm: "flex" } }}
                 display="flex"
                 direction="row"
                 justifyContent="flex-end"
