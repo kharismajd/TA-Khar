@@ -18,6 +18,9 @@ import {
   Radio,
   FormGroup,
   Checkbox,
+  Drawer,
+  AppBar,
+  Toolbar,
 } from "@mui/material";
 import BottomNav from "../components/BottomNav";
 import PrimarySearchAppBar from "../components/AppAppBar";
@@ -26,7 +29,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./react-gallery.css";
-import { Add, CheckCircle, Remove, Star } from "@mui/icons-material";
+import { Add, CheckCircle, Close, Remove, Star } from "@mui/icons-material";
 import { deepOrange } from "@mui/material/colors";
 
 const isNumbers = (str) => /^(\s*|\d+)$/.test(str);
@@ -46,7 +49,7 @@ function Product() {
   variantNames.forEach((name) => variantDictionary.set(name, 1));
 
   const imageGalleryRef = React.useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [quantity, setQuantity] = React.useState(1);
   const [variants, setVariants] = React.useState(variantDictionary);
@@ -55,9 +58,15 @@ function Product() {
   const [successBackdropMessage, setSuccessBackdropMessage] =
     React.useState("");
   const [disableQuestions, setDisableQuestions] = React.useState(false);
+  const [icQuestionDrawer, setIcQuestionDrawer] = React.useState(false);
+
+  const toggleIcQuestionDrawer = (bool) => {
+    setIcQuestionDrawer(bool);
+  };
 
   const handleSubmitInterestCheck = () => {
     setDisableQuestions(true);
+    toggleIcQuestionDrawer(false);
     handleOpenSuccessBackdrop("Jawaban telah terkirim");
   };
 
@@ -83,11 +92,15 @@ function Product() {
     for (const key of variants.keys()) {
       variantIds.push(variants.get(key).toString());
     }
-    navigate("../checkout?" +
-      "productIds=" + productId +
-      "&variants=" + variantIds.join(",") +
-      "&q=" + quantity
-    )
+    navigate(
+      "../checkout?" +
+        "productIds=" +
+        productId +
+        "&variants=" +
+        variantIds.join(",") +
+        "&q=" +
+        quantity
+    );
   };
 
   const handleImageRef = () => {
@@ -394,10 +407,12 @@ function Product() {
                     <Button
                       disabled={product.status === "ended"}
                       fullWidth
-                      variant="contained"
+                      variant="outlined"
                       sx={{
-                        backgroundColor: "secondary.main",
+                        borderColor: "secondary.main",
                         textTransform: "none",
+                        color: "secondary.main",
+                        fontWeight: "bold"
                       }}
                       onClick={handleBuyProduct}
                     >
@@ -412,6 +427,7 @@ function Product() {
                       sx={{
                         backgroundColor: "secondary.main",
                         textTransform: "none",
+                        fontWeight: "bold"
                       }}
                       onClick={handleAddToCart}
                     >
@@ -546,6 +562,7 @@ function Product() {
                   variant="contained"
                   sx={{
                     backgroundColor: "secondary.main",
+                    fontWeight: "bold",
                     textTransform: "none",
                     "&.Mui-disabled": {
                       background: "#18181B",
@@ -560,10 +577,175 @@ function Product() {
             )}
           </Grid>
         </Grid>
-        <Box sx={{ display: { xs: "block", md: "none" } }}>
-          <BottomNav value={0} />
-        </Box>
       </Box>
+      <Box
+        width="100%"
+        p={1}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          display: { xs: "block", md: "none" },
+          backgroundColor: "#18181B",
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8,
+        }}
+      >
+        {product.type === "Interest Check" && (
+          <Box display="flex">
+            <Button
+              disabled={disableQuestions || product.status === "ended"}
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={() => toggleIcQuestionDrawer(true)}
+              sx={{ textTransform: "none", whiteSpace: "nowrap" }}
+            >
+              Isi Interest Check
+            </Button>
+          </Box>
+        )}
+      </Box>
+      {product.type === "Interest Check" && (
+        <Drawer
+          anchor="bottom"
+          open={icQuestionDrawer}
+          onClose={() => toggleIcQuestionDrawer(false)}
+          sx={{
+            "& .MuiPaper-root": {
+              background: "#18181B",
+              borderRadius: 4,
+              maxHeight: "75vh",
+              p: 2,
+              pt: 3,
+            },
+          }}
+        >
+          {product.interestCheckQuestions.map((icQuestion, index) => (
+            <>
+              <Typography variant="body1">
+                {index + 1 + ". " + icQuestion.question}
+              </Typography>
+              {icQuestion.type === "radio" && (
+                <>
+                  <FormControl>
+                    <RadioGroup row name={icQuestion.id.toString()}>
+                      {icQuestion.options.map((option, index) => (
+                        <>
+                          <FormControlLabel
+                            disabled={
+                              disableQuestions || product.status === "ended"
+                            }
+                            value={option}
+                            control={
+                              <Radio
+                                sx={{
+                                  color: "#b2b2b2",
+                                  "&.Mui-checked": {
+                                    color: "secondary.main",
+                                  },
+                                }}
+                              />
+                            }
+                            label={option}
+                          />
+                        </>
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
+                </>
+              )}
+              {icQuestion.type === "checkbox" && (
+                <>
+                  <FormGroup row>
+                    {icQuestion.options.map((option, index) => (
+                      <>
+                        <FormControlLabel
+                          disabled={
+                            disableQuestions || product.status === "ended"
+                          }
+                          value={option}
+                          control={
+                            <Checkbox
+                              sx={{
+                                color: "#b2b2b2",
+                                "&.Mui-checked": {
+                                  color: "secondary.main",
+                                },
+                              }}
+                            />
+                          }
+                          label={option}
+                        />
+                      </>
+                    ))}
+                  </FormGroup>
+                </>
+              )}
+              {icQuestion.type === "text" && (
+                <>
+                  <Box mb={2} />
+                  <TextField
+                    disabled={disableQuestions || product.status === "ended"}
+                    id={icQuestion.id}
+                    placeholder="Jawaban anda"
+                    label=""
+                    multiline
+                    fullWidth
+                    maxRows={4}
+                    sx={{
+                      fieldset: {
+                        borderColor: "rgba(255,255,255,0.4)",
+                        color: "rgba(255,255,255,0.4)",
+                      },
+                      ".MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                        {
+                          borderColor: "rgba(255,255,255,0.6)",
+                        },
+                      ".MuiInputLabel-root": {
+                        color: "#c1c1c1",
+                      },
+                    }}
+                  />
+                </>
+              )}
+              {index < product.interestCheckQuestions.length - 1 ? (
+                <>
+                  <Box mt={2} />
+                  <Divider />
+                  <Box mb={2} />
+                </>
+              ) : (
+                <Box my={3} />
+              )}
+            </>
+          ))}
+          <Box
+            width="100%"
+            p={1}
+            sx={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              display: { xs: "block", md: "none" },
+              backgroundColor: "#18181B",
+            }}
+          >
+            <Box display="flex">
+              <Button
+                disabled={disableQuestions || product.status === "ended"}
+                fontWeight= "bold"
+                variant="contained"
+                color="secondary"
+                fullWidth
+                onClick={handleSubmitInterestCheck}
+                sx={{ textTransform: "none", whiteSpace: "nowrap" }}
+              >
+                Submit
+              </Button>
+            </Box>
+          </Box>
+        </Drawer>
+      )}
     </>
   );
 }
