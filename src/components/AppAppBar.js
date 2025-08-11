@@ -374,17 +374,17 @@ export default function PrimarySearchAppBar({
         </IconButton>
         <p>Home</p>
       </MenuItem>
-      <MenuItem onClick={() => navigate("/cart")}>
-        <IconButton size="large" color="inherit">
-          <ShoppingCart />
-        </IconButton>
-        <p>Keranjang</p>
-      </MenuItem>
       <MenuItem onClick={() => navigate("/transactions")}>
         <IconButton size="large" color="inherit">
           <List />
         </IconButton>
         <p>Transaksi</p>
+      </MenuItem>
+      <MenuItem onClick={() => navigate("/cart")}>
+        <IconButton size="large" color="inherit">
+          <ShoppingCart />
+        </IconButton>
+        <p>Keranjang</p>
       </MenuItem>
     </Menu>
   );
@@ -431,18 +431,6 @@ export default function PrimarySearchAppBar({
                   </IconButton>
                   <IconButton
                     size="large"
-                    aria-label="cart"
-                    color="primary"
-                    onClick={() => handleIconClick("cart")}
-                  >
-                    {nav === "cart" ? (
-                      <ShoppingCartIcon />
-                    ) : (
-                      <ShoppingCartOutlinedIcon />
-                    )}
-                  </IconButton>
-                  <IconButton
-                    size="large"
                     aria-label="list"
                     color="primary"
                     onClick={() => handleIconClick("transactions")}
@@ -455,15 +443,14 @@ export default function PrimarySearchAppBar({
                   </IconButton>
                   <IconButton
                     size="large"
-                    edge="end"
-                    aria-label="profile"
+                    aria-label="cart"
                     color="primary"
-                    onClick={() => handleIconClick("profile")}
+                    onClick={() => handleIconClick("cart")}
                   >
-                    {nav === "profile" ? (
-                      <PersonIcon />
+                    {nav === "cart" ? (
+                      <ShoppingCartIcon />
                     ) : (
-                      <PersonOutlinedIcon />
+                      <ShoppingCartOutlinedIcon />
                     )}
                   </IconButton>
                 </Box>

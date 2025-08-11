@@ -1535,7 +1535,7 @@ function Transactions() {
         </Box>
       </Box>
       <Box sx={{ display: { xs: "block", sm: "none" } }}>
-        <BottomNav value={2} />
+        <BottomNav value={1} />
       </Box>
     </>
   );

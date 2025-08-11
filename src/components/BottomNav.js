@@ -1,13 +1,13 @@
-import * as React from 'react';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import MuiBottomNavigationAction from '@mui/material/BottomNavigationAction';
-import Paper from '@mui/material/Paper';
-import { Box } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ListIcon from '@mui/icons-material/List';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import MuiBottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Paper from "@mui/material/Paper";
+import { Box } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ListIcon from "@mui/icons-material/List";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
 const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
@@ -27,16 +27,13 @@ export default function BottomNav({ value: valueProp }) {
     setValue(newValue);
     switch (newValue) {
       case 0:
-        navigate('/');
+        navigate("/");
         break;
       case 1:
-        navigate('/cart');
+        navigate("/transactions");
         break;
       case 2:
-        navigate('/transactions');
-        break;
-      case 3:
-        navigate('/profile');
+        navigate("/cart");
         break;
       default:
         break;
@@ -44,13 +41,29 @@ export default function BottomNav({ value: valueProp }) {
   };
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: 60, borderTopLeftRadius: '16px', borderTopRightRadius: '16px', zIndex: 1301 }} elevation={3}>
-      <BottomNavigation value={currentValue} onChange={handleChange} showLabels={false} sx={{ borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
+    <Paper
+      sx={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 60,
+        borderTopLeftRadius: "16px",
+        borderTopRightRadius: "16px",
+        zIndex: 1301,
+      }}
+      elevation={3}
+    >
+      <BottomNavigation
+        value={currentValue}
+        onChange={handleChange}
+        showLabels={false}
+        sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px" }}
+      >
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-        <BottomNavigationAction label="Keranjang" icon={<ShoppingCartIcon />} />
         <BottomNavigationAction label="Transaksi" icon={<ListIcon />} />
-        <BottomNavigationAction label="Akun" icon={<AccountCircleIcon />} />
+        <BottomNavigationAction label="Keranjang" icon={<ShoppingCartIcon />} />
       </BottomNavigation>
     </Paper>
   );
-} 
+}
