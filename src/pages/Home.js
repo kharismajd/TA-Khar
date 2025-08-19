@@ -48,8 +48,9 @@ function Home() {
         }}
       >
         <Typography
-          sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold" }}
+          sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold", cursor: "pointer" }}
           variant="h5"
+          onClick={() => navigate("./search-product?&gb=true&ic=false&berlangsung=true&selesai=false&urutkan=sesuai&page=1")}
         >
           Ongoing Group Buys
         </Typography>
@@ -103,9 +104,10 @@ function Home() {
         </Box>
         <Divider></Divider>
         <Typography
-          sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold" }}
+          sx={{ textAlign: { xs: "left", md: "center" }, fontWeight: "bold", cursor: "pointer" }}
           variant="h5"
           mt={2}
+          onClick={() => navigate("./search-product?&gb=false&ic=true&berlangsung=true&selesai=false&urutkan=sesuai&page=1")}
         >
           Ongoing Interest Checks
         </Typography>
