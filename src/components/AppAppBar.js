@@ -424,7 +424,7 @@ export default function PrimarySearchAppBar({
                   <IconButton
                     size="large"
                     aria-label="home"
-                    color="primary"
+                    color={nav === "home" ? "secondary" : "primary"}
                     onClick={() => handleIconClick("home")}
                   >
                     {nav === "home" ? <HomeIcon /> : <HomeOutlinedIcon />}
@@ -432,7 +432,7 @@ export default function PrimarySearchAppBar({
                   <IconButton
                     size="large"
                     aria-label="list"
-                    color="primary"
+                    color={nav === "transactions" ? "secondary" : "primary"}
                     onClick={() => handleIconClick("transactions")}
                   >
                     {nav === "transactions" ? (
@@ -444,7 +444,7 @@ export default function PrimarySearchAppBar({
                   <IconButton
                     size="large"
                     aria-label="cart"
-                    color="primary"
+                    color={nav === "cart" ? "secondary" : "primary"}
                     onClick={() => handleIconClick("cart")}
                   >
                     {nav === "cart" ? (
