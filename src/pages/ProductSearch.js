@@ -461,11 +461,6 @@ function ProductSearch() {
                   count={pageTotal}
                   page={page}
                   onChange={handlePageChange}
-                  sx={{
-                    "& .Mui-selected": {
-                      backgroundColor: "#00A329 !important",
-                    },
-                  }}
                 />
               </Box>
             </Grid>
