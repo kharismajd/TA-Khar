@@ -49,7 +49,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     }),
   },
   [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
+    borderRadius: 25,
     backgroundColor: "#00A329",
     ...theme.applyStyles("dark", {
       backgroundColor: "#00A329",
@@ -680,7 +680,7 @@ function Transactions() {
                     justifySelf="flex-end"
                     gutterBottom
                   >
-                    {product.storeName + " >"}
+                    {product.storeName}
                   </Typography>
                 </Box>
                 <Stack
@@ -1061,6 +1061,29 @@ function Transactions() {
             {isXs && transactionDetailDialog === 2 && (
               // Production Info Mobile
               <>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
+                    <BorderLinearProgress
+                      variant="determinate"
+                      value={product.productionInfo[productionInfoId].progress}
+                    />
+                  </Box>
+                  <Box sx={{ minWidth: 35 }}>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                    >{`${Math.round(
+                      product.productionInfo[productionInfoId].progress
+                    )}%`}</Typography>
+                  </Box>
+                </Box>
+                <Divider sx={{ mb: 2, mt: 2 }} />
                 <Stepper activeStep={0} orientation="vertical" nonLinear>
                   {product.productionInfo.map((step, index) => (
                     <Step
