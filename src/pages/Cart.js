@@ -51,6 +51,13 @@ function Cart() {
   const [totalItem, setTotalItem] = React.useState(totalItemInitState);
   const [totalPrice, setTotalPrice] = React.useState(0);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const handleCheckAllButton = (value) => {
     setIsAllChecked(value);
     const cartDataCopy = [...cartData];
@@ -299,10 +306,10 @@ function Cart() {
       )}
       <Box
         sx={{
-          pr: { xs: 2, sm: 4, md: "6%" },
-          pl: { xs: 2, sm: 4, md: "6%" },
+          pr: { xs: 1, sm: 4, md: "6%" },
+          pl: { xs: 1, sm: 4, md: "6%" },
           mb: { xs: 10, sm: 10 },
-          mt: 1.5,
+          mt: 1,
         }}
       >
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
@@ -428,6 +435,10 @@ function Cart() {
                                 >
                                   <Box display="flex">
                                     <Box
+                                      onClick={() => {
+                                        navigate("/product/" + sp.productId);
+                                        scrollToTop();
+                                      }}
                                       borderRadius={2}
                                       component="img"
                                       sx={{
@@ -442,6 +453,7 @@ function Cart() {
                                           md: "128px",
                                         },
                                         objectFit: "cover",
+                                        cursor: "pointer",
                                       }}
                                       src={productDetail.mainImage}
                                     />
@@ -479,14 +491,10 @@ function Cart() {
                                         {sp.variants.map((v, idx) => {
                                           return (
                                             <Chip
-                                              label={
-                                                v.name +
-                                                ": " +
-                                                getSelectedVariant(
-                                                  productDetail,
-                                                  v
-                                                )
-                                              }
+                                              label={getSelectedVariant(
+                                                productDetail,
+                                                v
+                                              )}
                                               sx={{
                                                 size: { xs: "small", md: "" },
                                               }}

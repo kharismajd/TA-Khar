@@ -22,6 +22,7 @@ import {
   AppBar,
   Toolbar,
   Chip,
+  Modal,
 } from "@mui/material";
 import BottomNav from "../components/BottomNav";
 import PrimarySearchAppBar from "../components/AppAppBar";
@@ -78,7 +79,13 @@ function Product() {
   const [disableQuestions, setDisableQuestions] = React.useState(false);
   const [icQuestionDrawer, setIcQuestionDrawer] = React.useState(false);
   const [buyProductDrawer, setBuyProductDrawer] = React.useState(false);
+  const [openImage, setOpenImage] = React.useState(false);
+  const [image, setImage] = React.useState("false");
   const [icAnswerState, setIcAnswerState] = React.useState(answer);
+
+  const handleCloseImage = () => {
+    setOpenImage(false);
+  };
 
   const toggleIcQuestionDrawer = (bool) => {
     setIcQuestionDrawer(bool);
@@ -108,7 +115,7 @@ function Product() {
 
   const handleAddToCart = () => {
     handleOpenSuccessBackdrop("Ditambahkan ke keranjang");
-    toggleBuyProductDrawer(false)
+    toggleBuyProductDrawer(false);
   };
 
   const handleOpenSuccessBackdrop = (text) => {
@@ -209,6 +216,18 @@ function Product() {
     }
     return price;
   };
+
+  const handleGalleryImageZoom = () => {
+    setImage(
+      product.images[imageGalleryRef.current.getCurrentIndex()].original
+    );
+    setOpenImage(true);
+  };
+
+  const handleImageZoom = (image) => {
+    setImage(image)
+    setOpenImage(true)
+  }
 
   const renderIcQuestions = (icQuestion, index) => {
     return (
@@ -315,6 +334,23 @@ function Product() {
   const renderVariant = (product) => {
     return (
       <>
+        <Modal
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          open={openImage}
+          onClose={handleCloseImage}
+          closeAfterTransition
+        >
+          <img
+            outline="none"
+            src={image}
+            alt="asd"
+            style={{ maxHeight: "90%", maxWidth: "90%" }}
+          />
+        </Modal>
         {product.variantList.map((variant) => (
           <>
             <Typography
@@ -366,7 +402,10 @@ function Product() {
             {variant.variant.map((variantSelection) => (
               <>
                 {variants.get(variant.name) === variantSelection.refId && (
-                  <Chip sx={{ borderRadius: '4px' }} label={variantSelection.name} />
+                  <Chip
+                    sx={{ borderRadius: "4px" }}
+                    label={variantSelection.name}
+                  />
                 )}
               </>
             ))}
@@ -404,15 +443,17 @@ function Product() {
           pr: { xs: 1, sm: 4, md: "6%" },
           pl: { xs: 1, sm: 4, md: "6%" },
           mb: { xs: 6, sm: 6 },
-          mt: 1.5,
+          mt: 1,
         }}
       >
         <Grid container columnSpacing={3}>
           <Grid size={{ xs: 12, md: product.type === "Group Buy" ? 9 : 8 }}>
             <ImageGallery
+              slideDuration={100}
               items={product.images}
               showPlayButton={false}
               ref={imageGalleryRef}
+              onClick={handleGalleryImageZoom}
             />
             <Typography variant="h4" mt={2}>
               {product.title}
@@ -475,8 +516,10 @@ function Product() {
                           width: { xs: "100%", sm: "auto" },
                           maxWidth: { xs: "100%", sm: "80%", md: "60%" },
                           maxHeight: { xs: "auto", sm: 400, md: 400 },
+                          cursor: "pointer",
                         }}
                         src={desc.image}
+                        onClick={() => handleImageZoom(desc.image)}
                       />
                     </Box>
                     <Box mt={2} />

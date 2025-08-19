@@ -13,12 +13,14 @@ import {
   Stack,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import PrimarySearchAppBar from "../components/AppAppBar";
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import products from "../products.json";
 import { CheckCircle, Notes } from "@mui/icons-material";
+import MobileSimpleAppBar from "../components/MobileSimpleAppBar";
 
 function getVariant(product, variantIds) {
   const variants = { variants: [], price: product.price };
@@ -57,6 +59,7 @@ function Checkout() {
   const [openSuccessBackdrop, setOpenSuccessBackdrop] = React.useState(false);
 
   const navigate = useNavigate();
+  const isXs = useMediaQuery((theme) => theme.breakpoints.only("xs"));
 
   const handlePaymentMethodChange = (method) => {
     setSelectedPaymentMethod(method);
@@ -112,7 +115,12 @@ function Checkout() {
 
   return (
     <>
-      <PrimarySearchAppBar nav="cart" />
+      {isXs ? (
+        <MobileSimpleAppBar title="Checkout" />
+      ) : (
+        <PrimarySearchAppBar nav="cart" />
+      )}
+
       <Backdrop
         sx={(theme) => ({
           backgroundColor: "rgba(0, 0, 0, 0.85)",
@@ -138,7 +146,7 @@ function Checkout() {
           pr: { xs: 2, sm: 4, md: "6%" },
           pl: { xs: 2, sm: 4, md: "6%" },
           mb: { xs: 14, sm: 14 },
-          mt: 1.5,
+          mt: 1,
         }}
       >
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
@@ -222,7 +230,7 @@ function Checkout() {
                               {selectedVariants.variants.map((v, idx) => {
                                 return (
                                   <Chip
-                                    label={v.name + ": " + v.selected}
+                                    label={v.selected}
                                     sx={{ size: { xs: "small", md: "" } }}
                                   />
                                 );

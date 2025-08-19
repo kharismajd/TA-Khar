@@ -187,7 +187,7 @@ function ProductSearch() {
           pr: { xs: 1, sm: 4, md: "6%" },
           pl: { xs: 1, sm: 4, md: "6%" },
           mb: { xs: 10, sm: 4 },
-          mt: 1.5,
+          mt: 1,
         }}
       >
         <Grid container columnSpacing={2}>

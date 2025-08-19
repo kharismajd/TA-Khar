@@ -45,19 +45,19 @@ export default function MobileSimpleAppBar({ title: title }) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={() => navigate("/")}>
-        <IconButton size="large" color="inherit">
+        <IconButton size="large" color="inherit" edge="start">
           <Home />
         </IconButton>
         <p>Home</p>
       </MenuItem>
       <MenuItem onClick={() => navigate("/transactions")}>
-        <IconButton size="large" color="inherit">
+        <IconButton size="large" color="inherit" edge="start">
           <List />
         </IconButton>
         <p>Transaksi</p>
       </MenuItem>
       <MenuItem onClick={() => navigate("/cart")}>
-        <IconButton size="large" color="inherit">
+        <IconButton size="large" color="inherit" edge="start">
           <ShoppingCart />
         </IconButton>
         <p>Keranjang</p>
