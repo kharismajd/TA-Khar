@@ -22,7 +22,7 @@ const theme = createTheme({
     text: {
       primary: '#e1e1e1',
     },
-    divider: 'rgba(93, 124, 168, 0.2)',
+    divider: 'rgba(255,255,255,0.2)',
   },
    components: {
     MuiCssBaseline: {
