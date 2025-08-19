@@ -470,7 +470,7 @@ function Product() {
               </Typography>
             )}
             <Divider sx={{ my: 2 }} />
-            <Box sx={{ display: { sx: "block", sm: "block", md: "none" } }}>
+            <Box sx={{ display: { xs: product.type === "Group Buy" ? "block" : "none", sm: product.type === "Group Buy" ? "block" : "none", md: "none" } }}>
               {renderVariant(product)}
               <Divider sx={{ my: 2 }} />
             </Box>
