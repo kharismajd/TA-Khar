@@ -536,7 +536,7 @@ function Cart() {
                                       handleDecrement(s.storeId, sp.id)
                                     }
                                     sx={{
-                                      backgroundColor: "#2f2f2f",
+                                      backgroundColor: "#3e454e",
                                       minWidth: 0,
                                     }}
                                   >
@@ -578,7 +578,7 @@ function Cart() {
                                       handleIncrement(s.storeId, sp.id)
                                     }
                                     sx={{
-                                      backgroundColor: "#2f2f2f",
+                                      backgroundColor: "#3e454e",
                                       minWidth: 0,
                                     }}
                                   >
@@ -643,9 +643,10 @@ function Cart() {
           position: "fixed",
           bottom: 0,
           display: { xs: "block", md: "none" },
-          backgroundColor: "#18181B",
+          backgroundColor: "#19212c",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
+          boxShadow: 4
         }}
       >
         <Box display="flex" justifyContent="space-between" alignItems="center">

@@ -376,7 +376,7 @@ function Product() {
                       backgroundColor:
                         variants.get(variant.name) === variantSelection.refId
                           ? "secondary.main"
-                          : "#2f2f2f",
+                          : "#3e454e",
                       mb: 1,
                       mr: 1,
                       textTransform: "none",
@@ -559,7 +559,7 @@ function Product() {
                   <Button
                     disabled={product.status === "ended"}
                     onClick={handleDecrement}
-                    sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
+                    sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
                   >
                     <Remove style={{ color: "d1d1d1" }} />
                   </Button>
@@ -589,7 +589,7 @@ function Product() {
                   <Button
                     disabled={product.status === "ended"}
                     onClick={handleIncrement}
-                    sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
+                    sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
                   >
                     <Add style={{ color: "d1d1d1" }} />
                   </Button>
@@ -679,14 +679,10 @@ function Product() {
                   fullWidth
                   disabled={disableQuestions || product.status === "ended"}
                   variant="contained"
+                  color="secondary"
                   sx={{
-                    backgroundColor: "secondary.main",
                     fontWeight: "bold",
                     textTransform: "none",
-                    "&.Mui-disabled": {
-                      background: "#18181B",
-                      color: "#d1d1d1",
-                    },
                   }}
                   onClick={handleSubmitInterestCheck}
                 >
@@ -704,9 +700,10 @@ function Product() {
           position: "fixed",
           bottom: 0,
           display: { xs: "block", md: "none" },
-          backgroundColor: "#18181B",
+          backgroundColor: "#19212c",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
+          boxShadow: 4
         }}
       >
         {product.type === "Interest Check" && (
@@ -846,7 +843,7 @@ function Product() {
                 <Button
                   disabled={product.status === "ended"}
                   onClick={handleDecrement}
-                  sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
+                  sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
                 >
                   <Remove fontSize="small" style={{ color: "d1d1d1" }} />
                 </Button>
@@ -876,7 +873,7 @@ function Product() {
                 <Button
                   disabled={product.status === "ended"}
                   onClick={handleIncrement}
-                  sx={{ backgroundColor: "#2f2f2f", minWidth: 0 }}
+                  sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
                 >
                   <Add fontSize="small" style={{ color: "d1d1d1" }} />
                 </Button>

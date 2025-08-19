@@ -467,7 +467,7 @@ function Checkout() {
           position: "fixed",
           bottom: 0,
           display: { xs: "block", md: "none" },
-          backgroundColor: "#18181B",
+          backgroundColor: "#19212c",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
         }}

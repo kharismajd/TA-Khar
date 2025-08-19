@@ -223,7 +223,7 @@ export default function PrimarySearchAppBar({
           value="gb"
           variant="contained"
           sx={{
-            backgroundColor: jenisMobile.gb ? "secondary.main" : "#2f2f2f",
+            backgroundColor: jenisMobile.gb ? "secondary.main" : "#3e454e",
             mr: 1,
             textTransform: "none",
           }}
@@ -235,7 +235,7 @@ export default function PrimarySearchAppBar({
           value="ic"
           variant="contained"
           sx={{
-            backgroundColor: jenisMobile.ic ? "secondary.main" : "#2f2f2f",
+            backgroundColor: jenisMobile.ic ? "secondary.main" : "#3e454e",
             mr: 1,
             textTransform: "none",
           }}
@@ -255,7 +255,7 @@ export default function PrimarySearchAppBar({
           sx={{
             backgroundColor: kondisiMobile.berlangsung
               ? "secondary.main"
-              : "#2f2f2f",
+              : "#3e454e",
             mr: 1,
             textTransform: "none",
           }}
@@ -269,7 +269,7 @@ export default function PrimarySearchAppBar({
           sx={{
             backgroundColor: kondisiMobile.selesai
               ? "secondary.main"
-              : "#2f2f2f",
+              : "#3e454e",
             mr: 1,
             textTransform: "none",
           }}
@@ -400,7 +400,7 @@ export default function PrimarySearchAppBar({
                 paddingLeft: { xs: "4%" },
                 paddingTop: { xs: "2px" },
                 paddingBottom: { xs: "2px" },
-                backgroundColor: "#18181B",
+                backgroundColor: "#19212c",
               }}
             >
               <Box width="25%" />
@@ -464,7 +464,7 @@ export default function PrimarySearchAppBar({
                 paddingLeft: { xs: "4%" },
                 paddingTop: { xs: "2px" },
                 paddingBottom: { xs: "2px" },
-                backgroundColor: "#18181B",
+                backgroundColor: "#19212c",
               }}
             >
               <IconButton
@@ -520,7 +520,7 @@ export default function PrimarySearchAppBar({
         sx={{
           zIndex: 1099,
           "& .MuiPaper-root": {
-            background: "#18181B",
+            background: "#19212c",
             borderRadius: 2,
           },
         }}

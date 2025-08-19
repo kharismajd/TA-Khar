@@ -222,7 +222,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "semua" ? "secondary.main" : "#2f2f2f",
+              statusMobile === "semua" ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -236,7 +236,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "selesai" ? "secondary.main" : "#2f2f2f",
+              statusMobile === "selesai" ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -250,7 +250,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "dikirim" ? "secondary.main" : "#2f2f2f",
+              statusMobile === "dikirim" ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -264,7 +264,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "diproduksi" ? "secondary.main" : "#2f2f2f",
+              statusMobile === "diproduksi" ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -278,7 +278,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "gbOngoing" ? "secondary.main" : "#2f2f2f",
+              statusMobile === "gbOngoing" ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -292,7 +292,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "gagal" ? "secondary.main" : "#2f2f2f",
+              statusMobile === "gagal" ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -385,7 +385,7 @@ export default function MobileTransactionAppBar({
               paddingLeft: { xs: "4%" },
               paddingTop: { xs: "2px" },
               paddingBottom: { xs: "2px" },
-              backgroundColor: "#18181B",
+              backgroundColor: "#19212c",
             }}
           >
             <IconButton
@@ -424,7 +424,7 @@ export default function MobileTransactionAppBar({
         sx={{
           zIndex: 1099,
           "& .MuiPaper-root": {
-            background: "#18181B",
+            background: "#19212c",
             borderRadius: 2,
           },
         }}

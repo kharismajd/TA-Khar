@@ -44,7 +44,7 @@ function Home() {
           pr: { xs: 1, sm: 4, md: "6%" },
           pl: { xs: 1, sm: 4, md: "6%" },
           mb: { xs: 10, sm: 4 },
-          mt: 1,
+          mt: 1.5,
         }}
       >
         <Typography
@@ -66,7 +66,7 @@ function Home() {
                     elevation={0}
                     sx={{
                       maxWidth: 345,
-                      backgroundColor: "#09090B",
+                      backgroundColor: "#19212c",
                       borderRadius: 2,
                     }}
                   >
@@ -122,7 +122,7 @@ function Home() {
                     elevation={0}
                     sx={{
                       maxWidth: 345,
-                      backgroundColor: "#09090B",
+                      backgroundColor: "#19212c",
                       borderRadius: 2,
                     }}
                   >

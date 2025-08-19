@@ -50,9 +50,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 25,
-    backgroundColor: "#00A329",
+    backgroundColor: "#508bbeff",
     ...theme.applyStyles("dark", {
-      backgroundColor: "#00A329",
+      backgroundColor: "#508bbeff",
     }),
   },
 }));
@@ -604,16 +604,16 @@ function Transactions() {
           aria-labelledby="customized-dialog-title"
           open={transactionDetailDialog !== 0}
           sx={{
-            background: isXs ? "#09090B" : "",
+            background: isXs ? "#19212c" : "",
             "& .MuiPaper-root": {
-              background: isXs ? "#09090B" : "",
+              background: isXs ? "#19212c" : "#19212c",
             },
           }}
           slotProps={{
             paper: {
               sx: {
                 maxHeight: isXs ? "100%" : "80vh",
-                backgroundColor: !isXs ? "#09090B" : "",
+                backgroundColor: !isXs ? "#19212c" : "",
               },
             },
           }}
@@ -975,7 +975,7 @@ function Transactions() {
                                 fill: "rgba(255,255,255,0)", // circle color (COMPLETED)
                               },
                               "& .MuiStepLabel-root .Mui-active": {
-                                color: "#00A329", // circle color (ACTIVE)
+                                color: "#508bbeff", // circle color (ACTIVE)
                               },
                               "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text":
                                 {
@@ -1094,7 +1094,7 @@ function Transactions() {
                           fill: "rgba(255,255,255,0)", // circle color (COMPLETED)
                         },
                         "& .MuiStepLabel-root .Mui-active": {
-                          color: "#00A329", // circle color (ACTIVE)
+                          color: "#508bbeff", // circle color (ACTIVE)
                         },
                         "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
                           fill: "rgba(255,255,255,0)", // circle's number (ACTIVE)
@@ -1329,7 +1329,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "semua" ? "secondary.main" : "#2f2f2f",
+                  status === "semua" ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1343,7 +1343,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "selesai" ? "secondary.main" : "#2f2f2f",
+                  status === "selesai" ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1357,7 +1357,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "dikirim" ? "secondary.main" : "#2f2f2f",
+                  status === "dikirim" ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1371,7 +1371,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "diproduksi" ? "secondary.main" : "#2f2f2f",
+                  status === "diproduksi" ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1385,7 +1385,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "gbOngoing" ? "secondary.main" : "#2f2f2f",
+                  status === "gbOngoing" ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1399,7 +1399,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "gagal" ? "secondary.main" : "#2f2f2f",
+                  status === "gagal" ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1549,11 +1549,6 @@ function Transactions() {
             count={pageTotal}
             page={page}
             onChange={handlePageChange}
-            sx={{
-              "& .Mui-selected": {
-                backgroundColor: "#00A329 !important",
-              },
-            }}
           />
         </Box>
       </Box>

@@ -17,6 +17,7 @@ import {
   Radio,
   Stack,
   Pagination,
+  Divider,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { red } from "@mui/material/colors";
@@ -194,13 +195,13 @@ function ProductSearch() {
           <Grid size={{ xs: 0, sm: 3 }}>
             <Box
               border={1}
-              borderColor="rgba(255,255,255,0.2)"
+              borderColor="divider"
               borderRadius={2}
               sx={{
                 display: { xs: "none", sm: "block" },
                 position: "sticky",
                 top: 76,
-                bgcolor: "#18181B",
+                bgcolor: "#242c36",
               }}
             >
               <Typography
@@ -209,13 +210,14 @@ function ProductSearch() {
               >
                 Filter
               </Typography>
+              <Divider />
               <Accordion
                 disableGutters
                 defaultExpanded
-                sx={{ backgroundColor: "#09090B" }}
+                sx={{ backgroundColor: "#19212c" }}
               >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: "#FFFFFF" }} />}
+                  expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
@@ -257,10 +259,10 @@ function ProductSearch() {
               <Accordion
                 disableGutters
                 defaultExpanded
-                sx={{ backgroundColor: "#09090B" }}
+                sx={{ backgroundColor: "#19212c" }}
               >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: "#FFFFFF" }} />}
+                  expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel2-content"
                   id="panel2-header"
                 >
@@ -302,10 +304,10 @@ function ProductSearch() {
               <Accordion
                 defaultExpanded
                 disableGutters
-                sx={{ backgroundColor: "#09090B" }}
+                sx={{ backgroundColor: "#19212c" }}
               >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: "#FFFFFF" }} />}
+                  expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel3-content"
                   id="panel3-header"
                 >
@@ -390,7 +392,7 @@ function ProductSearch() {
                       elevation={0}
                       sx={{
                         maxWidth: 345,
-                        backgroundColor: "#09090B",
+                        backgroundColor: "#19212c",
                         borderRadius: 2,
                       }}
                     >
@@ -416,8 +418,8 @@ function ProductSearch() {
                             borderTopRightRadius: 8,
                             bgcolor:
                               filteredProduct.type === "Group Buy"
-                                ? "secondary.main"
-                                : "#B945F2",
+                                ? "#00A329"
+                                : "#851db8ff",
                           }}
                         >
                           <Typography variant="body2" component="div">

@@ -13,24 +13,24 @@ const theme = createTheme({
       contrastText: "#d1d1d1"
     },
     secondary: {
-      main: '#00A329',
+      main: '#508bbeff',
     },
     background: {
-      default: '#09090B',
-      paper: '#18181b',
+      default: '#19212c',
+      paper: '#19212c',
     },
     text: {
       primary: '#e1e1e1',
     },
-    divider: 'rgba(255,255,255,0.2)',
+    divider: 'rgba(93, 124, 168, 0.2)',
   },
    components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          scrollbarColor: "#6b6b6b #2b2b2b",
+          scrollbarColor: "#6b6b6b #19212c",
           "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
-            backgroundColor: "#2b2b2b",
+            backgroundColor: "#19212c",
           },
           "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
             borderRadius: 8,

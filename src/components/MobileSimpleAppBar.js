@@ -75,7 +75,7 @@ export default function MobileSimpleAppBar({ title: title }) {
               paddingLeft: { xs: "4%" },
               paddingTop: { xs: "2px" },
               paddingBottom: { xs: "2px" },
-              backgroundColor: "#18181B",
+              backgroundColor: "#19212c",
             }}
           >
             <IconButton

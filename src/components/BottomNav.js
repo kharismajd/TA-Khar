@@ -13,7 +13,7 @@ import { styled } from "@mui/material/styles";
 const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
   color: #B2B2B2;
   &.Mui-selected {
-    color: #FFFFFF;
+    color: #508bbeff;
   }
 `);
 
@@ -52,7 +52,8 @@ export default function BottomNav({ value: valueProp }) {
         borderTopRightRadius: "16px",
         zIndex: 1301,
       }}
-      elevation={3}
+      elevation={4}
+      
     >
       <BottomNavigation
         value={currentValue}
