@@ -1,114 +1,97 @@
 [
   {
-    "id": 1,
-    "title": "Keycap Artistik 01",
-    "price": 100000,
-    "storeName": "Toko1",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Group Buy",
-    "status": "ongoing",
-    "mainImage": "/images/keycap.png",
-    "createdAt": "2025-06-01T23:15:00Z"
-  },
-  {
-    "id": 2,
-    "title": "Keychron K6 Mechanical Keyboard",
-    "price": 2100000,
-    "storeName": "Toko1",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Group Buy",
-    "status": "ongoing",
-    "mainImage": "/images/keychronk6.jpg",
-    "createdAt": "2025-06-02T23:15:00Z"
-  },
-  {
-    "id": 3,
-    "title": "Red Dragon K552 Mechanical Keyboard",
-    "price": 1200000,
-    "storeName": "Toko2",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Group Buy",
-    "status": "ongoing",
-    "mainImage": "/images/reddragonk552.jpg",
-    "createdAt": "2025-06-03T23:15:00Z"
-  },
-  {
-    "id": 4,
-    "title": "Magegee Light 87 Mechanical Keyboard",
-    "price": 900000,
-    "storeName": "Toko2",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Group Buy",
-    "status": "ongoing",
-    "mainImage": "/images/magegeelight87.webp",
-    "createdAt": "2025-06-04T23:15:00Z"
-  },
-  {
     "id": 5,
-    "title": "Mode Loop (Interest Check Test)",
+    "title": "Mode Sonnet",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
     "storeRatingCount": 100,
     "type": "Interest Check",
     "status": "ongoing",
-    "mainImage": "/images/modeloop2.webp",
+    "mainImage": "/images/modesonnet.webp",
     "createdAt": "2025-06-05T05:15:00Z",
     "description": [
       {
-        "image": "/images/modeloopdesc1.webp",
-        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
+        "image": "/images/sonnetdesc1.webp",
+        "description": "A keyboard that is a reflection of you. Whether you’re seeking a minimalist aesthetic or trying to make a bold statement, the Sonnet has you covered. Visualize your dream keyboard in real time through our live configurator. Thousands of pairings are available right at your fingertips — none of which you can go wrong with."
       },
       {
-        "image": "/images/modeloopdesc2.webp",
-        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
+        "image": "/images/sonnetdesc2.webp",
+        "description": "A carefully formulated selection of finishes designed to integrate seamlessly into any desk setup. Curate your own collection of accents to change the look of the Sonnet. Complement your mood -- or your favorite keycap set."
+      },
+      {
+        "image": "/images/sonnetdesc3.webp",
+        "description": "Beautiful inside and out. Fully-finished internal weights and bottoms — in stainless steel, copper, and polycarbonate — allow you to find the perfect blend of heft and acoustics."
       }
     ],
     "images": [
       {
         "refId": [],
-        "original": "/images/modeloop2.webp",
-        "thumbnail": "/images/modeloop2.webp"
+        "original": "/images/modesonnet.webp",
+        "thumbnail": "/images/modesonnet.webp"
       },
       {
         "refId": [],
-        "original": "/images/modeloop3.webp",
-        "thumbnail": "/images/modeloop3.webp"
+        "original": "/images/sonnet1.webp",
+        "thumbnail": "/images/sonnet1.webp"
       },
       {
-        "refId": [11, 21],
-        "original": "/images/modeloopv1.jpg",
-        "thumbnail": "/images/modeloopv1.jpg"
+        "refId": [],
+        "original": "/images/sonnet2.webp",
+        "thumbnail": "/images/sonnet2.webp"
       },
       {
-        "refId": [12, 22],
-        "original": "/images/modeloopv2.jpg",
-        "thumbnail": "/images/modeloopv2.jpg"
+        "refId": [],
+        "original": "/images/sonnet3.webp",
+        "thumbnail": "/images/sonnet3.webp"
       },
       {
-        "refId": [13, 23],
-        "original": "/images/modeloopv3.jpg",
-        "thumbnail": "/images/modeloopv3.jpg"
+        "refId": [],
+        "original": "/images/sonnet4.webp",
+        "thumbnail": "/images/sonnet4.webp"
+      },
+      {
+        "refId": [111, 121, 131],
+        "original": "/images/sonnetvar1.jpg",
+        "thumbnail": "/images/sonnetvar1.jpg"
+      },
+      {
+        "refId": [112, 122, 132],
+        "original": "/images/sonnetvar2.jpg",
+        "thumbnail": "/images/sonnetvar2.jpg"
+      },
+      {
+        "refId": [211, 221, 231],
+        "original": "/images/sonnetvar3.jpg",
+        "thumbnail": "/images/sonnetvar3.jpg"
+      },
+      {
+        "refId": [212, 222, 232],
+        "original": "/images/sonnetvar4.jpg",
+        "thumbnail": "/images/sonnetvar4.jpg"
       }
     ],
     "variantList": [
       {
-        "name": "Variant",
+        "name": "Top",
         "variant": [
-          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
-          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
+          { "refId": 1, "name": "Elderberry", "priceIncrease": 0 },
+          { "refId": 2, "name": "White", "priceIncrease": 100000 }
         ]
       },
       {
-        "name": "Finish",
+        "name": "Accent",
         "variant": [
-          { "refId": 1, "name": "Green", "priceIncrease": 0 },
-          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
-          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
+          { "refId": 1, "name": "Grey", "priceIncrease": 0 },
+          { "refId": 2, "name": "Dawn", "priceIncrease": 100000 },
+          { "refId": 3, "name": "White", "priceIncrease": 200000 }
+        ]
+      },
+      {
+        "name": "Bottom",
+        "variant": [
+          { "refId": 1, "name": "Black", "priceIncrease": 0 },
+          { "refId": 2, "name": "Dawn", "priceIncrease": 100000 }
         ]
       }
     ],
@@ -133,44 +116,8 @@
     ]
   },
   {
-    "id": 6,
-    "title": "Mode Sonnet",
-    "price": 4000000,
-    "storeName": "Mode",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Interest Check",
-    "status": "ongoing",
-    "mainImage": "/images/modesonnet.webp",
-    "createdAt": "2025-06-06T23:15:00Z"
-  },
-  {
-    "id": 7,
-    "title": "Mode SixtyFive",
-    "price": 3200000,
-    "storeName": "Mode",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Interest Check",
-    "status": "ongoing",
-    "mainImage": "/images/modesixtyfive.webp",
-    "createdAt": "2025-06-07T23:15:00Z"
-  },
-  {
-    "id": 8,
-    "title": "Mode Tempo",
-    "price": 3000000,
-    "storeName": "Mode",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Interest Check",
-    "status": "ongoing",
-    "mainImage": "/images/modetempo.webp",
-    "createdAt": "2025-06-08T23:15:00Z"
-  },
-  {
     "id": 9,
-    "title": "Mode Loop (Ended Group Buy Test)",
+    "title": "Mode Loop (Ended)",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -236,7 +183,7 @@
   },
   {
     "id": 10,
-    "title": "Mode Loop (Ended Interest Check Test)",
+    "title": "Mode Loop (Ended)",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -320,142 +267,8 @@
     ]
   },
   {
-    "id": 11,
-    "title": "Mode Loop (Group Buy Test)",
-    "price": 3500000,
-    "storeName": "Mode",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Group Buy",
-    "status": "ongoing",
-    "mainImage": "/images/modeloop2.webp",
-    "createdAt": "2025-06-05T05:15:00Z",
-    "description": [
-      {
-        "image": "/images/modeloopdesc1.webp",
-        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
-      },
-      {
-        "image": "/images/modeloopdesc2.webp",
-        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
-      }
-    ],
-    "images": [
-      {
-        "refId": [],
-        "original": "/images/modeloop2.webp",
-        "thumbnail": "/images/modeloop2.webp"
-      },
-      {
-        "refId": [],
-        "original": "/images/modeloop3.webp",
-        "thumbnail": "/images/modeloop3.webp"
-      },
-      {
-        "refId": [11, 21],
-        "original": "/images/modeloopv1.jpg",
-        "thumbnail": "/images/modeloopv1.jpg"
-      },
-      {
-        "refId": [12, 22],
-        "original": "/images/modeloopv2.jpg",
-        "thumbnail": "/images/modeloopv2.jpg"
-      },
-      {
-        "refId": [13, 23],
-        "original": "/images/modeloopv3.jpg",
-        "thumbnail": "/images/modeloopv3.jpg"
-      }
-    ],
-    "variantList": [
-      {
-        "name": "Variant",
-        "variant": [
-          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
-          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
-        ]
-      },
-      {
-        "name": "Finish",
-        "variant": [
-          { "refId": 1, "name": "Green", "priceIncrease": 0 },
-          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
-          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
-        ]
-      }
-    ]
-  },
-  {
-    "id": 12,
-    "title": "Mode Loop (Selesai Test)",
-    "price": 3500000,
-    "storeName": "Mode",
-    "storeRating": 4.7,
-    "storeRatingCount": 100,
-    "type": "Group Buy",
-    "status": "ended",
-    "isInProduction": false,
-    "isFailed": false,
-    "mainImage": "/images/modeloop2.webp",
-    "createdAt": "2025-06-05T05:15:00Z",
-    "description": [
-      {
-        "image": "/images/modeloopdesc1.webp",
-        "description": "The Loop features a new split ring design joining the top and bottom halves together, looping around the periphery of the board for a subtle and elegant accent. An accent strip across the forehead of the board and a solid weight mounted underneath the board round out the refined accents in this board. Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. The thick top skin of the lattice blocks acts as a force break, isolating the metal top case and ring from each other for a reduction of resonance between the chassis components."
-      },
-      {
-        "image": "/images/modeloopdesc2.webp",
-        "description": "The Mode Loop TKL makes use of the Lattice Block mounting method that was introduced on the Envoy and Tempo keyboards with some improvements based on user feedback. Instead of using retaining fasteners to keep the PCB and Plate from falling out of the board when tipped upside down, Loop uses a split ring multi-component chassis design that sandwiches the lattice blocks within the inner ring. Featuring returns of classic colors and materials such as cream, copper, mirage, and silver mirror the loop will also feature a new elderberry colorway as well as the revival of the black mirror finish."
-      }
-    ],
-    "images": [
-      {
-        "refId": [],
-        "original": "/images/modeloop2.webp",
-        "thumbnail": "/images/modeloop2.webp"
-      },
-      {
-        "refId": [],
-        "original": "/images/modeloop3.webp",
-        "thumbnail": "/images/modeloop3.webp"
-      },
-      {
-        "refId": [11, 21],
-        "original": "/images/modeloopv1.jpg",
-        "thumbnail": "/images/modeloopv1.jpg"
-      },
-      {
-        "refId": [12, 22],
-        "original": "/images/modeloopv2.jpg",
-        "thumbnail": "/images/modeloopv2.jpg"
-      },
-      {
-        "refId": [13, 23],
-        "original": "/images/modeloopv3.jpg",
-        "thumbnail": "/images/modeloopv3.jpg"
-      }
-    ],
-    "variantList": [
-      {
-        "name": "Variant",
-        "variant": [
-          { "refId": 1, "name": "Standard", "priceIncrease": 0 },
-          { "refId": 2, "name": "WKL", "priceIncrease": 100000 }
-        ]
-      },
-      {
-        "name": "Finish",
-        "variant": [
-          { "refId": 1, "name": "Green", "priceIncrease": 0 },
-          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
-          { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
-        ]
-      }
-    ]
-  },
-  {
     "id": 13,
-    "title": "Mode Loop (Dikirim Test)",
+    "title": "Mode Loop (Dikirim)",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -471,8 +284,7 @@
         "progress": 100,
         "createdAt": "2025-05-27T05:15:00Z",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam facilisis, elit et eleifend lacinia, velit nisl sodales quam, sed gravida justo nisi ac ante. Aliquam dui dui, congue in neque id, viverra molestie mi. Aliquam mollis nisi est, quis accumsan purus sollicitudin tincidunt. Praesent eu justo semper, accumsan metus tempor, vulputate tortor. Pellentesque vel justo ut arcu imperdiet maximus sed non dolor. Nullam rhoncus mattis maximus. Suspendisse lobortis eros mi, vitae condimentum urna fringilla vitae. Proin interdum erat vel urna imperdiet, in blandit ipsum pellentesque. Suspendisse ut felis id tellus accumsan consequat quis a metus. Aliquam massa orci, congue ultricies finibus eu, bibendum eu risus. Vestibulum molestie nisl eget vulputate mollis. \n\nMaecenas vel est in augue sagittis rhoncus vel a ex. Integer tempus mi ac egestas porttitor. Aliquam ultrices eros eu tincidunt dictum. Integer auctor lacus lorem, hendrerit pulvinar dui feugiat eu. Nullam at gravida quam. Duis vestibulum justo nec neque rhoncus, at suscipit leo dignissim. Aliquam ultricies nisi ac nibh pellentesque, et lacinia dui rutrum. Proin placerat non ex in sodales. Fusce eu diam ac augue pellentesque sodales. Vivamus maximus vel enim eget mollis. Nulla egestas, orci eu semper laoreet, arcu mi bibendum quam, vel interdum massa ipsum at sapien. Phasellus lobortis, elit in cursus lacinia, augue magna egestas libero, non consequat mauris mauris at neque.",
-        "images": [
-        ]
+        "images": []
       },
       {
         "progress": 60,
@@ -558,7 +370,7 @@
   },
   {
     "id": 14,
-    "title": "Mode Loop (Diproduksi Test)",
+    "title": "Mode Loop (Diproduksi)",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -569,6 +381,40 @@
     "isFailed": false,
     "mainImage": "/images/modeloop2.webp",
     "createdAt": "2025-06-05T05:15:00Z",
+    "productionInfo": [
+      {
+        "progress": 100,
+        "createdAt": "2025-05-27T05:15:00Z",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam facilisis, elit et eleifend lacinia, velit nisl sodales quam, sed gravida justo nisi ac ante. Aliquam dui dui, congue in neque id, viverra molestie mi. Aliquam mollis nisi est, quis accumsan purus sollicitudin tincidunt. Praesent eu justo semper, accumsan metus tempor, vulputate tortor. Pellentesque vel justo ut arcu imperdiet maximus sed non dolor. Nullam rhoncus mattis maximus. Suspendisse lobortis eros mi, vitae condimentum urna fringilla vitae. Proin interdum erat vel urna imperdiet, in blandit ipsum pellentesque. Suspendisse ut felis id tellus accumsan consequat quis a metus. Aliquam massa orci, congue ultricies finibus eu, bibendum eu risus. Vestibulum molestie nisl eget vulputate mollis. \n\nMaecenas vel est in augue sagittis rhoncus vel a ex. Integer tempus mi ac egestas porttitor. Aliquam ultrices eros eu tincidunt dictum. Integer auctor lacus lorem, hendrerit pulvinar dui feugiat eu. Nullam at gravida quam. Duis vestibulum justo nec neque rhoncus, at suscipit leo dignissim. Aliquam ultricies nisi ac nibh pellentesque, et lacinia dui rutrum. Proin placerat non ex in sodales. Fusce eu diam ac augue pellentesque sodales. Vivamus maximus vel enim eget mollis. Nulla egestas, orci eu semper laoreet, arcu mi bibendum quam, vel interdum massa ipsum at sapien. Phasellus lobortis, elit in cursus lacinia, augue magna egestas libero, non consequat mauris mauris at neque.",
+        "images": []
+      },
+      {
+        "progress": 60,
+        "createdAt": "2025-05-12T05:15:00Z",
+        "description": "Duis id ligula et urna vehicula sollicitudin. Donec fermentum nulla luctus lobortis dapibus. Nulla tellus augue, vulputate eget neque eget, vulputate scelerisque risus. Morbi a eros vel neque cursus volutpat. Aenean luctus sem diam, in lacinia orci aliquam quis. Morbi non pulvinar dolor. Donec tortor nisi, lobortis eget lobortis sit amet, auctor et nisi. Nullam diam nulla, pretium a porttitor in, lobortis in mauris. Suspendisse non tempor tortor, in placerat leo.\n\nPhasellus tristique ac sem sollicitudin consequat. Fusce quis nisi diam. Etiam aliquet odio sapien, at varius leo tincidunt in. Integer ac elit urna. Pellentesque nibh mauris, rutrum sed mauris nec, dapibus faucibus metus. Praesent sodales ex eget vehicula luctus. Cras sodales felis pharetra luctus elementum. Nullam consequat pulvinar aliquet. Curabitur at magna pellentesque velit commodo egestas. Etiam eleifend sollicitudin commodo. Sed a viverra risus, in commodo eros.",
+        "images": [
+          {
+            "original": "/images/modeloopdesc1.webp",
+            "thumbnail": "/images/modeloopdesc1.webp"
+          },
+          {
+            "original": "/images/modeloopdesc2.webp",
+            "thumbnail": "/images/modeloopdesc2.webp"
+          }
+        ]
+      },
+      {
+        "progress": 30,
+        "createdAt": "2025-05-01T05:15:00Z",
+        "description": "Nullam convallis lectus magna, non sagittis leo facilisis sed. Nam ut tristique turpis, a varius lectus. In elementum lacus enim, ac elementum odio imperdiet eu. Duis mollis hendrerit enim, sed eleifend neque elementum aliquet. Nam porttitor quam eget mi pretium, ac semper orci vestibulum. Nullam a commodo arcu. Donec sit amet euismod metus, eget interdum felis. Aliquam consequat at neque a tristique. Praesent pulvinar accumsan commodo. Proin condimentum est ac mi sagittis ornare. Quisque dignissim ipsum in porttitor ultricies. Nulla ac ipsum eleifend, feugiat erat et, rutrum felis. \n\nMaecenas vel blandit turpis. Curabitur vulputate ante eu tellus facilisis vestibulum. Integer dui odio, posuere vel tortor nec, faucibus commodo diam. Aliquam mattis, risus sit amet commodo auctor, purus est elementum eros, quis ultricies massa felis eget nisi. Donec auctor odio quis arcu suscipit, vitae imperdiet risus luctus. Nullam dignissim vestibulum libero, eu interdum ante semper a. Aliquam lorem eros, pulvinar a dictum sit amet, auctor in neque. Curabitur porttitor venenatis auctor. Praesent eget ex rutrum, viverra nulla non, viverra dui.",
+        "images": [
+          {
+            "original": "/images/modeloopdesc3.webp",
+            "thumbnail": "/images/modeloopdesc3.webp"
+          }
+        ]
+      }
+    ],
     "description": [
       {
         "image": "/images/modeloopdesc1.webp",
@@ -626,7 +472,7 @@
   },
   {
     "id": 15,
-    "title": "Mode Loop (Gagal Test)",
+    "title": "Mode Loop (Gagal)",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -694,7 +540,7 @@
   },
   {
     "id": 16,
-    "title": "Mode Loop (GB Ongoing Test)",
+    "title": "Mode Loop (GB Ongoing)",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -823,6 +669,542 @@
           { "refId": 2, "name": "Mirage", "priceIncrease": 100000 },
           { "refId": 3, "name": "Silver", "priceIncrease": 200000 }
         ]
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Mode Tempo",
+    "price": 3000000,
+    "storeName": "Mode",
+    "storeRating": 4.9,
+    "storeRatingCount": 100,
+    "type": "Group Buy",
+    "status": "ongoing",
+    "isInProduction": false,
+    "isFailed": false,
+    "mainImage": "/images/modetempo.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/tempodesc1.webp",
+        "description": "We've embraced the symmetric 60% layout, unlocking a unique design language that sets the Tempo apart. The floating wedge effect is achieved by subtly angling the front side of the board beneath the blockers, resulting in a subtle visual illusion."
+      },
+      {
+        "image": "/images/tempodesc2.webp",
+        "description": "The lattice block mount affords a dreamy typing experience that can be made more or less soft."
+      },
+      {
+        "image": "/images/tempodesc3.webp",
+        "description": "Select from hundreds of combinations to craft a board that reflects your personal preferences."
+      }
+    ],
+    "images": [
+      {
+        "refId": [],
+        "original": "/images/modetempo.webp",
+        "thumbnail": "/images/modetempo.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/tempo1.jpg",
+        "thumbnail": "/images/tempo1.jpg"
+      },
+      {
+        "refId": [111, 112],
+        "original": "/images/tempovar1.jpg",
+        "thumbnail": "/images/tempovar1.jpg"
+      },
+      {
+        "refId": [121, 122],
+        "original": "/images/tempovar2.jpg",
+        "thumbnail": "/images/tempovar2.jpg"
+      },
+      {
+        "refId": [131, 132],
+        "original": "/images/tempovar3.jpg",
+        "thumbnail": "/images/tempovar3.jpg"
+      },
+      {
+        "refId": [211, 212],
+        "original": "/images/tempovar4.jpg",
+        "thumbnail": "/images/tempovar4.jpg"
+      },
+      {
+        "refId": [221, 222],
+        "original": "/images/tempovar5.jpg",
+        "thumbnail": "/images/tempovar5.jpg"
+      },
+      {
+        "refId": [231, 232],
+        "original": "/images/tempovar6.jpg",
+        "thumbnail": "/images/tempovar6.jpg"
+      }
+    ],
+    "variantList": [
+      {
+        "name": "Chassis",
+        "variant": [
+          { "refId": 1, "name": "Grey", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Accent",
+        "variant": [
+          { "refId": 1, "name": "Rose", "priceIncrease": 0 },
+          { "refId": 2, "name": "Sky", "priceIncrease": 100000 },
+          { "refId": 3, "name": "White", "priceIncrease": 200000 }
+        ]
+      },
+      {
+        "name": "Weight",
+        "variant": [
+          { "refId": 1, "name": "Brass", "priceIncrease": 0 },
+          { "refId": 2, "name": "Copper", "priceIncrease": 100000 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Mode Tempo",
+    "price": 3000000,
+    "storeName": "Mode",
+    "storeRating": 4.9,
+    "storeRatingCount": 100,
+    "type": "Group Buy",
+    "status": "ongoing",
+    "isInProduction": false,
+    "isFailed": false,
+    "mainImage": "/images/modetempo.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/tempodesc1.webp",
+        "description": "We've embraced the symmetric 60% layout, unlocking a unique design language that sets the Tempo apart. The floating wedge effect is achieved by subtly angling the front side of the board beneath the blockers, resulting in a subtle visual illusion."
+      },
+      {
+        "image": "/images/tempodesc2.webp",
+        "description": "The lattice block mount affords a dreamy typing experience that can be made more or less soft."
+      },
+      {
+        "image": "/images/tempodesc3.webp",
+        "description": "Select from hundreds of combinations to craft a board that reflects your personal preferences."
+      }
+    ],
+    "images": [
+      {
+        "refId": [],
+        "original": "/images/modetempo.webp",
+        "thumbnail": "/images/modetempo.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/tempo1.jpg",
+        "thumbnail": "/images/tempo1.jpg"
+      },
+      {
+        "refId": [111, 112],
+        "original": "/images/tempovar1.jpg",
+        "thumbnail": "/images/tempovar1.jpg"
+      },
+      {
+        "refId": [121, 122],
+        "original": "/images/tempovar2.jpg",
+        "thumbnail": "/images/tempovar2.jpg"
+      },
+      {
+        "refId": [131, 132],
+        "original": "/images/tempovar3.jpg",
+        "thumbnail": "/images/tempovar3.jpg"
+      },
+      {
+        "refId": [211, 212],
+        "original": "/images/tempovar4.jpg",
+        "thumbnail": "/images/tempovar4.jpg"
+      },
+      {
+        "refId": [221, 222],
+        "original": "/images/tempovar5.jpg",
+        "thumbnail": "/images/tempovar5.jpg"
+      },
+      {
+        "refId": [231, 232],
+        "original": "/images/tempovar6.jpg",
+        "thumbnail": "/images/tempovar6.jpg"
+      }
+    ],
+    "variantList": [
+      {
+        "name": "Chassis",
+        "variant": [
+          { "refId": 1, "name": "Grey", "priceIncrease": 0 },
+          { "refId": 2, "name": "Mirage", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Accent",
+        "variant": [
+          { "refId": 1, "name": "Rose", "priceIncrease": 0 },
+          { "refId": 2, "name": "Sky", "priceIncrease": 100000 },
+          { "refId": 3, "name": "White", "priceIncrease": 200000 }
+        ]
+      },
+      {
+        "name": "Weight",
+        "variant": [
+          { "refId": 1, "name": "Brass", "priceIncrease": 0 },
+          { "refId": 2, "name": "Copper", "priceIncrease": 100000 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Mode Sonnet",
+    "price": 3500000,
+    "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
+    "type": "Interest Check",
+    "status": "ongoing",
+    "mainImage": "/images/modesonnet.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/sonnetdesc1.webp",
+        "description": "A keyboard that is a reflection of you. Whether you’re seeking a minimalist aesthetic or trying to make a bold statement, the Sonnet has you covered. Visualize your dream keyboard in real time through our live configurator. Thousands of pairings are available right at your fingertips — none of which you can go wrong with."
+      },
+      {
+        "image": "/images/sonnetdesc2.webp",
+        "description": "A carefully formulated selection of finishes designed to integrate seamlessly into any desk setup. Curate your own collection of accents to change the look of the Sonnet. Complement your mood -- or your favorite keycap set."
+      },
+      {
+        "image": "/images/sonnetdesc3.webp",
+        "description": "Beautiful inside and out. Fully-finished internal weights and bottoms — in stainless steel, copper, and polycarbonate — allow you to find the perfect blend of heft and acoustics."
+      }
+    ],
+    "images": [
+      {
+        "refId": [],
+        "original": "/images/modesonnet.webp",
+        "thumbnail": "/images/modesonnet.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet1.webp",
+        "thumbnail": "/images/sonnet1.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet2.webp",
+        "thumbnail": "/images/sonnet2.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet3.webp",
+        "thumbnail": "/images/sonnet3.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet4.webp",
+        "thumbnail": "/images/sonnet4.webp"
+      },
+      {
+        "refId": [111, 121, 131],
+        "original": "/images/sonnetvar1.jpg",
+        "thumbnail": "/images/sonnetvar1.jpg"
+      },
+      {
+        "refId": [112, 122, 132],
+        "original": "/images/sonnetvar2.jpg",
+        "thumbnail": "/images/sonnetvar2.jpg"
+      },
+      {
+        "refId": [211, 221, 231],
+        "original": "/images/sonnetvar3.jpg",
+        "thumbnail": "/images/sonnetvar3.jpg"
+      },
+      {
+        "refId": [212, 222, 232],
+        "original": "/images/sonnetvar4.jpg",
+        "thumbnail": "/images/sonnetvar4.jpg"
+      }
+    ],
+    "variantList": [
+      {
+        "name": "Top",
+        "variant": [
+          { "refId": 1, "name": "Elderberry", "priceIncrease": 0 },
+          { "refId": 2, "name": "White", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Accent",
+        "variant": [
+          { "refId": 1, "name": "Grey", "priceIncrease": 0 },
+          { "refId": 2, "name": "Dawn", "priceIncrease": 100000 },
+          { "refId": 3, "name": "White", "priceIncrease": 200000 }
+        ]
+      },
+      {
+        "name": "Bottom",
+        "variant": [
+          { "refId": 1, "name": "Black", "priceIncrease": 0 },
+          { "refId": 2, "name": "Dawn", "priceIncrease": 100000 }
+        ]
+      }
+    ],
+    "interestCheckQuestions": [
+      {
+        "id": 1,
+        "type": "radio",
+        "question": "Apakah anda tertarik untuk membeli produk ini?",
+        "options": ["Ya", "Tidak"]
+      },
+      {
+        "id": 2,
+        "type": "checkbox",
+        "question": "Apa yang membuat anda tertarik pada produk ini?",
+        "options": ["Spesifikasi", "Harga", "Variasi", "Desain"]
+      },
+      {
+        "id": 3,
+        "type": "text",
+        "question": "Apakah terdapat masukkan terkait spesifikasi dan harga dari produk?"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Mode Sonnet",
+    "price": 3500000,
+    "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
+    "type": "Interest Check",
+    "status": "ongoing",
+    "mainImage": "/images/modesonnet.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/sonnetdesc1.webp",
+        "description": "A keyboard that is a reflection of you. Whether you’re seeking a minimalist aesthetic or trying to make a bold statement, the Sonnet has you covered. Visualize your dream keyboard in real time through our live configurator. Thousands of pairings are available right at your fingertips — none of which you can go wrong with."
+      },
+      {
+        "image": "/images/sonnetdesc2.webp",
+        "description": "A carefully formulated selection of finishes designed to integrate seamlessly into any desk setup. Curate your own collection of accents to change the look of the Sonnet. Complement your mood -- or your favorite keycap set."
+      },
+      {
+        "image": "/images/sonnetdesc3.webp",
+        "description": "Beautiful inside and out. Fully-finished internal weights and bottoms — in stainless steel, copper, and polycarbonate — allow you to find the perfect blend of heft and acoustics."
+      }
+    ],
+    "images": [
+      {
+        "refId": [],
+        "original": "/images/modesonnet.webp",
+        "thumbnail": "/images/modesonnet.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet1.webp",
+        "thumbnail": "/images/sonnet1.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet2.webp",
+        "thumbnail": "/images/sonnet2.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet3.webp",
+        "thumbnail": "/images/sonnet3.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet4.webp",
+        "thumbnail": "/images/sonnet4.webp"
+      },
+      {
+        "refId": [111, 121, 131],
+        "original": "/images/sonnetvar1.jpg",
+        "thumbnail": "/images/sonnetvar1.jpg"
+      },
+      {
+        "refId": [112, 122, 132],
+        "original": "/images/sonnetvar2.jpg",
+        "thumbnail": "/images/sonnetvar2.jpg"
+      },
+      {
+        "refId": [211, 221, 231],
+        "original": "/images/sonnetvar3.jpg",
+        "thumbnail": "/images/sonnetvar3.jpg"
+      },
+      {
+        "refId": [212, 222, 232],
+        "original": "/images/sonnetvar4.jpg",
+        "thumbnail": "/images/sonnetvar4.jpg"
+      }
+    ],
+    "variantList": [
+      {
+        "name": "Top",
+        "variant": [
+          { "refId": 1, "name": "Elderberry", "priceIncrease": 0 },
+          { "refId": 2, "name": "White", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Accent",
+        "variant": [
+          { "refId": 1, "name": "Grey", "priceIncrease": 0 },
+          { "refId": 2, "name": "Dawn", "priceIncrease": 100000 },
+          { "refId": 3, "name": "White", "priceIncrease": 200000 }
+        ]
+      },
+      {
+        "name": "Bottom",
+        "variant": [
+          { "refId": 1, "name": "Black", "priceIncrease": 0 },
+          { "refId": 2, "name": "Dawn", "priceIncrease": 100000 }
+        ]
+      }
+    ],
+    "interestCheckQuestions": [
+      {
+        "id": 1,
+        "type": "radio",
+        "question": "Apakah anda tertarik untuk membeli produk ini?",
+        "options": ["Ya", "Tidak"]
+      },
+      {
+        "id": 2,
+        "type": "checkbox",
+        "question": "Apa yang membuat anda tertarik pada produk ini?",
+        "options": ["Spesifikasi", "Harga", "Variasi", "Desain"]
+      },
+      {
+        "id": 3,
+        "type": "text",
+        "question": "Apakah terdapat masukkan terkait spesifikasi dan harga dari produk?"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Mode Sonnet",
+    "price": 3500000,
+    "storeName": "Mode",
+    "storeRating": 4.7,
+    "storeRatingCount": 100,
+    "type": "Interest Check",
+    "status": "ongoing",
+    "mainImage": "/images/modesonnet.webp",
+    "createdAt": "2025-06-05T05:15:00Z",
+    "description": [
+      {
+        "image": "/images/sonnetdesc1.webp",
+        "description": "A keyboard that is a reflection of you. Whether you’re seeking a minimalist aesthetic or trying to make a bold statement, the Sonnet has you covered. Visualize your dream keyboard in real time through our live configurator. Thousands of pairings are available right at your fingertips — none of which you can go wrong with."
+      },
+      {
+        "image": "/images/sonnetdesc2.webp",
+        "description": "A carefully formulated selection of finishes designed to integrate seamlessly into any desk setup. Curate your own collection of accents to change the look of the Sonnet. Complement your mood -- or your favorite keycap set."
+      },
+      {
+        "image": "/images/sonnetdesc3.webp",
+        "description": "Beautiful inside and out. Fully-finished internal weights and bottoms — in stainless steel, copper, and polycarbonate — allow you to find the perfect blend of heft and acoustics."
+      }
+    ],
+    "images": [
+      {
+        "refId": [],
+        "original": "/images/modesonnet.webp",
+        "thumbnail": "/images/modesonnet.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet1.webp",
+        "thumbnail": "/images/sonnet1.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet2.webp",
+        "thumbnail": "/images/sonnet2.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet3.webp",
+        "thumbnail": "/images/sonnet3.webp"
+      },
+      {
+        "refId": [],
+        "original": "/images/sonnet4.webp",
+        "thumbnail": "/images/sonnet4.webp"
+      },
+      {
+        "refId": [111, 121, 131],
+        "original": "/images/sonnetvar1.jpg",
+        "thumbnail": "/images/sonnetvar1.jpg"
+      },
+      {
+        "refId": [112, 122, 132],
+        "original": "/images/sonnetvar2.jpg",
+        "thumbnail": "/images/sonnetvar2.jpg"
+      },
+      {
+        "refId": [211, 221, 231],
+        "original": "/images/sonnetvar3.jpg",
+        "thumbnail": "/images/sonnetvar3.jpg"
+      },
+      {
+        "refId": [212, 222, 232],
+        "original": "/images/sonnetvar4.jpg",
+        "thumbnail": "/images/sonnetvar4.jpg"
+      }
+    ],
+    "variantList": [
+      {
+        "name": "Top",
+        "variant": [
+          { "refId": 1, "name": "Elderberry", "priceIncrease": 0 },
+          { "refId": 2, "name": "White", "priceIncrease": 100000 }
+        ]
+      },
+      {
+        "name": "Accent",
+        "variant": [
+          { "refId": 1, "name": "Grey", "priceIncrease": 0 },
+          { "refId": 2, "name": "Dawn", "priceIncrease": 100000 },
+          { "refId": 3, "name": "White", "priceIncrease": 200000 }
+        ]
+      },
+      {
+        "name": "Bottom",
+        "variant": [
+          { "refId": 1, "name": "Black", "priceIncrease": 0 },
+          { "refId": 2, "name": "Dawn", "priceIncrease": 100000 }
+        ]
+      }
+    ],
+    "interestCheckQuestions": [
+      {
+        "id": 1,
+        "type": "radio",
+        "question": "Apakah anda tertarik untuk membeli produk ini?",
+        "options": ["Ya", "Tidak"]
+      },
+      {
+        "id": 2,
+        "type": "checkbox",
+        "question": "Apa yang membuat anda tertarik pada produk ini?",
+        "options": ["Spesifikasi", "Harga", "Variasi", "Desain"]
+      },
+      {
+        "id": 3,
+        "type": "text",
+        "question": "Apakah terdapat masukkan terkait spesifikasi dan harga dari produk?"
       }
     ]
   }

@@ -9,11 +9,15 @@
         "quantity": 1,
         "variants": [
           {
-            "name": "Variant",
-            "refId": 1
+            "name": "Chassis",
+            "refId": 2
           },
           {
-            "name": "Finish",
+            "name": "Accent",
+            "refId": 2
+          },
+          {
+            "name": "Weight",
             "refId": 2
           }
         ]

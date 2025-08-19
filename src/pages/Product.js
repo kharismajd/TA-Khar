@@ -454,6 +454,7 @@ function Product() {
               showPlayButton={false}
               ref={imageGalleryRef}
               onClick={handleGalleryImageZoom}
+              showFullscreenButton={false}
             />
             <Typography variant="h4" mt={2}>
               {product.title}
