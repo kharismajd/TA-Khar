@@ -110,6 +110,7 @@ function Checkout() {
   const selectedProducts = products.filter((product) =>
     productIds.includes(product.id)
   );
+  selectedProducts.sort((a, b) => a.id - b.id)
 
   const totalPrice = calculatePrice(selectedProducts, variantIds, quantities);
 
