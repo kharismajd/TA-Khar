@@ -221,7 +221,7 @@ function ProductSearch() {
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  <Typography component="span">Jenis</Typography>
+                  <Typography component="span">Tahap Produk</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <FormGroup>

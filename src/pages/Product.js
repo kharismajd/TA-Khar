@@ -403,7 +403,7 @@ function Product() {
               <>
                 {variants.get(variant.name) === variantSelection.refId && (
                   <Chip
-                    sx={{ borderRadius: "4px" }}
+                    sx={{ borderRadius: "4px", backgroundColor: "#508bbeff" }}
                     label={variantSelection.name}
                   />
                 )}

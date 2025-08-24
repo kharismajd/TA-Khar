@@ -497,6 +497,7 @@ function Cart() {
                                               )}
                                               sx={{
                                                 size: { xs: "small", md: "" },
+                                                backgroundColor: "#508bbeff"
                                               }}
                                             />
                                           );

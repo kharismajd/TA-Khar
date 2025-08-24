@@ -213,7 +213,7 @@ export default function PrimarySearchAppBar({
     <Box width="auto" role="presentation" p={2}>
       <Box display="flex" justifyContent="space-between">
         <Typography variant="body1" fontWeight="bold" gutterBottom>
-          Jenis
+          Tahap Produk
         </Typography>
         <Close onClick={toggleDrawer(false)} />
       </Box>
