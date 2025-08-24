@@ -810,7 +810,11 @@ function Transactions() {
                           >
                             {product.productionInfo[0].description}
                           </Typography>
-                          <Box mt={1.5} />
+                          <Box mt={2} />
+                          <Typography variant="body1" fontWeight="bold" gutterBottom>
+                            Persentase Penyelesaian
+                          </Typography>
+                          <Box mt={1} />
                           <Box sx={{ display: "flex", alignItems: "center" }}>
                             <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
                               <BorderLinearProgress
@@ -877,7 +881,11 @@ function Transactions() {
                           >
                             {product.productionInfo[0].description}
                           </Typography>
-                          <Box mt={1.5} />
+                          <Box mt={2} />
+                          <Typography variant="body1" fontWeight="bold" gutterBottom>
+                            Persentase Penyelesaian
+                          </Typography>
+                          <Box mt={1} />
                           <Box sx={{ display: "flex", alignItems: "center" }}>
                             <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
                               <BorderLinearProgress
@@ -1008,12 +1016,20 @@ function Transactions() {
                         pr: 2,
                       }}
                     >
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        gutterBottom
+                      >
+                        Persentase Penyelesaian
+                      </Typography>
                       <Box
                         sx={{
                           display: "flex",
                           alignItems: "center",
                           width: "100%",
                         }}
+                        mt={1}
                       >
                         <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
                           <BorderLinearProgress
@@ -1187,12 +1203,16 @@ function Transactions() {
             {isXs && transactionDetailDialog === 2 && (
               // Production Info Mobile
               <>
+                <Typography variant="body1" fontWeight="bold" gutterBottom>
+                  Persentase Penyelesaian
+                </Typography>
                 <Box
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     width: "100%",
                   }}
+                  mt={1}
                 >
                   <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
                     <BorderLinearProgress
@@ -1293,12 +1313,16 @@ function Transactions() {
             {transactionDetailDialog === 3 && isXs && (
               // Production Info Detail (Mobile Only)
               <>
+                <Typography variant="body1" fontWeight="bold" gutterBottom>
+                  Persentase Penyelesaian
+                </Typography>
                 <Box
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     width: "100%",
                   }}
+                  mt={1}
                 >
                   <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
                     <BorderLinearProgress
