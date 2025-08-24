@@ -139,6 +139,26 @@ function checkStatus(transactionItem) {
   return "";
 }
 
+function getStatusWording(status) {
+  if (status === "Selesai") {
+    return "Pesanan Selesai";
+  }
+
+  if (status === "Dikirim") {
+    return "Pesanan Sedang Dikirim";
+  }
+
+  if (status === "Diproduksi") {
+    return "Pesanan Sedang Diproduksi";
+  }
+
+  if (status === "GB Ongoing") {
+    return "Group Buy Sedang Berjalan";
+  }
+
+  return "Pesanan Gagal";
+}
+
 function statusColor(status) {
   if (status === "Gagal") {
     return { text: "#f44336", background: "#FFA9A6" };
@@ -652,7 +672,7 @@ function Transactions() {
               //Transaction Detail
               <>
                 <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  Pesanan {checkStatus(selectedTransaction)}
+                  {getStatusWording(checkStatus(selectedTransaction))}
                 </Typography>
                 <Box
                   display="flex"
@@ -714,95 +734,201 @@ function Transactions() {
                   </Stack>
                 </Stack>
                 <Divider sx={{ mb: 2, mt: 3 }} />
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  Info Pengiriman
-                </Typography>
-                <Grid container rowSpacing={1}>
-                  <Grid size={5}>
-                    <Typography variant="body1">Kurir</Typography>
-                  </Grid>
-                  <Grid size={7}>
-                    <Typography variant="body1">Kurir A</Typography>
-                  </Grid>
-                  <Grid size={5}>
-                    <Typography variant="body1">Resi</Typography>
-                  </Grid>
-                  <Grid size={7}>
-                    <Typography variant="body1">RESI12345RESI</Typography>
-                  </Grid>
-                  <Grid size={5}>
-                    <Typography variant="body1">Alamat</Typography>
-                  </Grid>
-                  <Grid size={7}>
-                    <Typography variant="body1">Mr Pikachu</Typography>
-                    <Typography variant="body1">+62 1234567890</Typography>
-                    <Typography variant="body1">
-                      Jl. Pikachu No. 123, Kec. Pikachu, Kota Pikachu, Prov.
-                      Pikachu
+                {checkStatus(selectedTransaction) === "Dikirim" ||
+                checkStatus(selectedTransaction) === "Selesai" ? (
+                  <>
+                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                      Info Pengiriman
                     </Typography>
-                  </Grid>
-                </Grid>
-                <Divider sx={{ mb: 2, mt: 2 }} />
-                {product.productionInfo &&
-                  product.productionInfo.length > 0 && (
-                    <>
-                      <Box
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                      >
-                        <Typography variant="h6" fontWeight="bold" gutterBottom>
-                          Info Produksi
+                    <Grid container rowSpacing={1}>
+                      <Grid size={5}>
+                        <Typography variant="body1">Kurir</Typography>
+                      </Grid>
+                      <Grid size={7}>
+                        <Typography variant="body1">Kurir A</Typography>
+                      </Grid>
+                      <Grid size={5}>
+                        <Typography variant="body1">Resi</Typography>
+                      </Grid>
+                      <Grid size={7}>
+                        <Typography variant="body1">RESI12345RESI</Typography>
+                      </Grid>
+                      <Grid size={5}>
+                        <Typography variant="body1">Alamat</Typography>
+                      </Grid>
+                      <Grid size={7}>
+                        <Typography variant="body1">Mr Pikachu</Typography>
+                        <Typography variant="body1">+62 1234567890</Typography>
+                        <Typography variant="body1">
+                          Jl. Pikachu No. 123, Kec. Pikachu, Kota Pikachu, Prov.
+                          Pikachu
                         </Typography>
-                        <Typography
-                          variant="body1"
-                          fontWeight="bold"
-                          color="secondary.main"
-                          justifySelf="flex-end"
-                          sx={{ cursor: "pointer" }}
-                          onClick={handleProductionInfoDialogOpen}
-                        >
-                          Lihat Detail
-                        </Typography>
-                      </Box>
-                      <Typography variant="body1" gutterBottom>
-                        {new Date(
-                          product.productionInfo[0].createdAt
-                        ).toShortFormatWithDay()}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        gutterBottom
-                        sx={{
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          display: "-webkit-box",
-                          WebkitLineClamp: "2",
-                          WebkitBoxOrient: "vertical",
-                        }}
-                      >
-                        {product.productionInfo[0].description}
-                      </Typography>
-                      <Box mt={1.5} />
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
-                          <BorderLinearProgress
-                            variant="determinate"
-                            value={product.productionInfo[0].progress}
-                          />
-                        </Box>
-                        <Box sx={{ minWidth: 35 }}>
+                      </Grid>
+                    </Grid>
+                    <Divider sx={{ mb: 2, mt: 2 }} />
+                    {product.productionInfo &&
+                      product.productionInfo.length > 0 && (
+                        <>
+                          <Box
+                            display="flex"
+                            justifyContent="space-between"
+                            alignItems="center"
+                          >
+                            <Typography
+                              variant="h6"
+                              fontWeight="bold"
+                              gutterBottom
+                            >
+                              Info Produksi
+                            </Typography>
+                            <Typography
+                              variant="body1"
+                              fontWeight="bold"
+                              color="secondary.main"
+                              justifySelf="flex-end"
+                              sx={{ cursor: "pointer" }}
+                              onClick={handleProductionInfoDialogOpen}
+                            >
+                              Lihat Detail
+                            </Typography>
+                          </Box>
+                          <Typography variant="body1" gutterBottom>
+                            {new Date(
+                              product.productionInfo[0].createdAt
+                            ).toShortFormatWithDay()}
+                          </Typography>
                           <Typography
                             variant="body1"
-                            fontWeight="bold"
-                          >{`${Math.round(
-                            product.productionInfo[0].progress
-                          )}%`}</Typography>
-                        </Box>
-                      </Box>
-                      <Divider sx={{ mb: 2, mt: 3 }} />
-                    </>
-                  )}
+                            gutterBottom
+                            sx={{
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              display: "-webkit-box",
+                              WebkitLineClamp: "2",
+                              WebkitBoxOrient: "vertical",
+                            }}
+                          >
+                            {product.productionInfo[0].description}
+                          </Typography>
+                          <Box mt={1.5} />
+                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
+                              <BorderLinearProgress
+                                variant="determinate"
+                                value={product.productionInfo[0].progress}
+                              />
+                            </Box>
+                            <Box sx={{ minWidth: 35 }}>
+                              <Typography
+                                variant="body1"
+                                fontWeight="bold"
+                              >{`${Math.round(
+                                product.productionInfo[0].progress
+                              )}%`}</Typography>
+                            </Box>
+                          </Box>
+                          <Divider sx={{ mb: 2, mt: 3 }} />
+                        </>
+                      )}
+                  </>
+                ) : (
+                  <>
+                    {product.productionInfo &&
+                      product.productionInfo.length > 0 && (
+                        <>
+                          <Box
+                            display="flex"
+                            justifyContent="space-between"
+                            alignItems="center"
+                          >
+                            <Typography
+                              variant="h6"
+                              fontWeight="bold"
+                              gutterBottom
+                            >
+                              Info Produksi
+                            </Typography>
+                            <Typography
+                              variant="body1"
+                              fontWeight="bold"
+                              color="secondary.main"
+                              justifySelf="flex-end"
+                              sx={{ cursor: "pointer" }}
+                              onClick={handleProductionInfoDialogOpen}
+                            >
+                              Lihat Detail
+                            </Typography>
+                          </Box>
+                          <Typography variant="body1" gutterBottom>
+                            {new Date(
+                              product.productionInfo[0].createdAt
+                            ).toShortFormatWithDay()}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                            sx={{
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              display: "-webkit-box",
+                              WebkitLineClamp: "2",
+                              WebkitBoxOrient: "vertical",
+                            }}
+                          >
+                            {product.productionInfo[0].description}
+                          </Typography>
+                          <Box mt={1.5} />
+                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Box sx={{ width: "calc(100% - 35px)", mr: 1 }}>
+                              <BorderLinearProgress
+                                variant="determinate"
+                                value={product.productionInfo[0].progress}
+                              />
+                            </Box>
+                            <Box sx={{ minWidth: 35 }}>
+                              <Typography
+                                variant="body1"
+                                fontWeight="bold"
+                              >{`${Math.round(
+                                product.productionInfo[0].progress
+                              )}%`}</Typography>
+                            </Box>
+                          </Box>
+                          <Divider sx={{ mb: 2, mt: 3 }} />
+                        </>
+                      )}
+                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                      Info Pengiriman
+                    </Typography>
+                    <Grid container rowSpacing={1}>
+                      <Grid size={5}>
+                        <Typography variant="body1">Kurir</Typography>
+                      </Grid>
+                      <Grid size={7}>
+                        <Typography variant="body1">Kurir A</Typography>
+                      </Grid>
+                      <Grid size={5}>
+                        <Typography variant="body1">Resi</Typography>
+                      </Grid>
+                      <Grid size={7}>
+                        <Typography variant="body1">RESI12345RESI</Typography>
+                      </Grid>
+                      <Grid size={5}>
+                        <Typography variant="body1">Alamat</Typography>
+                      </Grid>
+                      <Grid size={7}>
+                        <Typography variant="body1">Mr Pikachu</Typography>
+                        <Typography variant="body1">+62 1234567890</Typography>
+                        <Typography variant="body1">
+                          Jl. Pikachu No. 123, Kec. Pikachu, Kota Pikachu, Prov.
+                          Pikachu
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Divider sx={{ mb: 2, mt: 2 }} />
+                  </>
+                )}
+
                 <Typography variant="h6" fontWeight="bold" gutterBottom>
                   Rincian Pembayaran
                 </Typography>
