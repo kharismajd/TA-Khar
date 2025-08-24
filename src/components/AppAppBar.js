@@ -392,7 +392,7 @@ export default function PrimarySearchAppBar({
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar>
+        <AppBar elevation={0}>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Toolbar
               sx={{
@@ -400,7 +400,7 @@ export default function PrimarySearchAppBar({
                 paddingLeft: { xs: "4%" },
                 paddingTop: { xs: "2px" },
                 paddingBottom: { xs: "2px" },
-                backgroundColor: "#19212c",
+                backgroundColor: "#242c36",
               }}
             >
               <Box width="25%" />
@@ -464,7 +464,7 @@ export default function PrimarySearchAppBar({
                 paddingLeft: { xs: "4%" },
                 paddingTop: { xs: "2px" },
                 paddingBottom: { xs: "2px" },
-                backgroundColor: "#19212c",
+                backgroundColor: "#242c36",
               }}
             >
               <IconButton
@@ -520,7 +520,7 @@ export default function PrimarySearchAppBar({
         sx={{
           zIndex: 1099,
           "& .MuiPaper-root": {
-            background: "#19212c",
+            background: "#242c36",
             borderRadius: 2,
           },
         }}

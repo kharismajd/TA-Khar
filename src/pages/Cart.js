@@ -643,7 +643,7 @@ function Cart() {
           position: "fixed",
           bottom: 0,
           display: { xs: "block", md: "none" },
-          backgroundColor: "#19212c",
+          backgroundColor: "#242c36",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
           boxShadow: 4

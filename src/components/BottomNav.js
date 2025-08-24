@@ -51,6 +51,7 @@ export default function BottomNav({ value: valueProp }) {
         borderTopLeftRadius: "16px",
         borderTopRightRadius: "16px",
         zIndex: 1301,
+        backgroundColor: "#242c36"
       }}
       elevation={4}
       
@@ -59,7 +60,7 @@ export default function BottomNav({ value: valueProp }) {
         value={currentValue}
         onChange={handleChange}
         showLabels={false}
-        sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px" }}
+        sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px", backgroundColor: "#242c36" }}
       >
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction label="Transaksi" icon={<ListIcon />} />

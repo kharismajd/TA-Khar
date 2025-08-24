@@ -561,7 +561,7 @@ function Product() {
                     onClick={handleDecrement}
                     sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
                   >
-                    <Remove style={{ color: "d1d1d1" }} />
+                    <Remove style={{ color: "#d1d1d1" }} />
                   </Button>
                   <Box
                     sx={{
@@ -591,7 +591,7 @@ function Product() {
                     onClick={handleIncrement}
                     sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
                   >
-                    <Add style={{ color: "d1d1d1" }} />
+                    <Add style={{ color: "#d1d1d1" }} />
                   </Button>
                 </Stack>
                 <Box mb={2} />
@@ -700,7 +700,7 @@ function Product() {
           position: "fixed",
           bottom: 0,
           display: { xs: "block", md: "none" },
-          backgroundColor: "#19212c",
+          backgroundColor: "#242c36",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
           boxShadow: 4
@@ -845,7 +845,7 @@ function Product() {
                   onClick={handleDecrement}
                   sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
                 >
-                  <Remove fontSize="small" style={{ color: "d1d1d1" }} />
+                  <Remove fontSize="small" style={{ color: "#d1d1d1" }} />
                 </Button>
                 <Box
                   sx={{
@@ -875,7 +875,7 @@ function Product() {
                   onClick={handleIncrement}
                   sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
                 >
-                  <Add fontSize="small" style={{ color: "d1d1d1" }} />
+                  <Add fontSize="small" style={{ color: "#d1d1d1" }} />
                 </Button>
               </Box>
             </Stack>

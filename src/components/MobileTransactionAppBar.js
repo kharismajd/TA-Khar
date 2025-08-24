@@ -378,14 +378,14 @@ export default function MobileTransactionAppBar({
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar>
+        <AppBar elevation={0}>
           <Toolbar
             sx={{
               paddingRight: { xs: "4%" },
               paddingLeft: { xs: "4%" },
               paddingTop: { xs: "2px" },
               paddingBottom: { xs: "2px" },
-              backgroundColor: "#19212c",
+              backgroundColor: "#242c36",
             }}
           >
             <IconButton
