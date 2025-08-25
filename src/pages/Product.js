@@ -23,6 +23,7 @@ import {
   Toolbar,
   Chip,
   Modal,
+  SwipeableDrawer,
 } from "@mui/material";
 import BottomNav from "../components/BottomNav";
 import PrimarySearchAppBar from "../components/AppAppBar";
@@ -33,6 +34,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import "./react-gallery.css";
 import { Add, CheckCircle, Close, Remove, Star } from "@mui/icons-material";
 import { deepOrange } from "@mui/material/colors";
+import styled from "@emotion/styled";
 
 const isNumbers = (str) => /^(\s*|\d+)$/.test(str);
 
@@ -41,6 +43,16 @@ function formatPrice(n) {
     return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
   });
 }
+
+const Puller = styled("div")(({ theme }) => ({
+  width: 30,
+  height: 6,
+  backgroundColor: "#e1e1e1",
+  borderRadius: 3,
+  top: 20,
+  position: "absolute",
+  left: "calc(50% - 15px)",
+}));
 
 function Product() {
   const { productId } = useParams();
@@ -225,9 +237,9 @@ function Product() {
   };
 
   const handleImageZoom = (image) => {
-    setImage(image)
-    setOpenImage(true)
-  }
+    setImage(image);
+    setOpenImage(true);
+  };
 
   const renderIcQuestions = (icQuestion, index) => {
     return (
@@ -470,7 +482,15 @@ function Product() {
               </Typography>
             )}
             <Divider sx={{ my: 2 }} />
-            <Box sx={{ display: { xs: product.type === "Group Buy" ? "block" : "none", sm: product.type === "Group Buy" ? "block" : "none", md: "none" } }}>
+            <Box
+              sx={{
+                display: {
+                  xs: product.type === "Group Buy" ? "block" : "none",
+                  sm: product.type === "Group Buy" ? "block" : "none",
+                  md: "none",
+                },
+              }}
+            >
               {renderVariant(product)}
               <Divider sx={{ my: 2 }} />
             </Box>
@@ -703,7 +723,7 @@ function Product() {
           backgroundColor: "#242c36",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
-          boxShadow: 4
+          boxShadow: 4,
         }}
       >
         {product.type === "Interest Check" && (
@@ -757,179 +777,211 @@ function Product() {
         )}
       </Box>
       {product.type === "Interest Check" && (
-        <Drawer
+        <SwipeableDrawer
           anchor="bottom"
           open={icQuestionDrawer}
           onClose={() => toggleIcQuestionDrawer(false)}
           sx={{
             "& .MuiPaper-root": {
-              background: "#18181B",
+              background: "#19212c",
               borderRadius: 4,
               maxHeight: "75vh",
-              p: 2,
-              pt: 3,
             },
           }}
         >
-          {product.interestCheckQuestions.map((icQuestion, index) => (
-            <>
-              {renderIcQuestions(icQuestion, index)}
-              {index < product.interestCheckQuestions.length - 1 ? (
-                <>
-                  <Divider sx={{ my: 2 }} />
-                </>
-              ) : (
-                <Box my={3} />
-              )}
-            </>
-          ))}
           <Box
-            width="100%"
-            p={1}
+            zIndex={1201}
+            display="flex"
+            justifyContent="center"
             sx={{
-              position: "fixed",
-              bottom: 0,
-              left: 0,
-              display: { xs: "block", md: "none" },
-              backgroundColor: "#18181B",
+              position: "sticky",
+              top: 0,
+              left: "50%",
+              backgroundColor: "#19212c",
             }}
           >
-            <Box display="flex">
-              <Button
-                disabled={disableQuestions || product.status === "ended"}
-                fontWeight="bold"
-                variant="contained"
-                color="secondary"
-                fullWidth
-                onClick={handleSubmitInterestCheck}
-                sx={{ textTransform: "none", whiteSpace: "nowrap" }}
-              >
-                Submit
-              </Button>
+            <Box height="40px">
+              <Puller id="puller-handle" />
             </Box>
           </Box>
-        </Drawer>
+          <Box px={2}>
+            {product.interestCheckQuestions.map((icQuestion, index) => (
+              <>
+                {renderIcQuestions(icQuestion, index)}
+                {index < product.interestCheckQuestions.length - 1 ? (
+                  <>
+                    <Divider sx={{ my: 2 }} />
+                  </>
+                ) : (
+                  <Box my={8} />
+                )}
+              </>
+            ))}
+          </Box>
+        </SwipeableDrawer>
       )}
       {product.type === "Group Buy" && (
-        <Drawer
+        <SwipeableDrawer
           anchor="bottom"
           open={buyProductDrawer}
           onClose={() => toggleBuyProductDrawer(false)}
           sx={{
             "& .MuiPaper-root": {
-              background: "#18181B",
+              background: "#19212c",
               borderRadius: 4,
               maxHeight: "75vh",
-              p: 2,
-              pt: 3,
             },
           }}
         >
-          <Box display="flex">
-            <Box
-              component="img"
-              width="40%"
-              src={product.images[getImageIndex()].original}
-              borderRadius={2}
-            />
-            <Stack width="60%" ml={2} gap={1}>
-              <Box sx={{ flexWrap: "wrap", display: "flex", gap: 1 }}>
-                {renderVariantChip(product)}
-              </Box>
-              <Typography fontWeight="bold" variant="h6">
-                {"Rp" + formatPrice(totalPrice)}
-              </Typography>
-              <Box display="flex" mt={2}>
-                <Button
-                  disabled={product.status === "ended"}
-                  onClick={handleDecrement}
-                  sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
-                >
-                  <Remove fontSize="small" style={{ color: "#d1d1d1" }} />
-                </Button>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: 36,
-                    width: 48,
-                  }}
-                >
-                  <TextField
-                    value={quantity}
-                    onChange={handleQuantityInputChange}
-                    onBlur={handleOnBlur}
-                    sx={{ input: { textAlign: "center" } }}
-                    variant="standard"
-                    slotProps={{
-                      input: {
-                        disableUnderline: true,
-                      },
-                    }}
-                  ></TextField>
-                </Box>
-                <Button
-                  disabled={product.status === "ended"}
-                  onClick={handleIncrement}
-                  sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
-                >
-                  <Add fontSize="small" style={{ color: "#d1d1d1" }} />
-                </Button>
-              </Box>
-            </Stack>
-          </Box>
-          <Divider sx={{ my: 2 }} />
-          {renderVariant(product)}
-          <Box my={2} />
           <Box
-            width="100%"
-            p={1}
+            zIndex={1201}
+            display="flex"
+            justifyContent="center"
             sx={{
-              position: "fixed",
-              bottom: 0,
-              left: 0,
-              display: { xs: "block", md: "none" },
-              backgroundColor: "#18181B",
+              position: "sticky",
+              top: 0,
+              left: "50%",
+              backgroundColor: "#19212c",
             }}
           >
-            <Grid container spacing={1}>
-              <Grid size={6}>
-                <Button
-                  disabled={product.status === "ended"}
-                  fullWidth
-                  variant="outlined"
-                  sx={{
-                    borderColor: "secondary.main",
-                    textTransform: "none",
-                    color: "secondary.main",
-                    fontWeight: "bold",
-                  }}
-                  onClick={handleBuyProduct}
-                >
-                  Beli
-                </Button>
-              </Grid>
-              <Grid size={6}>
-                <Button
-                  disabled={product.status === "ended"}
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "secondary.main",
-                    textTransform: "none",
-                    fontWeight: "bold",
-                  }}
-                  onClick={handleAddToCart}
-                >
-                  + Keranjang
-                </Button>
-              </Grid>
-            </Grid>
+            <Box height="40px">
+              <Puller id="puller-handle" />
+            </Box>
           </Box>
-        </Drawer>
+          <Box px={2}>
+            <Box display="flex">
+              <Box
+                component="img"
+                width="40%"
+                src={product.images[getImageIndex()].original}
+                borderRadius={2}
+              />
+              <Stack width="60%" ml={2} gap={1}>
+                <Box sx={{ flexWrap: "wrap", display: "flex", gap: 1 }}>
+                  {renderVariantChip(product)}
+                </Box>
+                <Typography fontWeight="bold" variant="h6">
+                  {"Rp" + formatPrice(totalPrice)}
+                </Typography>
+                <Box display="flex" mt={2}>
+                  <Button
+                    disabled={product.status === "ended"}
+                    onClick={handleDecrement}
+                    sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
+                  >
+                    <Remove fontSize="small" style={{ color: "#d1d1d1" }} />
+                  </Button>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: 36,
+                      width: 48,
+                    }}
+                  >
+                    <TextField
+                      value={quantity}
+                      onChange={handleQuantityInputChange}
+                      onBlur={handleOnBlur}
+                      sx={{ input: { textAlign: "center" } }}
+                      variant="standard"
+                      slotProps={{
+                        input: {
+                          disableUnderline: true,
+                        },
+                      }}
+                    ></TextField>
+                  </Box>
+                  <Button
+                    disabled={product.status === "ended"}
+                    onClick={handleIncrement}
+                    sx={{ backgroundColor: "#3e454e", minWidth: 0 }}
+                  >
+                    <Add fontSize="small" style={{ color: "#d1d1d1" }} />
+                  </Button>
+                </Box>
+              </Stack>
+            </Box>
+            <Divider sx={{ my: 2 }} />
+            {renderVariant(product)}
+            <Box my={8} />
+          </Box>
+        </SwipeableDrawer>
       )}
+      <Box
+        width="100%"
+        zIndex={1201}
+        p={1}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          display: { xs: icQuestionDrawer ? "block" : "none", md: "none" },
+          backgroundColor: "#19212c",
+        }}
+      >
+        <Box display="flex">
+          <Button
+            disabled={disableQuestions || product.status === "ended"}
+            fontWeight="bold"
+            variant="contained"
+            color="secondary"
+            fullWidth
+            onClick={handleSubmitInterestCheck}
+            sx={{ textTransform: "none", whiteSpace: "nowrap" }}
+          >
+            Submit
+          </Button>
+        </Box>
+      </Box>
+      <Box
+        width="100%"
+        zIndex={1201}
+        p={1}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          display: { xs: buyProductDrawer ? "block" : "none", md: "none" },
+          backgroundColor: "#19212c",
+        }}
+      >
+        <Grid container spacing={1}>
+          <Grid size={6}>
+            <Button
+              disabled={product.status === "ended"}
+              fullWidth
+              variant="outlined"
+              sx={{
+                borderColor: "secondary.main",
+                textTransform: "none",
+                color: "secondary.main",
+                fontWeight: "bold",
+              }}
+              onClick={handleBuyProduct}
+            >
+              Beli
+            </Button>
+          </Grid>
+          <Grid size={6}>
+            <Button
+              disabled={product.status === "ended"}
+              fullWidth
+              variant="contained"
+              sx={{
+                backgroundColor: "secondary.main",
+                textTransform: "none",
+                fontWeight: "bold",
+              }}
+              onClick={handleAddToCart}
+            >
+              + Keranjang
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 }
