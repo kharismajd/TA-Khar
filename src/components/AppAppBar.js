@@ -210,14 +210,14 @@ export default function PrimarySearchAppBar({
   };
 
   const filterDrawer = () => (
-    <Box width="auto" role="presentation" p={2}>
+    <Box width="auto" role="presentation" sx={{ pl: { xs: 2, sm: 2, md: "25.5%"}, pr: { xs: 2, sm: 2, md: "27.7%"}, py: 2 }}>
       <Box display="flex" justifyContent="space-between">
         <Typography variant="body1" fontWeight="bold" gutterBottom>
           Tahap Produk
         </Typography>
         <Close onClick={toggleDrawer(false)} />
       </Box>
-      <Container display="flex" disableGutters>
+      <Container display="flex" disableGutters sx={{ mx: 0 }}>
         <Button
           onClick={handleJenisChange}
           value="gb"
@@ -247,7 +247,7 @@ export default function PrimarySearchAppBar({
       <Typography variant="body1" fontWeight="bold" gutterBottom>
         Kondisi
       </Typography>
-      <Container display="flex" disableGutters>
+      <Container display="flex" disableGutters sx={{ mx: 0 }}>
         <Button
           onClick={handleKondisiChange}
           value="berlangsung"
@@ -403,8 +403,23 @@ export default function PrimarySearchAppBar({
                 backgroundColor: "#242c36",
               }}
             >
-              <Box width="25%" />
+              <Box display="flex" width="25%" justifyContent="flex-end" >
+                {nav === "home" && (
+                  <>
+                  <IconButton
+                size="large"
+                edge="end"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={toggleDrawer(!drawerState)}
+              >
+                <TuneIcon />
+              </IconButton>
+                  </>
+                )}
+              </Box>
               <Box width="50%">
+                
                 <Search>
                   <SearchIconWrapper>
                     <SearchIcon color="primary" />
@@ -424,10 +439,10 @@ export default function PrimarySearchAppBar({
                   <IconButton
                     size="large"
                     aria-label="home"
-                    color={nav === "home" ? "secondary" : "primary"}
+                    color={nav === "home" || nav === "search" ? "secondary" : "primary"}
                     onClick={() => handleIconClick("home")}
                   >
-                    {nav === "home" ? <HomeIcon /> : <HomeOutlinedIcon />}
+                    {nav === "home" || nav === "search" ? <HomeIcon /> : <HomeOutlinedIcon />}
                   </IconButton>
                   <IconButton
                     size="large"
@@ -513,6 +528,7 @@ export default function PrimarySearchAppBar({
       </Box>
       <Toolbar />
       <Drawer
+        disableScrollLock
         disableEnforceFocus
         anchor="top"
         open={drawerState}
@@ -521,7 +537,7 @@ export default function PrimarySearchAppBar({
           zIndex: 1099,
           "& .MuiPaper-root": {
             background: "#242c36",
-            borderRadius: 2,
+            borderRadius: 2,            
           },
         }}
       >

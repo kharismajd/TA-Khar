@@ -178,7 +178,7 @@ function ProductSearch() {
   return (
     <>
       <PrimarySearchAppBar
-        nav="home"
+        nav="search"
         jenis={jenis}
         kondisi={kondisi}
         urutkan={urutkan}
