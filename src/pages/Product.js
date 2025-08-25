@@ -32,7 +32,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./react-gallery.css";
-import { Add, CheckCircle, Close, Remove, Star } from "@mui/icons-material";
+import {
+  AccessAlarm,
+  Add,
+  CheckCircle,
+  Close,
+  Remove,
+  Star,
+} from "@mui/icons-material";
 import { deepOrange } from "@mui/material/colors";
 import styled from "@emotion/styled";
 
@@ -481,6 +488,40 @@ function Product() {
                 {"Rp" + formatPrice(totalPrice)}
               </Typography>
             )}
+            <Stack direction="row" gap={1}>
+              <Box
+                mt={1}
+                sx={{
+                  backgroundColor:
+                    product.type === "Group Buy" ? "#00A329" : "#851db8ff",
+                  borderRadius: 2,
+                  px: 1.5,
+                  py: 1,
+                }}
+              >
+                <Typography variant="body1" fontWeight="bold">
+                  {product.type}
+                </Typography>
+              </Box>
+              <Box
+                display="flex"
+                alignContent="center"
+                mt={1}
+                sx={{
+                  backgroundColor: "#db3b2fff",
+                  borderRadius: 2,
+                  px: 1.5,
+                  py: 1,
+                }}
+              >
+                <AccessAlarm />
+                <Typography variant="body1" fontWeight="bold" ml={0.5}>
+                  {product.status === "ended"
+                    ? "Telah Berakhir"
+                    : "Berakhir Dalam: 2 Hari"}
+                </Typography>
+              </Box>
+            </Stack>
             <Divider sx={{ my: 2 }} />
             <Box
               sx={{

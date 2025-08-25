@@ -19,7 +19,7 @@ import PrimarySearchAppBar from "../components/AppAppBar";
 import products from "../products.json";
 import cart from "../cart.json";
 import { useNavigate } from "react-router-dom";
-import { Add, Delete, Remove } from "@mui/icons-material";
+import { AccessAlarm, Add, Delete, Remove } from "@mui/icons-material";
 import MobileSimpleAppBar from "../components/MobileSimpleAppBar";
 
 function formatPrice(n) {
@@ -497,11 +497,30 @@ function Cart() {
                                               )}
                                               sx={{
                                                 size: { xs: "small", md: "" },
-                                                backgroundColor: "#508bbeff"
+                                                backgroundColor: "#508bbeff",
                                               }}
                                             />
                                           );
                                         })}
+                                      </Box>
+                                      <Box
+                                        display="flex"
+                                        alignContent="center"
+                                        mt={1}
+                                        sx={{
+                                          backgroundColor: "#db3b2fff",
+                                          borderRadius: 8,
+                                          px: 1.5,
+                                          py: 1,
+                                        }}
+                                      >
+                                        <AccessAlarm sx={{ width: 18, height: 18 }}/>
+                                        <Typography
+                                          variant="body2"
+                                          ml={0.5}
+                                        >
+                                          {"Berakhir Dalam: 2 Hari"}
+                                        </Typography>
                                       </Box>
                                     </Stack>
                                   </Box>
@@ -647,7 +666,7 @@ function Cart() {
           backgroundColor: "#242c36",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
-          boxShadow: 4
+          boxShadow: 4,
         }}
       >
         <Box display="flex" justifyContent="space-between" alignItems="center">
