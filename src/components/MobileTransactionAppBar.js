@@ -110,7 +110,17 @@ export default function MobileTransactionAppBar({
   };
 
   const handleStatusMobileChange = (event) => {
-    setStatusMobile(event.target.value);
+    const statusMobileCopy = [...statusMobile]
+    const idx = statusMobileCopy.indexOf(event.target.value)
+
+    if (idx > -1) {
+      statusMobileCopy.splice(idx, 1)
+    }
+    else {
+      statusMobileCopy.push(event.target.value)
+    }
+
+    setStatusMobile(statusMobileCopy);
   };
 
   const handleTanggalChange = (event) => {
@@ -131,7 +141,7 @@ export default function MobileTransactionAppBar({
       "/transactions?transactionTerm=" +
         transactionTerm +
         "&status=" +
-        status +
+        status.join(",") +
         "&startDate=" +
         startDate +
         "&endDate=" +
@@ -218,25 +228,11 @@ export default function MobileTransactionAppBar({
       <Container display="flex" disableGutters>
         <Button
           onClick={handleStatusMobileChange}
-          value="semua"
-          variant="contained"
-          sx={{
-            backgroundColor:
-              statusMobile === "semua" ? "secondary.main" : "#3e454e",
-            mb: 1,
-            mr: 1,
-            textTransform: "none",
-          }}
-        >
-          Semua
-        </Button>
-        <Button
-          onClick={handleStatusMobileChange}
           value="selesai"
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "selesai" ? "secondary.main" : "#3e454e",
+              statusMobile.includes("selesai") ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -250,7 +246,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "dikirim" ? "secondary.main" : "#3e454e",
+              statusMobile.includes("dikirim") ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -264,7 +260,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "diproduksi" ? "secondary.main" : "#3e454e",
+              statusMobile.includes("diproduksi") ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -274,11 +270,11 @@ export default function MobileTransactionAppBar({
         </Button>
         <Button
           onClick={handleStatusMobileChange}
-          value="gbOngoing"
+          value="gbongoing"
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "gbOngoing" ? "secondary.main" : "#3e454e",
+              statusMobile.includes("gbongoing") ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",
@@ -292,7 +288,7 @@ export default function MobileTransactionAppBar({
           variant="contained"
           sx={{
             backgroundColor:
-              statusMobile === "gagal" ? "secondary.main" : "#3e454e",
+              statusMobile.includes("gagal") ? "secondary.main" : "#3e454e",
             mb: 1,
             mr: 1,
             textTransform: "none",

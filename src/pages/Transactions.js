@@ -267,7 +267,7 @@ function Transactions() {
     searchParams.get("transactionTerm"),
     ""
   );
-  let status = checkNullString(searchParams.get("status"), "semua");
+  let status = checkNullString(searchParams.get("status"), "selesai,dikirim,diproduksi,gbongoing,gagal").split(",");
   let page = checkNull(parseInt(searchParams.get("transactionPage")), 1);
   let transactionDetailDialog = checkNull(
     parseInt(searchParams.get("transactionDetailStep")),
@@ -456,7 +456,15 @@ function Transactions() {
   };
 
   const handleStatusChange = (event) => {
-    status = event.target.value;
+    const idx = status.indexOf(event.target.value)
+
+    if (idx > -1) {
+      status.splice(idx, 1)
+    }
+    else {
+      status.push(event.target.value)
+    }
+        
     applyFilter(
       transactionSearchInputValue,
       status,
@@ -483,7 +491,7 @@ function Transactions() {
       "/transactions?transactionTerm=" +
         transactionSearchInputValue +
         "&status=" +
-        status +
+        status.join(",") +
         "&startDate=" +
         startDate +
         "&endDate=" +
@@ -503,7 +511,7 @@ function Transactions() {
     transactionSearchInputValue = "";
     startDate = null;
     endDate = null;
-    status = "semua";
+    status = ["selesai", "dikirim", "diproduksi", "gbongoing", "gagal"];
     page = 1;
     transactionDetailDialog = 0;
     transactionId = null;
@@ -555,10 +563,9 @@ function Transactions() {
       });
 
       const cleanedTStatus = tStatus.replaceAll(" ", "").toLowerCase();
-      const cleanedStatus = status.replaceAll(" ", "").toLowerCase();
       if (
         product.title.toLowerCase().includes(term.toLowerCase()) &&
-        (cleanedStatus === cleanedTStatus || cleanedStatus === "semua")
+        (status.includes(cleanedTStatus))
       ) {
         const day = dayjs(t.createdAt)
           .set("hour", 0)
@@ -1475,25 +1482,11 @@ function Transactions() {
             </Box>
             <Button
               onClick={handleStatusChange}
-              value="semua"
-              variant="contained"
-              sx={{
-                backgroundColor:
-                  status === "semua" ? "secondary.main" : "#3e454e",
-                mb: 1,
-                mr: 1,
-                textTransform: "none",
-              }}
-            >
-              Semua
-            </Button>
-            <Button
-              onClick={handleStatusChange}
               value="selesai"
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "selesai" ? "secondary.main" : "#3e454e",
+                  status.includes("selesai") ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1507,7 +1500,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "dikirim" ? "secondary.main" : "#3e454e",
+                  status.includes("dikirim") ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1521,7 +1514,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "diproduksi" ? "secondary.main" : "#3e454e",
+                  status.includes("diproduksi") ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1531,11 +1524,11 @@ function Transactions() {
             </Button>
             <Button
               onClick={handleStatusChange}
-              value="gbOngoing"
+              value="gbongoing"
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "gbOngoing" ? "secondary.main" : "#3e454e",
+                  status.includes("gbongoing") ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
@@ -1549,7 +1542,7 @@ function Transactions() {
               variant="contained"
               sx={{
                 backgroundColor:
-                  status === "gagal" ? "secondary.main" : "#3e454e",
+                  status.includes("gagal") ? "secondary.main" : "#3e454e",
                 mb: 1,
                 mr: 1,
                 textTransform: "none",
