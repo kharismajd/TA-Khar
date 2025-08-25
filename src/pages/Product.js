@@ -778,6 +778,7 @@ function Product() {
       </Box>
       {product.type === "Interest Check" && (
         <SwipeableDrawer
+          disableSwipeToOpen
           anchor="bottom"
           open={icQuestionDrawer}
           onClose={() => toggleIcQuestionDrawer(false)}
@@ -823,6 +824,7 @@ function Product() {
       {product.type === "Group Buy" && (
         <SwipeableDrawer
           anchor="bottom"
+          disableSwipeToOpen
           open={buyProductDrawer}
           onClose={() => toggleBuyProductDrawer(false)}
           sx={{
