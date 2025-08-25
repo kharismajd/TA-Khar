@@ -30,6 +30,7 @@ import {
   Link,
   useSearchParams,
 } from "react-router-dom";
+import { SentimentDissatisfied } from "@mui/icons-material";
 
 function formatPrice(n) {
   return n.toFixed(0).replace(/./g, function (c, i, a) {
@@ -200,7 +201,7 @@ function ProductSearch() {
               sx={{
                 display: { xs: "none", sm: "block" },
                 position: "sticky",
-                top: 76,
+                top: 75,
                 bgcolor: "#242c36",
               }}
             >
@@ -376,94 +377,115 @@ function ProductSearch() {
             </Box>
           </Grid>
           <Grid size={{ xs: 12, sm: 9 }}>
-            <Grid
-              container
-              spacing={{ xs: 1, md: 2 }}
-              rowSpacing={{ xs: 1, md: 2 }}
-            >
-              {filteredProducts.items.map((filteredProduct) => (
-                <Grid size={{ xs: 6, sm: 3 }}>
-                  <Link
-                    to={"../product/" + filteredProduct.id}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Card
-                      variant="outlined"
-                      elevation={0}
-                      sx={{
-                        maxWidth: 345,
-                        backgroundColor: "#19212c",
-                        borderRadius: 2,
-                      }}
-                    >
-                      <CardMedia
-                        sx={{
-                          height: { xs: 180, sm: 140, md: 200 },
-                          position: "relative",
-                        }}
-                        image={filteredProduct.mainImage}
-                        title={filteredProduct.title}
-                      >
-                        <Box
-                          sx={{
-                            pt: "4px",
-                            pb: "4px",
-                            pl: "8px",
-                            pr: "8px",
-                            display: "flex",
-                            justifyContent: "center",
-                            position: "absolute",
-                            bottom: "0px",
-                            left: "0px",
-                            borderTopRightRadius: 8,
-                            bgcolor:
-                              filteredProduct.type === "Group Buy"
-                                ? "#00A329"
-                                : "#851db8ff",
-                          }}
-                        >
-                          <Typography variant="body2" component="div">
-                            {filteredProduct.type}
-                          </Typography>
-                        </Box>
-                      </CardMedia>
-                      <CardContent sx={{ pt: 2, "&:last-child": { pb: 2 } }}>
-                        <Typography gutterBottom variant="body2" noWrap={true}>
-                          {filteredProduct.title}
-                        </Typography>
-                        <Typography
-                          gutterBottom
-                          sx={{ fontWeight: "bold" }}
-                          variant="body2"
-                          noWrap={true}
-                        >
-                          {"Rp" + formatPrice(filteredProduct.price)}
-                        </Typography>
-                        <Typography
-                          sx={{ fontSize: 12 }}
-                          variant="body2"
-                          noWrap={true}
-                        >
-                          {filteredProduct.storeName}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </Grid>
-              ))}
-              <Box
-                sx={{ display: { xs: "none", sm: "flex" } }}
-                direction="row"
-                justifyContent="flex-end"
-                width="100%"
+            {filteredProducts.total === 0 ? (
+              <Grid container justifyContent="center" height="100%">
+                <Stack height="100%" justifyContent="center">
+                <Box display="flex" justifyContent="center" alignItems="center">
+                  <SentimentDissatisfied
+                    sx={{ height: 200, width: 200, color: "#e1e1e1" }}
+                  />
+                </Box>
+                <Box display="flex" justifyContent="center" alignItems="center">
+                  <Typography variant="h5">
+                    Tidak ada produk yang sesuai
+                  </Typography>
+                </Box>
+                </Stack>
+              </Grid>
+            ) : (
+              <Grid
+                container
+                spacing={{ xs: 1, md: 2 }}
+                rowSpacing={{ xs: 1, md: 2 }}
               >
-                <Pagination
-                  count={pageTotal}
-                  page={page}
-                  onChange={handlePageChange}
-                />
-              </Box>
-            </Grid>
+                {filteredProducts.items.map((filteredProduct) => (
+                  <Grid size={{ xs: 6, sm: 3 }}>
+                    <Link
+                      to={"../product/" + filteredProduct.id}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Card
+                        variant="outlined"
+                        elevation={0}
+                        sx={{
+                          maxWidth: 345,
+                          backgroundColor: "#19212c",
+                          borderRadius: 2,
+                        }}
+                      >
+                        <CardMedia
+                          sx={{
+                            height: { xs: 180, sm: 140, md: 200 },
+                            position: "relative",
+                          }}
+                          image={filteredProduct.mainImage}
+                          title={filteredProduct.title}
+                        >
+                          <Box
+                            sx={{
+                              pt: "4px",
+                              pb: "4px",
+                              pl: "8px",
+                              pr: "8px",
+                              display: "flex",
+                              justifyContent: "center",
+                              position: "absolute",
+                              bottom: "0px",
+                              left: "0px",
+                              borderTopRightRadius: 8,
+                              bgcolor:
+                                filteredProduct.type === "Group Buy"
+                                  ? "#00A329"
+                                  : "#851db8ff",
+                            }}
+                          >
+                            <Typography variant="body2" component="div">
+                              {filteredProduct.type}
+                            </Typography>
+                          </Box>
+                        </CardMedia>
+                        <CardContent sx={{ pt: 2, "&:last-child": { pb: 2 } }}>
+                          <Typography
+                            gutterBottom
+                            variant="body2"
+                            noWrap={true}
+                          >
+                            {filteredProduct.title}
+                          </Typography>
+                          <Typography
+                            gutterBottom
+                            sx={{ fontWeight: "bold" }}
+                            variant="body2"
+                            noWrap={true}
+                          >
+                            {"Rp" + formatPrice(filteredProduct.price)}
+                          </Typography>
+                          <Typography
+                            sx={{ fontSize: 12 }}
+                            variant="body2"
+                            noWrap={true}
+                          >
+                            {filteredProduct.storeName}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </Grid>
+                ))}
+                <Box
+                  sx={{ display: { xs: "none", sm: "flex" } }}
+                  direction="row"
+                  justifyContent="flex-end"
+                  width="100%"
+                >
+                  <Pagination
+                    count={pageTotal}
+                    page={page}
+                    onChange={handlePageChange}
+                  />
+                </Box>
+              </Grid>
+            )}
           </Grid>
         </Grid>
         <Box sx={{ display: { xs: "block", sm: "none" } }}>
