@@ -161,7 +161,7 @@ function getStatusWording(status) {
 
 function statusColor(status) {
   if (status === "Gagal") {
-    return { text: "#f44336", background: "#FFA9A6" };
+    return { text: "#db3b2fff", background: "#ffc8c6ff" };
   }
 
   if (
@@ -169,10 +169,10 @@ function statusColor(status) {
     status === "GB Ongoing" ||
     status === "Dikirim"
   ) {
-    return { text: "#8AA300", background: "#FFFC9E" };
+    return { text: "#708400ff", background: "#fcfacdff" };
   }
 
-  return { text: "#00A329", background: "#9EFFA1" };
+  return { text: "#009b27ff", background: "#beffc1ff" };
 }
 
 function checkStringBoolean(string) {
@@ -1592,7 +1592,7 @@ function Transactions() {
                 >
                   <Stack direction="row" spacing={1.5} alignItems="center">
                     <ShoppingBag />
-                    <Typography variant="body1">Belanja</Typography>
+                    <Typography variant="body1" fontWeight="bold">Belanja</Typography>
                     <Typography variant="body1" color="rgb(146, 146, 146)">
                       {new Date(transaction.createdAt).toShortFormat()}
                     </Typography>
@@ -1606,6 +1606,7 @@ function Transactions() {
                       <Typography
                         variant="body2"
                         color={statusColor(status).text}
+                        fontWeight="bold"
                       >
                         {status}
                       </Typography>
