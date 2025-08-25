@@ -18,6 +18,7 @@ import {
   Stack,
   Pagination,
   Divider,
+  Backdrop,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { red } from "@mui/material/colors";
@@ -421,6 +422,11 @@ function ProductSearch() {
                           image={filteredProduct.mainImage}
                           title={filteredProduct.title}
                         >
+                          
+                          <Backdrop timeout={0} open={filteredProduct.status === "ended"} sx={{ mb: 4, position: "relative", width: "100%", height: "100%", backgroundColor: 'rgba(0, 0, 0, 0.6)', display: "block" }} />
+                          <Box width="100%" display={filteredProduct.status === "ended" ? "flex" : "none"} py="4px" justifyContent="center" position="absolute" top="0px" sx={{ backgroundColor: "#db3b2fff" }}>
+                            <Typography variant="body2">Telah Berakhir</Typography>
+                          </Box>
                           <Box
                             sx={{
                               pt: "4px",
