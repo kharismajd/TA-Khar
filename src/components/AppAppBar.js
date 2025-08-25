@@ -404,7 +404,7 @@ export default function PrimarySearchAppBar({
               }}
             >
               <Box display="flex" width="25%" justifyContent="flex-end" >
-                {nav === "home" && (
+                {nav !== "search" && (
                   <>
                   <IconButton
                 size="large"
