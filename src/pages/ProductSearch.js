@@ -381,16 +381,24 @@ function ProductSearch() {
             {filteredProducts.total === 0 ? (
               <Grid container justifyContent="center" height="100%">
                 <Stack height="100%" justifyContent="center">
-                <Box display="flex" justifyContent="center" alignItems="center">
-                  <SentimentDissatisfied
-                    sx={{ height: 200, width: 200, color: "#e1e1e1" }}
-                  />
-                </Box>
-                <Box display="flex" justifyContent="center" alignItems="center">
-                  <Typography variant="h5">
-                    Tidak ada produk yang sesuai
-                  </Typography>
-                </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <SentimentDissatisfied
+                      sx={{ height: 200, width: 200, color: "#e1e1e1" }}
+                    />
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Typography variant="h5">
+                      Tidak ada produk yang sesuai
+                    </Typography>
+                  </Box>
                 </Stack>
               </Grid>
             ) : (
@@ -422,10 +430,34 @@ function ProductSearch() {
                           image={filteredProduct.mainImage}
                           title={filteredProduct.title}
                         >
-                          
-                          <Backdrop timeout={0} open={filteredProduct.status === "ended"} sx={{ mb: 4, position: "relative", width: "100%", height: "100%", backgroundColor: 'rgba(0, 0, 0, 0.6)', display: "block" }} />
-                          <Box width="100%" display={filteredProduct.status === "ended" ? "flex" : "none"} py="4px" justifyContent="center" position="absolute" top="0px" sx={{ backgroundColor: "#db3b2fff" }}>
-                            <Typography variant="body2">Telah Berakhir</Typography>
+                          <Backdrop
+                            timeout={0}
+                            open={filteredProduct.status === "ended"}
+                            sx={{
+                              mb: 4,
+                              position: "relative",
+                              width: "100%",
+                              height: "100%",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              display: "block",
+                            }}
+                          />
+                          <Box
+                            width="100%"
+                            display={
+                              filteredProduct.status === "ended"
+                                ? "flex"
+                                : "none"
+                            }
+                            py="4px"
+                            justifyContent="center"
+                            position="absolute"
+                            top="0px"
+                            sx={{ backgroundColor: "#db3b2fff" }}
+                          >
+                            <Typography variant="body2">
+                              Telah Berakhir
+                            </Typography>
                           </Box>
                           <Box
                             sx={{
