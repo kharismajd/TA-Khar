@@ -7,6 +7,7 @@ import {
   FormControl,
   Grid,
   InputAdornment,
+  InputLabel,
   MenuItem,
   Radio,
   Select,
@@ -110,7 +111,7 @@ function Checkout() {
   const selectedProducts = products.filter((product) =>
     productIds.includes(product.id)
   );
-  selectedProducts.sort((a, b) => a.id - b.id)
+  selectedProducts.sort((a, b) => a.id - b.id);
 
   const totalPrice = calculatePrice(selectedProducts, variantIds, quantities);
 
@@ -232,7 +233,10 @@ function Checkout() {
                                 return (
                                   <Chip
                                     label={v.selected}
-                                    sx={{ size: { xs: "small", md: "" } }}
+                                    sx={{
+                                      size: { xs: "small", md: "" },
+                                      backgroundColor: "#508bbeff",
+                                    }}
                                   />
                                 );
                               })}
@@ -253,10 +257,11 @@ function Checkout() {
                   );
                 })}
                 <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Kurir</InputLabel>
                   <Select
                     value={shipping}
                     onChange={handleShippingChange}
-                    inputProps={{ "aria-label": "Without label" }}
+                    label="Kurir"
                   >
                     <MenuItem value="pengirimanA">Kurir A (Rp0)</MenuItem>
                     <MenuItem value="pengirimanB">Kurir B (Rp0)</MenuItem>
@@ -265,18 +270,20 @@ function Checkout() {
                   </Select>
                   <Box mt={2}></Box>
                   <TextField
+                    multiline
+                    maxRows={3}
                     slotProps={{
                       input: {
                         startAdornment: (
                           <InputAdornment position="start">
                             <Notes />
-                            <Typography ml={1}>Catatan Pemesanan</Typography>
                           </InputAdornment>
                         ),
                       },
                     }}
                     size="small"
                     id="fullWidth"
+                    label="Catatan Pesanan"
                   />
                 </FormControl>
               </Box>
