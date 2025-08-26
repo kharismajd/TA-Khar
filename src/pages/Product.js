@@ -466,7 +466,7 @@ function Product() {
         }}
       >
         <Grid container columnSpacing={3}>
-          <Grid size={{ xs: 12, md: product.type === "Group Buy" ? 9 : 8 }}>
+          <Grid size={{ xs: 12, md: product.type === "Group Buy" ? 8.5 : 8 }}>
             <ImageGallery
               slideDuration={100}
               items={product.images}
@@ -592,7 +592,7 @@ function Product() {
               </>
             ))}
           </Grid>
-          <Grid size={{ xs: 0, md: product.type === "Group Buy" ? 3 : 4 }}>
+          <Grid size={{ xs: 0, md: product.type === "Group Buy" ? 3.5 : 4 }}>
             {product.type === "Group Buy" && (
               <Box
                 border={1}
