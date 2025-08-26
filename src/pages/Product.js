@@ -895,7 +895,9 @@ function Product() {
             <Box display="flex">
               <Box
                 component="img"
-                width="40%"
+                width="140px"
+                height="100%"
+                objectFit="cover"
                 src={product.images[getImageIndex()].original}
                 borderRadius={2}
               />
@@ -906,7 +908,7 @@ function Product() {
                 <Typography fontWeight="bold" variant="h6">
                   {"Rp" + formatPrice(totalPrice)}
                 </Typography>
-                <Box display="flex" mt={2}>
+                <Box display="flex" mt={0}>
                   <Button
                     disabled={product.status === "ended"}
                     onClick={handleDecrement}

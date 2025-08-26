@@ -19,6 +19,7 @@ import {
   DialogContent,
   DialogActions,
   DialogTitle,
+  SwipeableDrawer,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import BottomNav from "../components/BottomNav";
@@ -54,6 +55,16 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
+const Puller = styled("div")(({ theme }) => ({
+  width: 30,
+  height: 6,
+  backgroundColor: "#e1e1e1",
+  borderRadius: 3,
+  top: 20,
+  position: "absolute",
+  left: "calc(50% - 15px)",
+}));
+
 function Cart() {
   const navigate = useNavigate();
   const isXs = useMediaQuery((theme) => theme.breakpoints.only("xs"));
@@ -76,12 +87,18 @@ function Cart() {
   const [totalPrice, setTotalPrice] = React.useState(0);
   const [openChangeVariantDialog, setOpenChangeVariantDialog] =
     React.useState(false);
+  const [openChangeVariantDrawer, setOpenChangeVariantDrawer] =
+    React.useState(false);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
   const [selectedCartProduct, setSelectedCartProduct] = React.useState(null);
   const [tempVariant, setTempVariant] = React.useState(null);
 
-  const handleCloseVariantChangeDialog = () => {
+  const handleCloseChangeVariantDialog = () => {
     setOpenChangeVariantDialog(false);
+  };
+
+  const handleCloseChangeVariantDrawer = () => {
+    setOpenChangeVariantDrawer(false);
   };
 
   const scrollToTop = () => {
@@ -325,11 +342,11 @@ function Cart() {
     return checked;
   };
 
-  const handleOpenChangeVariantDialog = (productDetail, storeProduct) => {
+  const handleChangeVarian = (productDetail, storeProduct) => {
     setSelectedProduct(productDetail);
     setSelectedCartProduct(storeProduct);
     setTempVariant([...storeProduct.variants]);
-    setOpenChangeVariantDialog(true);
+    !isXs ? setOpenChangeVariantDialog(true) : setOpenChangeVariantDrawer(true);
   };
 
   const handleVariantButtonClick = (variantName, refId) => {
@@ -341,6 +358,7 @@ function Cart() {
 
   const handleSaveProductVariant = (storeProduct) => {
     setOpenChangeVariantDialog(false);
+    setOpenChangeVariantDrawer(false);
     storeProduct.variants = tempVariant;
     const cartDataCopy = [...cartData];
     setCartData(cartDataCopy);
@@ -366,18 +384,164 @@ function Cart() {
     return found ? idx : 0;
   };
 
+  const renderVariantChip = (product) => {
+    return (
+      <>
+        {product.variantList.map((variant) => (
+          <>
+            {variant.variant.map((variantSelection) => (
+              <>
+                {tempVariant.find((e) => e.name === variant.name).refId ===
+                  variantSelection.refId && (
+                  <Chip
+                    sx={{ borderRadius: "4px", backgroundColor: "#508bbeff" }}
+                    label={variantSelection.name}
+                  />
+                )}
+              </>
+            ))}
+          </>
+        ))}
+      </>
+    );
+  };
+
+  const renderChangeVariantDrawer = (productDetail, storeProduct) => {
+    return (
+      <>
+        <SwipeableDrawer
+          anchor="bottom"
+          disableSwipeToOpen
+          open={openChangeVariantDrawer}
+          onClose={handleCloseChangeVariantDrawer}
+          sx={{
+            "& .MuiPaper-root": {
+              background: "#19212c",
+              borderRadius: 4,
+              maxHeight: "75vh",
+            },
+          }}
+        >
+          <Box
+            zIndex={1201}
+            display="flex"
+            justifyContent="center"
+            sx={{
+              position: "sticky",
+              top: 0,
+              left: "50%",
+              backgroundColor: "#19212c",
+            }}
+          >
+            <Box height="40px">
+              <Puller id="puller-handle" />
+            </Box>
+          </Box>
+          <Box px={2}>
+            <Box display="flex">
+              <Box
+                component="img"
+                width="40%"
+                objectFit="cover"
+                src={productDetail.images[getImageIndex()].original}
+                borderRadius={2}
+              />
+              <Stack width="60%" ml={2} gap={1}>
+                <Box sx={{ flexWrap: "wrap", display: "flex", gap: 1 }}>
+                  {renderVariantChip(productDetail)}
+                </Box>
+                <Typography fontWeight="bold" variant="h6">
+                  {"Rp" + formatPrice(getVariantPrice(productDetail, tempVariant))}
+                </Typography>
+              </Stack>
+            </Box>
+            <Divider sx={{ my: 2 }} />
+            {productDetail.variantList.map((variant) => (
+              <>
+                <Typography
+                  gutterBottom
+                  sx={{ fontWeight: "bold" }}
+                  variant="body2"
+                >
+                  {variant.name + ":"}
+                </Typography>
+                <Container display="flex" disableGutters>
+                  {variant.variant.map((variantSelection) => (
+                    <>
+                      <Button
+                        onClick={() =>
+                          handleVariantButtonClick(
+                            variant.name,
+                            variantSelection.refId
+                          )
+                        }
+                        variant="contained"
+                        sx={{
+                          backgroundColor:
+                            tempVariant.find((e) => e.name === variant.name)
+                              .refId === variantSelection.refId
+                              ? "secondary.main"
+                              : "#3e454e",
+                          mb: 1,
+                          mr: 1,
+                          textTransform: "none",
+                        }}
+                      >
+                        {variantSelection.name}
+                      </Button>
+                    </>
+                  ))}
+                </Container>
+                <Box mb={1} />
+              </>
+            ))}
+            <Box my={8} />
+          </Box>
+        </SwipeableDrawer>
+        <Box
+          width="100%"
+          zIndex={1201}
+          p={1}
+          sx={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            display: {
+              xs: openChangeVariantDrawer ? "block" : "none",
+              md: "none",
+            },
+            backgroundColor: "#19212c",
+          }}
+        >
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{
+              backgroundColor: "secondary.main",
+              textTransform: "none",
+              fontWeight: "bold",
+            }}
+            onClick={() => handleSaveProductVariant(storeProduct)}
+          >
+            Simpan
+          </Button>
+        </Box>
+      </>
+    );
+  };
+
   const renderChangeVariantDialog = (productDetail, storeProduct) => {
     return (
       <BootstrapDialog
         open={openChangeVariantDialog}
-        onClose={handleCloseVariantChangeDialog}
+        onClose={handleCloseChangeVariantDialog}
         closeAfterTransition
         sx={{
-            background: isXs ? "#19212c" : "",
-            "& .MuiPaper-root": {
-              background: "#19212c",
-            },
-          }}
+          background: isXs ? "#19212c" : "",
+          "& .MuiPaper-root": {
+            background: "#19212c",
+          },
+        }}
       >
         <DialogTitle
           sx={{ fontWeight: "bold", m: 0, p: 2 }}
@@ -387,7 +551,7 @@ function Cart() {
         </DialogTitle>
         <IconButton
           aria-label="close"
-          onClick={handleCloseVariantChangeDialog}
+          onClick={handleCloseChangeVariantDialog}
           sx={(theme) => ({
             position: "absolute",
             right: 8,
@@ -400,13 +564,13 @@ function Cart() {
         <DialogContent dividers>
           <Stack direction={"row"} gap={2}>
             <Box
-                component="img"
-                width="240px"
-                height="100%"
-                objectFit="cover"
-                src={productDetail.images[getImageIndex()].original}
-                borderRadius={2}
-              />
+              component="img"
+              width="240px"
+              height="100%"
+              objectFit="cover"
+              src={productDetail.images[getImageIndex()].original}
+              borderRadius={2}
+            />
             <Box>
               {productDetail.variantList.map((variant) => (
                 <>
@@ -449,7 +613,13 @@ function Cart() {
               ))}
             </Box>
           </Stack>
-              
+          <Divider sx={{ my: 2 }} />
+          <Box display="flex" justifyContent="space-between">
+            <Typography variant="body1">Subtotal</Typography>
+            <Typography variant="body1" fontWeight="bold">
+              {"Rp" + formatPrice(getVariantPrice(productDetail, tempVariant))}
+            </Typography>
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button
@@ -477,9 +647,10 @@ function Cart() {
       ) : (
         <PrimarySearchAppBar nav="cart" />
       )}
-      {selectedProduct !== null &&
-        selectedCartProduct !== null &&
+      {openChangeVariantDialog &&
         renderChangeVariantDialog(selectedProduct, selectedCartProduct)}
+      {openChangeVariantDrawer &&
+        renderChangeVariantDrawer(selectedProduct, selectedCartProduct)}
       <Box
         sx={{
           pr: { xs: 1, sm: 4, md: "6%" },
@@ -677,13 +848,13 @@ function Cart() {
                                               }}
                                               deleteIcon={<ExpandMore />}
                                               onDelete={() => {
-                                                handleOpenChangeVariantDialog(
+                                                handleChangeVarian(
                                                   productDetail,
                                                   sp
                                                 );
                                               }}
                                               onClick={() =>
-                                                handleOpenChangeVariantDialog(
+                                                handleChangeVarian(
                                                   productDetail,
                                                   sp
                                                 )
