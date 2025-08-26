@@ -353,23 +353,6 @@ function Product() {
   const renderVariant = (product) => {
     return (
       <>
-        <Modal
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          open={openImage}
-          onClose={handleCloseImage}
-          closeAfterTransition
-        >
-          <img
-            outline="none"
-            src={image}
-            alt="asd"
-            style={{ maxHeight: "90%", maxWidth: "90%" }}
-          />
-        </Modal>
         {product.variantList.map((variant) => (
           <>
             <Typography
@@ -437,6 +420,23 @@ function Product() {
   return (
     <>
       <PrimarySearchAppBar nav="home" withMenu />
+      <Modal
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        open={openImage}
+        onClose={handleCloseImage}
+        closeAfterTransition
+      >
+        <img
+          outline="none"
+          src={image}
+          alt="asd"
+          style={{ maxHeight: "90%", maxWidth: "90%" }}
+        />
+      </Modal>
       <Backdrop
         sx={(theme) => ({
           backgroundColor: "rgba(0, 0, 0, 0.85)",
