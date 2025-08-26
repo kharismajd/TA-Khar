@@ -451,7 +451,8 @@ function Cart() {
                   {renderVariantChip(productDetail)}
                 </Box>
                 <Typography fontWeight="bold" variant="h6">
-                  {"Rp" + formatPrice(getVariantPrice(productDetail, tempVariant))}
+                  {"Rp" +
+                    formatPrice(getVariantPrice(productDetail, tempVariant))}
                 </Typography>
               </Stack>
             </Box>
@@ -835,33 +836,65 @@ function Cart() {
                                           gap: 1,
                                         }}
                                       >
-                                        {sp.variants.map((v, idx) => {
-                                          return (
-                                            <Chip
-                                              label={getSelectedVariant(
+                                        {isXs && sp.variants.length !== 0 && (
+                                          <Chip
+                                            label={
+                                              getSelectedVariant(
                                                 productDetail,
-                                                v
-                                              )}
-                                              sx={{
-                                                size: { xs: "small", md: "" },
-                                                backgroundColor: "#508bbeff",
-                                              }}
-                                              deleteIcon={<ExpandMore />}
-                                              onDelete={() => {
-                                                handleChangeVarian(
+                                                sp.variants[0]
+                                              ) +
+                                                (sp.variants.length >
+                                              1
+                                                ? " +" + (sp.variants.length - 1)
+                                                : "")
+                                            }
+                                            sx={{
+                                              size: { xs: "small", md: "" },
+                                              backgroundColor: "#508bbeff",
+                                            }}
+                                            deleteIcon={<ExpandMore />}
+                                            onDelete={() => {
+                                              handleChangeVarian(
+                                                productDetail,
+                                                sp
+                                              );
+                                            }}
+                                            onClick={() =>
+                                              handleChangeVarian(
+                                                productDetail,
+                                                sp
+                                              )
+                                            }
+                                          />
+                                        )}
+                                        {!isXs &&
+                                          sp.variants.map((v, idx) => {
+                                            return (
+                                              <Chip
+                                                label={getSelectedVariant(
                                                   productDetail,
-                                                  sp
-                                                );
-                                              }}
-                                              onClick={() =>
-                                                handleChangeVarian(
-                                                  productDetail,
-                                                  sp
-                                                )
-                                              }
-                                            />
-                                          );
-                                        })}
+                                                  v
+                                                )}
+                                                sx={{
+                                                  size: { xs: "small", md: "" },
+                                                  backgroundColor: "#508bbeff",
+                                                }}
+                                                deleteIcon={<ExpandMore />}
+                                                onDelete={() => {
+                                                  handleChangeVarian(
+                                                    productDetail,
+                                                    sp
+                                                  );
+                                                }}
+                                                onClick={() =>
+                                                  handleChangeVarian(
+                                                    productDetail,
+                                                    sp
+                                                  )
+                                                }
+                                              />
+                                            );
+                                          })}
                                       </Box>
                                       <Box
                                         display="flex"
