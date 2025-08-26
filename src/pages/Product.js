@@ -518,7 +518,7 @@ function Product() {
                 <Typography variant="body1" fontWeight="bold" ml={0.5}>
                   {product.status === "ended"
                     ? "Telah Berakhir"
-                    : "Berakhir Dalam: 2 Hari"}
+                    : "Berakhir: 2 Hari"}
                 </Typography>
               </Box>
             </Stack>

@@ -512,6 +512,7 @@ function Cart() {
                                           borderRadius: 8,
                                           px: 1.5,
                                           py: 1,
+                                          width: "fit-content"
                                         }}
                                       >
                                         <AccessAlarm sx={{ width: 18, height: 18 }}/>
@@ -519,7 +520,7 @@ function Cart() {
                                           variant="body2"
                                           ml={0.5}
                                         >
-                                          {"Berakhir Dalam: 2 Hari"}
+                                          {"Berakhir: 2 Hari"}
                                         </Typography>
                                       </Box>
                                     </Stack>
