@@ -39,45 +39,5 @@
 		},
 		"paymentMethod": "Direct Transfer",
 		"createdAt": "2025-07-11T00:00:00"
-	},
-	{
-		"id": 4,
-		"item":
-		{
-			"itemId": 15,
-			"quantity": 1,
-			"variants": [
-				{
-					"name": "Variant",
-					"refId": 1
-				},
-				{
-					"name": "Finish",
-					"refId": 2
-				}
-			]
-		},
-		"paymentMethod": "Direct Transfer",
-		"createdAt": "2025-07-04T00:00:00"
-	},
-	{
-		"id": 5,
-		"item":
-		{
-			"itemId": 16,
-			"quantity": 1,
-			"variants": [
-				{
-					"name": "Variant",
-					"refId": 1
-				},
-				{
-					"name": "Finish",
-					"refId": 2
-				}
-			]
-		},
-		"paymentMethod": "Direct Transfer",
-		"createdAt": "2025-07-05T00:00:00"
 	}
 ]

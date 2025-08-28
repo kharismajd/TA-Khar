@@ -173,7 +173,7 @@
   },
   {
     "id": 10,
-    "title": "Mode Loop (Ended)",
+    "title": "Mode Loop",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -258,7 +258,7 @@
   },
   {
     "id": 13,
-    "title": "Mode Loop (Dikirim)",
+    "title": "Mode Loop",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -273,13 +273,13 @@
       {
         "progress": 100,
         "createdAt": "2025-05-27T05:15:00Z",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam facilisis, elit et eleifend lacinia, velit nisl sodales quam, sed gravida justo nisi ac ante. Aliquam dui dui, congue in neque id, viverra molestie mi. Aliquam mollis nisi est, quis accumsan purus sollicitudin tincidunt. Praesent eu justo semper, accumsan metus tempor, vulputate tortor. Pellentesque vel justo ut arcu imperdiet maximus sed non dolor. Nullam rhoncus mattis maximus. Suspendisse lobortis eros mi, vitae condimentum urna fringilla vitae. Proin interdum erat vel urna imperdiet, in blandit ipsum pellentesque. Suspendisse ut felis id tellus accumsan consequat quis a metus. Aliquam massa orci, congue ultricies finibus eu, bibendum eu risus. Vestibulum molestie nisl eget vulputate mollis. \n\nMaecenas vel est in augue sagittis rhoncus vel a ex. Integer tempus mi ac egestas porttitor. Aliquam ultrices eros eu tincidunt dictum. Integer auctor lacus lorem, hendrerit pulvinar dui feugiat eu. Nullam at gravida quam. Duis vestibulum justo nec neque rhoncus, at suscipit leo dignissim. Aliquam ultricies nisi ac nibh pellentesque, et lacinia dui rutrum. Proin placerat non ex in sodales. Fusce eu diam ac augue pellentesque sodales. Vivamus maximus vel enim eget mollis. Nulla egestas, orci eu semper laoreet, arcu mi bibendum quam, vel interdum massa ipsum at sapien. Phasellus lobortis, elit in cursus lacinia, augue magna egestas libero, non consequat mauris mauris at neque.",
+        "description": "Produksi telah berhasil. Pengiriman produk akan dilakukan dalam waktu 3 hari.",
         "images": []
       },
       {
         "progress": 60,
         "createdAt": "2025-05-12T05:15:00Z",
-        "description": "Duis id ligula et urna vehicula sollicitudin. Donec fermentum nulla luctus lobortis dapibus. Nulla tellus augue, vulputate eget neque eget, vulputate scelerisque risus. Morbi a eros vel neque cursus volutpat. Aenean luctus sem diam, in lacinia orci aliquam quis. Morbi non pulvinar dolor. Donec tortor nisi, lobortis eget lobortis sit amet, auctor et nisi. Nullam diam nulla, pretium a porttitor in, lobortis in mauris. Suspendisse non tempor tortor, in placerat leo.\n\nPhasellus tristique ac sem sollicitudin consequat. Fusce quis nisi diam. Etiam aliquet odio sapien, at varius leo tincidunt in. Integer ac elit urna. Pellentesque nibh mauris, rutrum sed mauris nec, dapibus faucibus metus. Praesent sodales ex eget vehicula luctus. Cras sodales felis pharetra luctus elementum. Nullam consequat pulvinar aliquet. Curabitur at magna pellentesque velit commodo egestas. Etiam eleifend sollicitudin commodo. Sed a viverra risus, in commodo eros.",
+        "description": "Komponen PCB sudah selesai lebih awal dari perkiraan. Semua switch juga telah berhasil untuk diproduksi. Sementara itu finishing baru saja dimulai.\n\nFrame yang deffect sudah berhasil diperbaiki. Kemungkinan fullfilment akan tepat waktu.",
         "images": [
           {
             "original": "/images/modeloopdesc1.webp",
@@ -294,7 +294,7 @@
       {
         "progress": 30,
         "createdAt": "2025-05-01T05:15:00Z",
-        "description": "Nullam convallis lectus magna, non sagittis leo facilisis sed. Nam ut tristique turpis, a varius lectus. In elementum lacus enim, ac elementum odio imperdiet eu. Duis mollis hendrerit enim, sed eleifend neque elementum aliquet. Nam porttitor quam eget mi pretium, ac semper orci vestibulum. Nullam a commodo arcu. Donec sit amet euismod metus, eget interdum felis. Aliquam consequat at neque a tristique. Praesent pulvinar accumsan commodo. Proin condimentum est ac mi sagittis ornare. Quisque dignissim ipsum in porttitor ultricies. Nulla ac ipsum eleifend, feugiat erat et, rutrum felis. \n\nMaecenas vel blandit turpis. Curabitur vulputate ante eu tellus facilisis vestibulum. Integer dui odio, posuere vel tortor nec, faucibus commodo diam. Aliquam mattis, risus sit amet commodo auctor, purus est elementum eros, quis ultricies massa felis eget nisi. Donec auctor odio quis arcu suscipit, vitae imperdiet risus luctus. Nullam dignissim vestibulum libero, eu interdum ante semper a. Aliquam lorem eros, pulvinar a dictum sit amet, auctor in neque. Curabitur porttitor venenatis auctor. Praesent eget ex rutrum, viverra nulla non, viverra dui.",
+        "description": "Frame dari semua varian produk telah diproduksi. Akan tetapi terdapat beberapa frame yang defect. Oleh karena itu, kemungkinan fullfilment dari group buy akan sedikit terlambat. \n\nProses pencetakan PCB baru saja dimulai, kemungkinan akan selesai dalam 2 minggu ke depan.",
         "images": [
           {
             "original": "/images/modeloopdesc3.webp",
@@ -360,7 +360,7 @@
   },
   {
     "id": 14,
-    "title": "Mode Loop (Diproduksi)",
+    "title": "Mode SixtyFive",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -369,13 +369,13 @@
     "status": "ended",
     "isInProduction": true,
     "isFailed": false,
-    "mainImage": "/images/modeloop2.webp",
+    "mainImage": "/images/mode65.webp",
     "createdAt": "2025-06-05T05:15:00Z",
     "productionInfo": [
-      {
+            {
         "progress": 60,
         "createdAt": "2025-05-12T05:15:00Z",
-        "description": "Duis id ligula et urna vehicula sollicitudin. Donec fermentum nulla luctus lobortis dapibus. Nulla tellus augue, vulputate eget neque eget, vulputate scelerisque risus. Morbi a eros vel neque cursus volutpat. Aenean luctus sem diam, in lacinia orci aliquam quis. Morbi non pulvinar dolor. Donec tortor nisi, lobortis eget lobortis sit amet, auctor et nisi. Nullam diam nulla, pretium a porttitor in, lobortis in mauris. Suspendisse non tempor tortor, in placerat leo.\n\nPhasellus tristique ac sem sollicitudin consequat. Fusce quis nisi diam. Etiam aliquet odio sapien, at varius leo tincidunt in. Integer ac elit urna. Pellentesque nibh mauris, rutrum sed mauris nec, dapibus faucibus metus. Praesent sodales ex eget vehicula luctus. Cras sodales felis pharetra luctus elementum. Nullam consequat pulvinar aliquet. Curabitur at magna pellentesque velit commodo egestas. Etiam eleifend sollicitudin commodo. Sed a viverra risus, in commodo eros.",
+        "description": "Komponen PCB sudah selesai lebih awal dari perkiraan. Semua switch juga telah berhasil untuk diproduksi. Sementara itu finishing baru saja dimulai.\n\nFrame yang deffect sudah berhasil diperbaiki. Kemungkinan fullfilment akan tepat waktu.",
         "images": [
           {
             "original": "/images/modeloopdesc1.webp",
@@ -390,7 +390,7 @@
       {
         "progress": 30,
         "createdAt": "2025-05-01T05:15:00Z",
-        "description": "Nullam convallis lectus magna, non sagittis leo facilisis sed. Nam ut tristique turpis, a varius lectus. In elementum lacus enim, ac elementum odio imperdiet eu. Duis mollis hendrerit enim, sed eleifend neque elementum aliquet. Nam porttitor quam eget mi pretium, ac semper orci vestibulum. Nullam a commodo arcu. Donec sit amet euismod metus, eget interdum felis. Aliquam consequat at neque a tristique. Praesent pulvinar accumsan commodo. Proin condimentum est ac mi sagittis ornare. Quisque dignissim ipsum in porttitor ultricies. Nulla ac ipsum eleifend, feugiat erat et, rutrum felis. \n\nMaecenas vel blandit turpis. Curabitur vulputate ante eu tellus facilisis vestibulum. Integer dui odio, posuere vel tortor nec, faucibus commodo diam. Aliquam mattis, risus sit amet commodo auctor, purus est elementum eros, quis ultricies massa felis eget nisi. Donec auctor odio quis arcu suscipit, vitae imperdiet risus luctus. Nullam dignissim vestibulum libero, eu interdum ante semper a. Aliquam lorem eros, pulvinar a dictum sit amet, auctor in neque. Curabitur porttitor venenatis auctor. Praesent eget ex rutrum, viverra nulla non, viverra dui.",
+        "description": "Frame dari semua varian produk telah diproduksi. Akan tetapi terdapat beberapa frame yang defect. Oleh karena itu, kemungkinan fullfilment dari group buy akan sedikit terlambat. \n\nProses pencetakan PCB baru saja dimulai, kemungkinan akan selesai dalam 2 minggu ke depan.",
         "images": [
           {
             "original": "/images/modeloopdesc3.webp",
@@ -456,7 +456,7 @@
   },
   {
     "id": 15,
-    "title": "Mode Loop (Gagal)",
+    "title": "Mode Loop",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -524,7 +524,7 @@
   },
   {
     "id": 16,
-    "title": "Mode Loop (GB Ongoing)",
+    "title": "Mode Loop",
     "price": 3500000,
     "storeName": "Mode",
     "storeRating": 4.7,
@@ -754,7 +754,7 @@
     "id": 20,
     "title": "Mode Tempo",
     "price": 3000000,
-    "storeName": "Mode",
+    "storeName": "Mode Distributor",
     "storeRating": 4.9,
     "storeRatingCount": 100,
     "type": "Group Buy",
